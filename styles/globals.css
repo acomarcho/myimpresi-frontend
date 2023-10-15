@@ -8,4 +8,27 @@
     width: 6px;
     height: 6px;
   }
+
+  .event-grid {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 180px 180px;
+    grid-template-areas:
+      "main ev1 ev2"
+      "main ev3 ev4";
+  }
+  .grid-main {
+    grid-area: main;
+  }
+  .grid-ev1 {
+    grid-area: ev1;
+  }
+  .grid-ev2 {
+    grid-area: ev2;
+  }
+  .grid-ev3 {
+    grid-area: ev3;
+  }
+  .grid-ev4 {
+    grid-area: ev4;
+  }
 }
