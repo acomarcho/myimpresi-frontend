@@ -79,7 +79,7 @@ const events = [
 
 export default function Home() {
   return (
-    <>
+    <div className="relative">
       <div className="max-w-[1200px] mx-auto p-[1.5rem]">
         {/* Banner image */}
         <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
@@ -347,6 +347,21 @@ export default function Home() {
           </p>
         </div>
       </div>
-    </>
+      {/* Floating WA Icon */}
+      <a
+        href="https:/wa.me"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed right-[1.5rem] bottom-[1.5rem] lg:right-[3.75rem] lg:bottom-[3.75rem]"
+      >
+        <Image
+          src="/assets/icon-wa.png"
+          width={72}
+          height={72}
+          className="w-[36px] h-[36px] lg:w-[72px] lg:h-[72px]"
+          alt="WhatsApp"
+        />
+      </a>
+    </div>
   );
 }
