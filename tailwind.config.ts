@@ -11,6 +11,12 @@ const config: Config = {
       fontFamily: {
         inter: ["var(--font-inter)"],
       },
+      colors: {
+        neutral: {
+          100: "#050a30",
+          60: "#707389",
+        },
+      },
     },
   },
   plugins: [],
