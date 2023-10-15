@@ -18,6 +18,7 @@ const config: Config = {
           10: "#FFFFFF",
         },
         red: "#E52222",
+        "primary-pressed": "#153261",
       },
     },
   },

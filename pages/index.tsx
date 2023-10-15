@@ -2,6 +2,7 @@ import Image from "next/image";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Heading from "@/components/home/heading";
 import Subheading from "@/components/home/subheading";
+import Link from "next/link";
 
 const dummySelectedCategories = [
   {
@@ -78,151 +79,274 @@ const events = [
 
 export default function Home() {
   return (
-    <div className="max-w-[1200px] mx-auto p-[1rem]">
-      {/* Banner image */}
-      <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
-      {/* Kategori Pilihan */}
-      <div className="mt-[2rem] lg:mt-[5rem]">
-        <Heading text="Kategori Pilihan" />
-        <Subheading text="Temukan produk pilihan Anda dengan harga terjangkau" />
-        <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem]">
-          {dummySelectedCategories.map((c) => {
-            return (
-              <div
-                key={c.id}
-                className="flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative"
-              >
-                {c.featured && (
-                  <>
-                    <div className="bg-red px-[0.25rem] h-[22px] flex items-center absolute left-[-6px] top-[12px]">
-                      <p className="font-inter text-bold text-[0.75rem] text-neutral-10">
-                        Terlaris
+    <>
+      <div className="max-w-[1200px] mx-auto p-[1.5rem]">
+        {/* Banner image */}
+        <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
+        {/* Kategori Pilihan */}
+        <div className="mt-[2rem] lg:mt-[5rem]">
+          <Heading text="Kategori Pilihan" />
+          <Subheading text="Temukan produk pilihan Anda dengan harga terjangkau" />
+          <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem]">
+            {dummySelectedCategories.map((c) => {
+              return (
+                <div
+                  key={c.id}
+                  className="flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative"
+                >
+                  {c.featured && (
+                    <>
+                      <div className="bg-red px-[0.25rem] h-[22px] flex items-center absolute left-[-6px] top-[12px]">
+                        <p className="font-inter text-bold text-[0.75rem] text-neutral-10">
+                          Terlaris
+                        </p>
+                      </div>
+                      <div className="bg-red clip-triangle absolute left-[-6px] top-[34px]" />
+                    </>
+                  )}
+                  <Image
+                    src={c.imagePath}
+                    width={150}
+                    height={150}
+                    alt={c.name}
+                    className="object-cover rounded-xl"
+                  />
+                  <p className="font-inter font-bold text-neutral-100 text-[1rem]">
+                    {c.name}
+                  </p>
+                </div>
+              );
+            })}
+          </ScrollContainer>
+        </div>
+        {/* Events */}
+        <div className="mt-[2rem] lg:mt-[5rem]">
+          <Heading text="Events" />
+          <Subheading text="Temukan produk kit sesuai dengan kebutuhanmu" />
+          <div className="grid grid-cols-1 auto-rows-[180px] gap-[1rem] mt-[2rem] lg:event-grid">
+            {events.map((e, i) => {
+              switch (i) {
+                case 0:
+                  return (
+                    <div
+                      key={e.id}
+                      className="relative lg:grid-main rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={e.imagePath}
+                        width="0"
+                        height="0"
+                        sizes="100vw"
+                        className="w-full h-full object-cover"
+                        alt={e.name}
+                      />
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                        {e.name}
                       </p>
                     </div>
-                    <div className="bg-red clip-triangle absolute left-[-6px] top-[34px]" />
-                  </>
-                )}
-                <Image
-                  src={c.imagePath}
-                  width={150}
-                  height={150}
-                  alt={c.name}
-                  className="object-cover rounded-xl"
-                />
-                <p className="font-inter font-bold text-neutral-100 text-[1rem]">
-                  {c.name}
-                </p>
-              </div>
-            );
-          })}
-        </ScrollContainer>
-      </div>
-      {/* Events */}
-      <div className="mt-[2rem] lg:mt-[5rem]">
-        <Heading text="Events" />
-        <Subheading text="Temukan produk kit sesuai dengan kebutuhanmu" />
-        <div className="grid grid-cols-1 auto-rows-[180px] gap-[1rem] mt-[2rem] lg:event-grid">
-          {events.map((e, i) => {
-            switch (i) {
-              case 0:
-                return (
-                  <div
-                    key={e.id}
-                    className="relative lg:grid-main rounded-xl overflow-hidden"
-                  >
-                    <Image
-                      src={e.imagePath}
-                      width="0"
-                      height="0"
-                      sizes="100vw"
-                      className="w-full h-full object-cover"
-                      alt={e.name}
-                    />
-                    <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
-                      {e.name}
-                    </p>
-                  </div>
-                );
-              case 1:
-                return (
-                  <div
-                    key={e.id}
-                    className="relative lg:grid-ev1 rounded-xl overflow-hidden"
-                  >
-                    <Image
-                      src={e.imagePath}
-                      width="0"
-                      height="0"
-                      sizes="100vw"
-                      className="w-full h-full object-cover"
-                      alt={e.name}
-                    />
-                    <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
-                      {e.name}
-                    </p>
-                  </div>
-                );
-              case 2:
-                return (
-                  <div
-                    key={e.id}
-                    className="relative lg:grid-ev2 rounded-xl overflow-hidden"
-                  >
-                    <Image
-                      src={e.imagePath}
-                      width="0"
-                      height="0"
-                      sizes="100vw"
-                      className="w-full h-full object-cover"
-                      alt={e.name}
-                    />
-                    <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
-                      {e.name}
-                    </p>
-                  </div>
-                );
-              case 3:
-                return (
-                  <div
-                    key={e.id}
-                    className="relative lg:grid-ev3 rounded-xl overflow-hidden"
-                  >
-                    <Image
-                      src={e.imagePath}
-                      width="0"
-                      height="0"
-                      sizes="100vw"
-                      className="w-full h-full object-cover"
-                      alt={e.name}
-                    />
-                    <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
-                      {e.name}
-                    </p>
-                  </div>
-                );
-              default:
-                return (
-                  <div
-                    key={e.id}
-                    className="relative lg:grid-ev4 rounded-xl overflow-hidden"
-                  >
-                    <Image
-                      src={e.imagePath}
-                      width="0"
-                      height="0"
-                      sizes="100vw"
-                      className="w-full h-full object-cover"
-                      alt={e.name}
-                    />
-                    <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
-                      {e.name}
-                    </p>
-                  </div>
-                );
-            }
-          })}
+                  );
+                case 1:
+                  return (
+                    <div
+                      key={e.id}
+                      className="relative lg:grid-ev1 rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={e.imagePath}
+                        width="0"
+                        height="0"
+                        sizes="100vw"
+                        className="w-full h-full object-cover"
+                        alt={e.name}
+                      />
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                        {e.name}
+                      </p>
+                    </div>
+                  );
+                case 2:
+                  return (
+                    <div
+                      key={e.id}
+                      className="relative lg:grid-ev2 rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={e.imagePath}
+                        width="0"
+                        height="0"
+                        sizes="100vw"
+                        className="w-full h-full object-cover"
+                        alt={e.name}
+                      />
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                        {e.name}
+                      </p>
+                    </div>
+                  );
+                case 3:
+                  return (
+                    <div
+                      key={e.id}
+                      className="relative lg:grid-ev3 rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={e.imagePath}
+                        width="0"
+                        height="0"
+                        sizes="100vw"
+                        className="w-full h-full object-cover"
+                        alt={e.name}
+                      />
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                        {e.name}
+                      </p>
+                    </div>
+                  );
+                default:
+                  return (
+                    <div
+                      key={e.id}
+                      className="relative lg:grid-ev4 rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={e.imagePath}
+                        width="0"
+                        height="0"
+                        sizes="100vw"
+                        className="w-full h-full object-cover"
+                        alt={e.name}
+                      />
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                        {e.name}
+                      </p>
+                    </div>
+                  );
+              }
+            })}
+          </div>
         </div>
       </div>
-    </div>
+      {/* Footer */}
+      <div className="bg-primary-pressed py-[2.5rem]">
+        <div className="max-w-[1200px] mx-auto px-[1.5rem]">
+          <div className="flex flex-col gap-[2rem] lg:flex-row lg:justify-between">
+            <div className="lg:w-[50%]">
+              <Image
+                src="/assets/logo-impresi.png"
+                width={157}
+                height={39}
+                alt="Impresi"
+              />
+              <p className="font-inter text-neutral-10 mt-[1rem]">
+                Your natural candle made for your home and for your wellness.
+              </p>
+              <div className="hidden lg:flex lg:gap-[1rem] lg:items-center lg:mt-[2rem]">
+                <Link href="/">
+                  <Image
+                    src="/assets/icon-facebook.png"
+                    width={32}
+                    height={32}
+                    alt="Facebook"
+                  />
+                </Link>
+                <Link href="/">
+                  <Image
+                    src="/assets/icon-twitter.png"
+                    width={32}
+                    height={32}
+                    alt="Twitter"
+                  />
+                </Link>
+                <Link href="/">
+                  <Image
+                    src="/assets/icon-linkedin.png"
+                    width={32}
+                    height={32}
+                    alt="LinkedIn"
+                  />
+                </Link>
+                <Link href="/">
+                  <Image
+                    src="/assets/icon-dribbble.png"
+                    width={32}
+                    height={32}
+                    alt="Dribbble"
+                  />
+                </Link>
+              </div>
+            </div>
+            <div className="lg:w-[50%]">
+              <div className="flex justify-between">
+                <div>
+                  <p className="font-inter font-bold text-neutral-10">Sell</p>
+                  <div className="flex flex-col items-start mt-[1rem] gap-[0.75rem]">
+                    <Link href="/" className="font-inter text-neutral-10">
+                      Products
+                    </Link>
+                    <Link href="/" className="font-inter text-neutral-10">
+                      Events
+                    </Link>
+                    <Link href="/" className="font-inter text-neutral-10">
+                      Wishlist
+                    </Link>
+                  </div>
+                </div>
+                <div>
+                  <p className="font-inter font-bold text-neutral-10">Info</p>
+                  <div className="flex flex-col items-start mt-[1rem] gap-[0.75rem]">
+                    <Link href="/" className="font-inter text-neutral-10">
+                      Kontak Kami
+                    </Link>
+                    <Link href="/" className="font-inter text-neutral-10">
+                      Kebijakan Privasi
+                    </Link>
+                    <Link href="/" className="font-inter text-neutral-10">
+                      Syarat & Ketentuan
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-[1rem] items-center mt-[0.5rem] lg:hidden">
+              <Link href="/">
+                <Image
+                  src="/assets/icon-facebook.png"
+                  width={32}
+                  height={32}
+                  alt="Facebook"
+                />
+              </Link>
+              <Link href="/">
+                <Image
+                  src="/assets/icon-twitter.png"
+                  width={32}
+                  height={32}
+                  alt="Twitter"
+                />
+              </Link>
+              <Link href="/">
+                <Image
+                  src="/assets/icon-linkedin.png"
+                  width={32}
+                  height={32}
+                  alt="LinkedIn"
+                />
+              </Link>
+              <Link href="/">
+                <Image
+                  src="/assets/icon-dribbble.png"
+                  width={32}
+                  height={32}
+                  alt="Dribbble"
+                />
+              </Link>
+            </div>
+          </div>
+          <p className="font-inter text-neutral-10 mt-[1.25rem] lg:mt-[2.5rem]">
+            &copy; 2023 PT Mencari Cinta Sejati
+          </p>
+        </div>
+      </div>
+    </>
   );
 }
