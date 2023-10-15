@@ -85,7 +85,7 @@ export default function Home() {
       <div className="mt-[2rem] lg:mt-[5rem]">
         <Heading text="Kategori Pilihan" />
         <Subheading text="Temukan produk pilihan Anda dengan harga terjangkau" />
-        <ScrollContainer className="flex flex-row gap-[1.25rem] mt-[2rem]">
+        <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem]">
           {dummySelectedCategories.map((c) => {
             return (
               <div
@@ -123,7 +123,6 @@ export default function Home() {
         <Subheading text="Temukan produk kit sesuai dengan kebutuhanmu" />
         <div className="grid grid-cols-1 auto-rows-[180px] gap-[1rem] mt-[2rem] lg:event-grid">
           {events.map((e, i) => {
-            console.log(i);
             switch (i) {
               case 0:
                 return (
@@ -154,7 +153,7 @@ export default function Home() {
                       src={e.imagePath}
                       width="0"
                       height="0"
-                      sizes="33vw"
+                      sizes="100vw"
                       className="w-full h-full object-cover"
                       alt={e.name}
                     />
@@ -173,7 +172,7 @@ export default function Home() {
                       src={e.imagePath}
                       width="0"
                       height="0"
-                      sizes="33vw"
+                      sizes="100vw"
                       className="w-full h-full object-cover"
                       alt={e.name}
                     />
@@ -192,7 +191,7 @@ export default function Home() {
                       src={e.imagePath}
                       width="0"
                       height="0"
-                      sizes="33vw"
+                      sizes="100vw"
                       className="w-full h-full object-cover"
                       alt={e.name}
                     />
