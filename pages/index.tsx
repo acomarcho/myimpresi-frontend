@@ -92,7 +92,7 @@ export default function Home() {
               return (
                 <div
                   key={c.id}
-                  className="flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative"
+                  className="cursor-pointer flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.05]"
                 >
                   {c.featured && (
                     <>
@@ -130,7 +130,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-main rounded-xl overflow-hidden"
+                      className="relative lg:grid-main rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -149,7 +149,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev1 rounded-xl overflow-hidden"
+                      className="relative lg:grid-ev1 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -168,7 +168,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev2 rounded-xl overflow-hidden"
+                      className="relative lg:grid-ev2 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -187,7 +187,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev3 rounded-xl overflow-hidden"
+                      className="relative lg:grid-ev3 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -206,7 +206,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev4 rounded-xl overflow-hidden"
+                      className="relative lg:grid-ev4 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
