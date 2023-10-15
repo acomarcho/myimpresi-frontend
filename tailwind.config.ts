@@ -15,7 +15,9 @@ const config: Config = {
         neutral: {
           100: "#050a30",
           60: "#707389",
+          10: "#FFFFFF",
         },
+        red: "#E52222",
       },
     },
   },
