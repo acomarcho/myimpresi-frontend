@@ -1,5 +1,6 @@
 import Heading from "./heading";
 import Image from "next/image";
+import { useState } from "react";
 
 type FormLabelProps = {
   htmlFor: string;
@@ -19,6 +20,13 @@ const FormLabel = ({ htmlFor, text, required }: FormLabelProps) => {
 };
 
 const Form = () => {
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    city: "",
+  });
+
   return (
     <div className="p-[2rem] lg:p-[5rem] flex flex-col gap-[1.25rem] lg:gap-[2.5rem] items-center justify-center bg-primary-base">
       <div className="text-center">
@@ -34,6 +42,10 @@ const Form = () => {
               className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
               placeholder="Masukkan nama"
               required
+              value={formState.name}
+              onChange={(e) => {
+                setFormState({ ...formState, name: e.currentTarget.value });
+              }}
             />
           </div>
           <div>
@@ -44,6 +56,10 @@ const Form = () => {
               className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
               placeholder="Masukkan email"
               required
+              value={formState.email}
+              onChange={(e) => {
+                setFormState({ ...formState, email: e.currentTarget.value });
+              }}
             />
           </div>
           <div>
@@ -59,11 +75,18 @@ const Form = () => {
                 <p className="font-inter text-neutral-100">+62</p>
               </div>
               <input
-                type="phone"
+                type="string"
                 name="phone"
                 className="p-[0.75rem] border-[1px] border-l-[0px] rounded-xl border-netural-50 font-inter text-neutral-100 w-[65%] lg:flex-1 rounded-tl-none rounded-bl-none"
                 placeholder="823 4567 8910"
                 required
+                value={formState.phoneNumber}
+                onChange={(e) => {
+                  setFormState({
+                    ...formState,
+                    phoneNumber: e.currentTarget.value,
+                  });
+                }}
               />
             </div>
           </div>
@@ -74,6 +97,13 @@ const Form = () => {
               name="city"
               className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
               placeholder="Masukkan kota"
+              value={formState.city}
+              onChange={(e) => {
+                setFormState({
+                  ...formState,
+                  city: e.currentTarget.value,
+                });
+              }}
             />
           </div>
         </div>
