@@ -109,10 +109,13 @@ const Form = () => {
         </div>
         <button
           type="submit"
-          className="bg-primary-default text-neutral-10 font-inter font-bold p-[0.75rem] w-full rounded-2xl mt-[2rem] transition-all hover:opacity-[0.9]"
+          className="bg-primary-default text-neutral-10 font-inter font-bold p-[0.75rem] w-full rounded-2xl mt-[2rem] transition-all hover:opacity-[0.9] disabled:opacity-[0.6]"
           onClick={(e) => {
             e.preventDefault();
           }}
+          disabled={
+            !formState.email || !formState.phoneNumber || !formState.name
+          }
         >
           Tolong Hubungi Saya
         </button>
