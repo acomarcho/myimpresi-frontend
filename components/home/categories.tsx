@@ -13,7 +13,7 @@ export default function Categories() {
       <Heading text="Kategori Pilihan" />
       <Subheading text="Temukan produk pilihan Anda dengan harga terjangkau" />
       <Skeleton height={200} visible={isLoading}>
-        <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem]">
+        <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem] px-[0.5rem]">
           {categories?.categories.map((c) => {
             return (
               <div
