@@ -6,6 +6,7 @@ import Event from "@/components/home/event";
 import Form from "@/components/home/form";
 import Categories from "@/components/home/categories";
 import Banner from "@/components/home/banner";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 const events = [
   {
@@ -32,6 +33,73 @@ const events = [
     id: 5,
     imagePath: "/dummy/ev-5.png",
     name: "Others",
+  },
+];
+
+const dummyProducts = [
+  {
+    id: 1,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci A",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
+  },
+  {
+    id: 2,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci B",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
+  },
+  {
+    id: 3,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci C",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
+  },
+  {
+    id: 5,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci D",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
+  },
+  {
+    id: 6,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci E",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
+  },
+  {
+    id: 7,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci F",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
+  },
+  {
+    id: 8,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci G",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
+  },
+  {
+    id: 4,
+    imagePath: "/dummy/produk.png",
+    name: "Gantungan Kunci H",
+    price: "12000",
+    minQuantity: "10",
+    soldAmount: "200",
   },
 ];
 
@@ -98,6 +166,44 @@ export default function Home() {
               }
             })}
           </div>
+        </div>
+        {/* Products */}
+        <div className="mt-[2rem] lg:mt-[5rem] mb-[2rem] lg:mb-[5rem]">
+          <Heading text="Produk Best Selling Tahun Ini" />
+          <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem] px-[0.5rem] pb-[1rem]">
+            {dummyProducts.map((p) => {
+              return (
+                <div
+                  key={p.id}
+                  className="shadow-md rounded-xl bg-neutral-10 w-[180px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05]"
+                >
+                  <Image
+                    src={p.imagePath}
+                    width={180}
+                    height={180}
+                    alt={p.name}
+                    className="object-cover"
+                  />
+                  <div className="p-[0.75rem]">
+                    <p className="h-[42px] font-inter text-neutral-100 text-[0.875rem]">
+                      {p.name}
+                    </p>
+                    <p className="font-inter text-neutral-100">
+                      <span className="font-bold text-[1.125rem]">
+                        {p.price}
+                      </span>
+                      <span className="text-neutral-60">
+                        /{p.minQuantity} pcs
+                      </span>
+                    </p>
+                    <p className="font-inter text-neutral-60">
+                      {p.soldAmount}+ terjual
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </ScrollContainer>
         </div>
       </div>
       {/* Contact field */}
