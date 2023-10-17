@@ -6,6 +6,8 @@ import Link from "next/link";
 import Event from "@/components/home/event";
 import Form from "@/components/home/form";
 
+import useCategories from "@/hooks/use-categories";
+
 const dummySelectedCategories = [
   {
     id: 1,
@@ -80,6 +82,8 @@ const events = [
 ];
 
 export default function Home() {
+  const { categories, isLoading: isCategoryLoading } = useCategories();
+
   return (
     <div className="relative">
       <div className="max-w-[1200px] mx-auto p-[1.5rem]">
@@ -90,13 +94,13 @@ export default function Home() {
           <Heading text="Kategori Pilihan" />
           <Subheading text="Temukan produk pilihan Anda dengan harga terjangkau" />
           <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem]">
-            {dummySelectedCategories.map((c) => {
+            {categories?.categories.map((c) => {
               return (
                 <div
                   key={c.id}
                   className="cursor-pointer flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.05]"
                 >
-                  {c.featured && (
+                  {c.isFeatured && (
                     <>
                       <div className="bg-red px-[0.25rem] h-[22px] flex items-center absolute left-[-6px] top-[12px]">
                         <p className="font-inter text-bold text-[0.75rem] text-neutral-10">
