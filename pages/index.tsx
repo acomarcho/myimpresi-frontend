@@ -5,10 +5,7 @@ import Link from "next/link";
 import Event from "@/components/home/event";
 import Form from "@/components/home/form";
 import Categories from "@/components/home/categories";
-import { useRef } from "react";
-import { Carousel } from "@mantine/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import useBanners from "@/hooks/use-banners";
+import Banner from "@/components/home/banner";
 
 const events = [
   {
@@ -39,29 +36,11 @@ const events = [
 ];
 
 export default function Home() {
-  const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: false }));
-
-  const { banners, isLoading } = useBanners();
-
   return (
     <div className="relative">
       <div className="max-w-[1200px] mx-auto p-[1.5rem]">
         {/* Banner image */}
-        <Carousel
-          slideSize="100%"
-          height={400}
-          withControls={false}
-          loop
-          plugins={[autoplay.current]}
-        >
-          {banners?.banners.map((b) => {
-            return (
-              <Carousel.Slide key={b.id}>
-                <Image src={b.imagePath} width={1200} height={400} alt="" />
-              </Carousel.Slide>
-            );
-          })}
-        </Carousel>
+        <Banner />
         {/* Kategori Pilihan */}
         <Categories />
         {/* Events */}
