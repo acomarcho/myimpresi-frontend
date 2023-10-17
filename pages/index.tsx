@@ -175,7 +175,7 @@ export default function Home() {
               return (
                 <div
                   key={p.id}
-                  className="shadow-md rounded-xl bg-neutral-10 w-[180px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05]"
+                  className="shadow-md rounded-xl bg-neutral-10 w-[180px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
                 >
                   <Image
                     src={p.imagePath}
@@ -199,6 +199,15 @@ export default function Home() {
                     <p className="font-inter text-neutral-60">
                       {p.soldAmount}+ terjual
                     </p>
+                  </div>
+                  <div className="absolute w-[2rem] h-[2rem] bg-neutral-10 rounded-full top-[1rem] right-[1rem] flex items-center justify-center">
+                    <Image
+                      src="/assets/heart.svg"
+                      height={16}
+                      width={16}
+                      alt="Heart"
+                      className="transition-all hover:scale-[1.2]"
+                    />
                   </div>
                 </div>
               );
