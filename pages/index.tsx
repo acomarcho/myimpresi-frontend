@@ -182,7 +182,7 @@ export default function Home() {
         <div className="text-center">
           <Heading text="Kirimi saya penawaran ekslkusif, ide produk unik, dan dipersonalisasi tips berbelanja di Impresi." />
         </div>
-        <div className="bg-neutral-10 p-[1.5rem] rounded-xl shadow-md w-full">
+        <div className="bg-neutral-10 p-[1.5rem] rounded-xl shadow-md w-full max-w-[1160px]">
           <div className="grid grid-cols-1 grid-rows-4 gap-[1rem] lg:grid-cols-2 lg:grid-rows-2">
             <div className="flex flex-col items-start gap-[0.25rem]">
               <label
