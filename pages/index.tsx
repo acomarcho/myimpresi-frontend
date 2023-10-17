@@ -3,6 +3,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Heading from "@/components/home/heading";
 import Subheading from "@/components/home/subheading";
 import Link from "next/link";
+import Event from "@/components/home/event";
 
 const dummySelectedCategories = [
   {
@@ -124,7 +125,7 @@ export default function Home() {
           <Heading text="Events" />
           <Subheading text="Temukan produk kit sesuai dengan kebutuhanmu" />
           <div className="grid event-grid-mobile gap-[1rem] mt-[2rem] lg:event-grid-desktop">
-            {events.map((e, i) => {
+            {events.slice(0, 5).map((e, i) => {
               switch (i) {
                 case 0:
                   return (
@@ -132,17 +133,7 @@ export default function Home() {
                       key={e.id}
                       className="relative grid-main rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
-                      <Image
-                        src={e.imagePath}
-                        width="0"
-                        height="0"
-                        sizes="100vw"
-                        className="w-full h-full object-cover"
-                        alt={e.name}
-                      />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
-                        {e.name}
-                      </p>
+                      <Event imagePath={e.imagePath} name={e.name} />
                     </div>
                   );
                 case 1:
@@ -151,17 +142,7 @@ export default function Home() {
                       key={e.id}
                       className="relative grid-ev1 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
-                      <Image
-                        src={e.imagePath}
-                        width="0"
-                        height="0"
-                        sizes="100vw"
-                        className="w-full h-full object-cover"
-                        alt={e.name}
-                      />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
-                        {e.name}
-                      </p>
+                      <Event imagePath={e.imagePath} name={e.name} />
                     </div>
                   );
                 case 2:
@@ -170,17 +151,7 @@ export default function Home() {
                       key={e.id}
                       className="relative grid-ev2 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
-                      <Image
-                        src={e.imagePath}
-                        width="0"
-                        height="0"
-                        sizes="100vw"
-                        className="w-full h-full object-cover"
-                        alt={e.name}
-                      />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
-                        {e.name}
-                      </p>
+                      <Event imagePath={e.imagePath} name={e.name} />
                     </div>
                   );
                 case 3:
@@ -189,17 +160,7 @@ export default function Home() {
                       key={e.id}
                       className="relative grid-ev3 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
-                      <Image
-                        src={e.imagePath}
-                        width="0"
-                        height="0"
-                        sizes="100vw"
-                        className="w-full h-full object-cover"
-                        alt={e.name}
-                      />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
-                        {e.name}
-                      </p>
+                      <Event imagePath={e.imagePath} name={e.name} />
                     </div>
                   );
                 default:
@@ -208,17 +169,7 @@ export default function Home() {
                       key={e.id}
                       className="relative grid-ev4 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
-                      <Image
-                        src={e.imagePath}
-                        width="0"
-                        height="0"
-                        sizes="100vw"
-                        className="w-full h-full object-cover"
-                        alt={e.name}
-                      />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
-                        {e.name}
-                      </p>
+                      <Event imagePath={e.imagePath} name={e.name} />
                     </div>
                   );
               }
