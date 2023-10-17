@@ -189,7 +189,7 @@ export default function Home() {
                 htmlFor="name"
                 className="font-inter font-bold text-[1rem] text-neutral-70"
               >
-                Nama
+                Nama <span className="text-red">*</span>
               </label>
               <input
                 type="text"
@@ -203,7 +203,7 @@ export default function Home() {
                 htmlFor="email"
                 className="font-inter font-bold text-[1rem] text-neutral-70"
               >
-                Email
+                Email <span className="text-red">*</span>
               </label>
               <input
                 type="email"
@@ -217,7 +217,7 @@ export default function Home() {
                 htmlFor="phone"
                 className="font-inter font-bold text-[1rem] text-neutral-70"
               >
-                Nomor HP
+                Nomor HP <span className="text-red">*</span>
               </label>
               <div className="flex">
                 <div className="flex p-[0.75rem] border-[1px] rounded-xl border-netural-50 font-inter text-neutral-100 gap-[0.25rem] flex-shrink-0 w-[35%] lg:w-auto rounded-tr-none rounded-br-none">
