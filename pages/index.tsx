@@ -219,12 +219,23 @@ export default function Home() {
               >
                 Nomor HP
               </label>
-              <input
-                type="phone"
-                name="phone"
-                className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
-                placeholder="823 4567 8910"
-              />
+              <div className="flex">
+                <div className="flex p-[0.75rem] border-[1px] rounded-xl border-netural-50 font-inter text-neutral-100 gap-[0.25rem] flex-shrink-0 w-[35%] lg:w-auto rounded-tr-none rounded-br-none">
+                  <Image
+                    src="/assets/indonesia.svg"
+                    width={20}
+                    height={14}
+                    alt="Indonesia"
+                  />
+                  <p className="font-inter text-neutral-100">+62</p>
+                </div>
+                <input
+                  type="phone"
+                  name="phone"
+                  className="p-[0.75rem] border-[1px] border-l-[0px] rounded-xl border-netural-50 font-inter text-neutral-100 w-[65%] lg:flex-1 rounded-tl-none rounded-bl-none"
+                  placeholder="823 4567 8910"
+                />
+              </div>
             </div>
             <div>
               <label
