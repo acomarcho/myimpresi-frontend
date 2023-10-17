@@ -9,8 +9,18 @@
     height: 6px;
   }
 
-  .event-grid {
-    grid-template-rows: 1fr 1fr 1fr;
+  .event-grid-mobile {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 80px 80px 80px 80px;
+    grid-template-areas:
+      "main main"
+      "main main"
+      "ev1 ev2"
+      "ev3 ev4";
+  }
+
+  .event-grid-desktop {
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 180px 180px;
     grid-template-areas:
       "main ev1 ev2"

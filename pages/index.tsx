@@ -73,7 +73,7 @@ const events = [
   {
     id: 5,
     imagePath: "/dummy/ev-5.png",
-    name: "Other",
+    name: "Others",
   },
 ];
 
@@ -123,14 +123,14 @@ export default function Home() {
         <div className="mt-[2rem] lg:mt-[5rem]">
           <Heading text="Events" />
           <Subheading text="Temukan produk kit sesuai dengan kebutuhanmu" />
-          <div className="grid grid-cols-1 auto-rows-[180px] gap-[1rem] mt-[2rem] lg:event-grid">
+          <div className="grid event-grid-mobile gap-[1rem] mt-[2rem] lg:event-grid-desktop">
             {events.map((e, i) => {
               switch (i) {
                 case 0:
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-main rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
+                      className="relative grid-main rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -140,7 +140,7 @@ export default function Home() {
                         className="w-full h-full object-cover"
                         alt={e.name}
                       />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
                         {e.name}
                       </p>
                     </div>
@@ -149,7 +149,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev1 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
+                      className="relative grid-ev1 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -159,7 +159,7 @@ export default function Home() {
                         className="w-full h-full object-cover"
                         alt={e.name}
                       />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
                         {e.name}
                       </p>
                     </div>
@@ -168,7 +168,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev2 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
+                      className="relative grid-ev2 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -178,7 +178,7 @@ export default function Home() {
                         className="w-full h-full object-cover"
                         alt={e.name}
                       />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
                         {e.name}
                       </p>
                     </div>
@@ -187,7 +187,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev3 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
+                      className="relative grid-ev3 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -197,7 +197,7 @@ export default function Home() {
                         className="w-full h-full object-cover"
                         alt={e.name}
                       />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
                         {e.name}
                       </p>
                     </div>
@@ -206,7 +206,7 @@ export default function Home() {
                   return (
                     <div
                       key={e.id}
-                      className="relative lg:grid-ev4 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
+                      className="relative grid-ev4 rounded-xl overflow-hidden transition-all cursor-pointer hover:scale-[1.05]"
                     >
                       <Image
                         src={e.imagePath}
@@ -216,7 +216,7 @@ export default function Home() {
                         className="w-full h-full object-cover"
                         alt={e.name}
                       />
-                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[1.5rem] bottom-[1.5rem]">
+                      <p className="font-inter font-bold text-[1rem] lg:text-[1.25rem] text-neutral-10 absolute left-[0.5rem] bottom-[0.5rem] lg:left-[1.5rem] lg:bottom-[1.5rem]">
                         {e.name}
                       </p>
                     </div>
