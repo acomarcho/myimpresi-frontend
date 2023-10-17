@@ -14,11 +14,15 @@ const config: Config = {
       colors: {
         neutral: {
           100: "#050a30",
+          70: "#3E4D6F",
           60: "#707389",
+          50: "#97A1B5",
           10: "#FFFFFF",
         },
         red: "#E52222",
         "primary-pressed": "#153261",
+        "primary-base": "#E3ECFC",
+        "primary-default": "#0057E2",
       },
     },
   },

@@ -177,6 +177,75 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* Contact field */}
+      <div className="p-[2rem] lg:p-[5rem] flex flex-col gap-[1.25rem] lg:gap-[2.5rem] items-center justify-center bg-primary-base">
+        <div className="text-center">
+          <Heading text="Kirimi saya penawaran ekslkusif, ide produk unik, dan dipersonalisasi tips berbelanja di Impresi." />
+        </div>
+        <div className="bg-neutral-10 p-[1.5rem] rounded-xl shadow-md w-full">
+          <div className="grid grid-cols-1 grid-rows-4 gap-[1rem] lg:grid-cols-2 lg:grid-rows-2">
+            <div className="flex flex-col items-start gap-[0.25rem]">
+              <label
+                htmlFor="name"
+                className="font-inter font-bold text-[1rem] text-neutral-70"
+              >
+                Nama
+              </label>
+              <input
+                type="text"
+                name="name"
+                className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
+                placeholder="Masukkan nama"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="font-inter font-bold text-[1rem] text-neutral-70"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
+                placeholder="Masukkan email"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="phone"
+                className="font-inter font-bold text-[1rem] text-neutral-70"
+              >
+                Nomor HP
+              </label>
+              <input
+                type="phone"
+                name="phone"
+                className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
+                placeholder="823 4567 8910"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="city"
+                className="font-inter font-bold text-[1rem] text-neutral-70"
+              >
+                Kota
+              </label>
+              <input
+                type="text"
+                name="city"
+                className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
+                placeholder="Masukkan kota"
+              />
+            </div>
+          </div>
+          <button className="bg-primary-default text-neutral-10 font-inter font-bold p-[0.75rem] w-full rounded-2xl mt-[2rem]">
+            Tolong Hubungi Saya
+          </button>
+        </div>
+      </div>
       {/* Footer */}
       <div className="bg-primary-pressed py-[2.5rem]">
         <div className="max-w-[1200px] mx-auto px-[1.5rem]">
