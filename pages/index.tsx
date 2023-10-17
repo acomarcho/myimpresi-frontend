@@ -1,57 +1,10 @@
 import Image from "next/image";
-import ScrollContainer from "react-indiana-drag-scroll";
 import Heading from "@/components/home/heading";
 import Subheading from "@/components/home/subheading";
 import Link from "next/link";
 import Event from "@/components/home/event";
 import Form from "@/components/home/form";
-
-import useCategories from "@/hooks/use-categories";
-
-const dummySelectedCategories = [
-  {
-    id: 1,
-    imagePath: "/dummy/clock.png",
-    name: "Jam",
-    featured: false,
-  },
-  {
-    id: 2,
-    imagePath: "/dummy/clock.png",
-    name: "Payung",
-    featured: false,
-  },
-  {
-    id: 3,
-    imagePath: "/dummy/mug.png",
-    name: "Drinkwater",
-    featured: true,
-  },
-  {
-    id: 4,
-    imagePath: "/dummy/clock.png",
-    name: "Pakaian",
-    featured: false,
-  },
-  {
-    id: 5,
-    imagePath: "/dummy/clock.png",
-    name: "Stationary",
-    featured: false,
-  },
-  {
-    id: 6,
-    imagePath: "/dummy/clock.png",
-    name: "Office Kit",
-    featured: false,
-  },
-  {
-    id: 7,
-    imagePath: "/dummy/clock.png",
-    name: "Others",
-    featured: false,
-  },
-];
+import Categories from "@/components/home/categories";
 
 const events = [
   {
@@ -82,49 +35,13 @@ const events = [
 ];
 
 export default function Home() {
-  const { categories, isLoading: isCategoryLoading } = useCategories();
-
   return (
     <div className="relative">
       <div className="max-w-[1200px] mx-auto p-[1.5rem]">
         {/* Banner image */}
         <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
         {/* Kategori Pilihan */}
-        <div className="mt-[2rem] lg:mt-[5rem]">
-          <Heading text="Kategori Pilihan" />
-          <Subheading text="Temukan produk pilihan Anda dengan harga terjangkau" />
-          <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem]">
-            {categories?.categories.map((c) => {
-              return (
-                <div
-                  key={c.id}
-                  className="cursor-pointer flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.05]"
-                >
-                  {c.isFeatured && (
-                    <>
-                      <div className="bg-red px-[0.25rem] h-[22px] flex items-center absolute left-[-6px] top-[12px]">
-                        <p className="font-inter text-bold text-[0.75rem] text-neutral-10">
-                          Terlaris
-                        </p>
-                      </div>
-                      <div className="bg-red clip-triangle absolute left-[-6px] top-[34px]" />
-                    </>
-                  )}
-                  <Image
-                    src={c.imagePath}
-                    width={150}
-                    height={150}
-                    alt={c.name}
-                    className="object-cover rounded-xl"
-                  />
-                  <p className="font-inter font-bold text-neutral-100 text-[1rem]">
-                    {c.name}
-                  </p>
-                </div>
-              );
-            })}
-          </ScrollContainer>
-        </div>
+        <Categories />
         {/* Events */}
         <div className="mt-[2rem] lg:mt-[5rem]">
           <Heading text="Events" />
