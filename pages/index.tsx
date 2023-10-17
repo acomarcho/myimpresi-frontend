@@ -252,7 +252,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <button className="bg-primary-default text-neutral-10 font-inter font-bold p-[0.75rem] w-full rounded-2xl mt-[2rem]">
+          <button className="bg-primary-default text-neutral-10 font-inter font-bold p-[0.75rem] w-full rounded-2xl mt-[2rem] transition-all hover:opacity-[0.9]">
             Tolong Hubungi Saya
           </button>
         </div>
