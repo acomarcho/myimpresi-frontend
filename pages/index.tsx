@@ -7,6 +7,7 @@ import Form from "@/components/home/form";
 import Categories from "@/components/home/categories";
 import Banner from "@/components/home/banner";
 import ScrollContainer from "react-indiana-drag-scroll";
+import { formatToRupiah } from "@/utils/format-to-rupiah";
 
 const events = [
   {
@@ -41,65 +42,65 @@ const dummyProducts = [
     id: 1,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci A",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
   {
     id: 2,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci B",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
   {
     id: 3,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci C",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
   {
     id: 5,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci D",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
   {
     id: 6,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci E",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
   {
     id: 7,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci F",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
   {
     id: 8,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci G",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
   {
     id: 4,
     imagePath: "/dummy/produk.png",
     name: "Gantungan Kunci H",
-    price: "12000",
-    minQuantity: "10",
-    soldAmount: "200",
+    price: 12000,
+    minQuantity: 10,
+    soldAmount: 200,
   },
 ];
 
@@ -175,12 +176,12 @@ export default function Home() {
               return (
                 <div
                   key={p.id}
-                  className="shadow-md rounded-xl bg-neutral-10 w-[180px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
+                  className="shadow-md rounded-xl bg-neutral-10 w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
                 >
                   <Image
                     src={p.imagePath}
-                    width={180}
-                    height={180}
+                    width={280}
+                    height={280}
                     alt={p.name}
                     className="object-cover"
                   />
@@ -190,7 +191,7 @@ export default function Home() {
                     </p>
                     <p className="font-inter text-neutral-100">
                       <span className="font-bold text-[1.125rem]">
-                        {p.price}
+                        {formatToRupiah(p.price)}
                       </span>
                       <span className="text-neutral-60">
                         /{p.minQuantity} pcs
