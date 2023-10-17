@@ -8,6 +8,7 @@ import Categories from "@/components/home/categories";
 import { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import useBanners from "@/hooks/use-banners";
 
 const events = [
   {
@@ -40,6 +41,8 @@ const events = [
 export default function Home() {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: false }));
 
+  const { banners, isLoading } = useBanners();
+
   return (
     <div className="relative">
       <div className="max-w-[1200px] mx-auto p-[1.5rem]">
@@ -51,18 +54,13 @@ export default function Home() {
           loop
           plugins={[autoplay.current]}
         >
-          <Carousel.Slide>
-            <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Image src="/dummy/banner.png" width={1200} height={400} alt="" />
-          </Carousel.Slide>
+          {banners?.banners.map((b) => {
+            return (
+              <Carousel.Slide key={b.id}>
+                <Image src={b.imagePath} width={1200} height={400} alt="" />
+              </Carousel.Slide>
+            );
+          })}
         </Carousel>
         {/* Kategori Pilihan */}
         <Categories />
