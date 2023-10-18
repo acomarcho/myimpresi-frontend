@@ -3,7 +3,8 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Heading from "./heading";
 import Subheading from "./subheading";
 import Image from "next/image";
-import { Skeleton } from "@mantine/core";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Categories() {
   const { categories, isLoading } = useCategories();
@@ -12,9 +13,10 @@ export default function Categories() {
     <div className="mt-[2rem] lg:mt-[5rem]">
       <Heading text="Kategori Pilihan" />
       <Subheading text="Temukan produk pilihan Anda dengan harga terjangkau" />
-      <Skeleton height={200} visible={isLoading}>
-        <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem] px-[0.5rem]">
-          {categories?.categories.map((c) => {
+      <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem] px-[0.5rem]">
+        {isLoading && <Skeleton containerClassName="flex-1" count={5} />}
+        {!isLoading &&
+          categories?.categories?.map((c) => {
             return (
               <div
                 key={c.id}
@@ -43,8 +45,7 @@ export default function Categories() {
               </div>
             );
           })}
-        </ScrollContainer>
-      </Skeleton>
+      </ScrollContainer>
     </div>
   );
 }
