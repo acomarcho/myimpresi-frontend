@@ -79,7 +79,7 @@ const Form = () => {
   return (
     <div className="p-[2rem] lg:p-[5rem] flex flex-col gap-[1.25rem] lg:gap-[2.5rem] items-center justify-center bg-primary-base">
       <div className="text-center">
-        <Heading text="Kirimi saya penawaran ekslkusif, ide produk unik, dan dipersonalisasi tips berbelanja di Impresi." />
+        <Heading text="Kirimi saya penawaran eksklusif, ide produk unik, dan tips berbelanja yang dipersonalisasi di Impresi." />
       </div>
       <form
         className="bg-neutral-10 p-[1.5rem] rounded-xl shadow-md w-full max-w-[1160px]"
