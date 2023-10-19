@@ -136,7 +136,7 @@ const Form = () => {
             <input
               type="text"
               name="name"
-              className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
+              className="p-[0.75rem] border-[1px] w-full rounded-xl border-neutral-50 font-inter text-neutral-100"
               placeholder="Masukkan nama"
               required
               value={formState.name}
@@ -150,7 +150,7 @@ const Form = () => {
             <input
               type="email"
               name="email"
-              className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
+              className="p-[0.75rem] border-[1px] w-full rounded-xl border-neutral-50 font-inter text-neutral-100"
               placeholder="Masukkan email"
               required
               value={formState.email}
@@ -162,7 +162,7 @@ const Form = () => {
           <div>
             <FormLabel htmlFor="phone" text="Nomor HP" required />
             <div className="grid grid-cols-[auto_1fr]">
-              <div className="flex p-[0.75rem] border-[1px] rounded-xl border-netural-50 font-inter text-neutral-100 gap-[0.25rem] flex-shrink-0 rounded-tr-none rounded-br-none">
+              <div className="flex p-[0.75rem] border-[1px] rounded-xl border-neutral-50 font-inter text-neutral-100 gap-[0.25rem] flex-shrink-0 rounded-tr-none rounded-br-none">
                 <Image
                   src="/assets/indonesia.svg"
                   width={20}
@@ -174,7 +174,7 @@ const Form = () => {
               <input
                 type="string"
                 name="phone"
-                className="p-[0.75rem] border-[1px] border-l-[0px] rounded-xl border-netural-50 font-inter text-neutral-100 rounded-tl-none rounded-bl-none"
+                className="p-[0.75rem] border-[1px] w-full border-l-[0px] rounded-xl border-neutral-50 font-inter text-neutral-100 rounded-tl-none rounded-bl-none"
                 placeholder="823 4567 8910"
                 required
                 value={formState.phoneNumber}
@@ -192,7 +192,7 @@ const Form = () => {
             <input
               type="text"
               name="city"
-              className="p-[0.75rem] border-[1px] w-full rounded-xl border-netural-50 font-inter text-neutral-100"
+              className="p-[0.75rem] border-[1px] w-full rounded-xl border-neutral-50 font-inter text-neutral-100"
               placeholder="Masukkan kota"
               value={formState.city}
               onChange={(e) => {
