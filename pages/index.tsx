@@ -105,6 +105,44 @@ const dummyProducts = [
   },
 ];
 
+import { Autocomplete } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
+
+const Navbar = () => {
+  return (
+    <div className="w-screen fixed top-0 left-0 z-[999] bg-white">
+      <div className="max-w-[1200px] mx-auto p-[1.5rem]">
+        <div className="grid grid-cols-[auto_1fr_auto] gap-[1rem] items-center">
+          <Link href="/">
+            <Image
+              src="/assets/logo-impresi-blue.png"
+              width={132}
+              height={33}
+              alt="Logo MyImpresi"
+            />
+          </Link>
+          <Autocomplete
+            leftSection={<IconSearch className="w-[1rem] h-[1rem]" />}
+            styles={{
+              input: {
+                borderRadius: "0.5rem",
+                padding: "0.75rem",
+                paddingLeft: "2rem",
+                fontFamily: "var(--font-inter)",
+                color: "var(--neutral-100)",
+              },
+            }}
+            placeholder="Mau cari produk apa...?"
+          />
+          <Link href="/" className="transition-all hover:scale-[1.05]">
+            <Image src="/assets/heart.svg" width={28} height={32} alt="Love" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <>
@@ -112,6 +150,7 @@ export default function Home() {
         <title>Impresi - Souvenir & Gifts</title>
       </Head>
       <div className="relative">
+        <Navbar />
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           {/* Banner image */}
           <Banner />

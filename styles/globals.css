@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --neutral-100: #050a30;
+  --neutral-70: #3e4d6f;
+  --neutral-60: #707389;
+  --neutral-50: #97a1b5;
+  --neutral-10: #ffffff;
+}
+
 @layer utilities {
   .clip-triangle {
     clip-path: polygon(0 0, 100% 0, 100% 100%);
