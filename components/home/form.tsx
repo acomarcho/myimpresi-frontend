@@ -161,8 +161,8 @@ const Form = () => {
           </div>
           <div>
             <FormLabel htmlFor="phone" text="Nomor HP" required />
-            <div className="flex">
-              <div className="flex p-[0.75rem] border-[1px] rounded-xl border-netural-50 font-inter text-neutral-100 gap-[0.25rem] flex-shrink-0 w-[35%] lg:w-auto rounded-tr-none rounded-br-none">
+            <div className="grid grid-cols-[auto_1fr]">
+              <div className="flex p-[0.75rem] border-[1px] rounded-xl border-netural-50 font-inter text-neutral-100 gap-[0.25rem] flex-shrink-0 rounded-tr-none rounded-br-none">
                 <Image
                   src="/assets/indonesia.svg"
                   width={20}
@@ -174,7 +174,7 @@ const Form = () => {
               <input
                 type="string"
                 name="phone"
-                className="p-[0.75rem] border-[1px] border-l-[0px] rounded-xl border-netural-50 font-inter text-neutral-100 w-[65%] lg:flex-1 rounded-tl-none rounded-bl-none"
+                className="p-[0.75rem] border-[1px] border-l-[0px] rounded-xl border-netural-50 font-inter text-neutral-100 rounded-tl-none rounded-bl-none"
                 placeholder="823 4567 8910"
                 required
                 value={formState.phoneNumber}
