@@ -76,6 +76,7 @@ const Form = () => {
   const [isToastOpen, setIsToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState<"error" | "success">("success");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   return (
@@ -89,6 +90,7 @@ const Form = () => {
           e.preventDefault();
 
           try {
+            setIsSubmitting(true);
             if (!executeRecaptcha) {
               throw new Error("Recaptcha not available!");
             }
@@ -109,7 +111,9 @@ const Form = () => {
             setFormState(defaultFormState);
           } catch (error) {
             setToastType("error");
-            if (
+            if (axios.isAxiosError(error)) {
+              setToastMessage(error.response?.data?.message);
+            } else if (
               error &&
               typeof error === "object" &&
               "message" in error &&
@@ -121,6 +125,7 @@ const Form = () => {
               setToastMessage("Gagal mengirimkan pesan! Silakan kontak admin.");
             }
           } finally {
+            setIsSubmitting(false);
             setIsToastOpen(true);
           }
         }}
@@ -206,7 +211,8 @@ const Form = () => {
             !formState.email ||
             !formState.phoneNumber ||
             !formState.name ||
-            isToastOpen
+            isToastOpen ||
+            isSubmitting
           }
         >
           Tolong Hubungi Saya
