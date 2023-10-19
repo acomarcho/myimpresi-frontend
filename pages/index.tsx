@@ -122,12 +122,17 @@ const Navbar = () => {
             />
           </Link>
           <Autocomplete
-            leftSection={<IconSearch className="w-[1rem] h-[1rem]" />}
+            leftSection={<IconSearch size={16} stroke={4} />}
             styles={{
+              section: {
+                paddingLeft: "1rem",
+              },
               input: {
-                borderRadius: "0.5rem",
-                padding: "0.75rem",
-                paddingLeft: "2rem",
+                borderRadius: "100px",
+                paddingTop: "0.25rem",
+                paddingBottom: "0.25rem",
+                height: "auto",
+                paddingLeft: "2.75rem",
                 fontFamily: "var(--font-inter)",
                 color: "var(--neutral-100)",
                 fontSize: "1rem",
