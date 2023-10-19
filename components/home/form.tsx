@@ -2,6 +2,7 @@ import Heading from "./heading";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 type FormLabelProps = {
   htmlFor: string;
@@ -75,6 +76,7 @@ const Form = () => {
   const [isToastOpen, setIsToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState<"error" | "success">("success");
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   return (
     <div className="p-[2rem] lg:p-[5rem] flex flex-col gap-[1.25rem] lg:gap-[2.5rem] items-center justify-center bg-primary-base">
@@ -87,6 +89,10 @@ const Form = () => {
           e.preventDefault();
 
           try {
+            if (!executeRecaptcha) {
+              throw new Error("Recaptcha not available!");
+            }
+            const token = await executeRecaptcha("contactFormSubmit");
             await axios.post(
               `${process.env.NEXT_PUBLIC_BE_URL}/gsheet/contact`,
               {
@@ -94,6 +100,7 @@ const Form = () => {
                 email: formState.email,
                 phone: formState.phoneNumber,
                 city: formState.city,
+                recaptchaToken: token,
               }
             );
             setToastType("success");
@@ -106,9 +113,10 @@ const Form = () => {
               error &&
               typeof error === "object" &&
               "message" in error &&
-              typeof error["message"] === "string"
+              typeof (error as { message: string })["message"] === "string"
             ) {
-              setToastMessage(error.message);
+              const e = error as { message: string };
+              setToastMessage(e.message);
             } else {
               setToastMessage("Gagal mengirimkan pesan! Silakan kontak admin.");
             }

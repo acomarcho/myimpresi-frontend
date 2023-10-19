@@ -42,3 +42,7 @@
     grid-area: ev4;
   }
 }
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
