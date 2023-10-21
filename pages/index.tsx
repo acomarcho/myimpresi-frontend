@@ -10,6 +10,7 @@ import Banner from "@/components/home/banner";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import Navbar from "@/components/home/navbar";
+import useCategories from "@/hooks/use-categories";
 
 const events = [
   {
@@ -107,6 +108,8 @@ const dummyProducts = [
 ];
 
 export default function Home() {
+  const { categories } = useCategories();
+
   return (
     <>
       <Head>
@@ -237,57 +240,29 @@ export default function Home() {
                   alt="Impresi"
                 />
                 <p className="font-inter text-neutral-10 mt-[1rem]">
-                  Your natural candle made for your home and for your wellness.
+                  Permata Hijau
+                  <br />
+                  Permai Kaliabang Tengah Bekasi Utara, Kota Bekasi, 17125
                 </p>
-                <div className="hidden lg:flex lg:gap-[1rem] lg:items-center lg:mt-[2rem]">
-                  <Link href="/">
-                    <Image
-                      src="/assets/icon-facebook.png"
-                      width={32}
-                      height={32}
-                      alt="Facebook"
-                    />
-                  </Link>
-                  <Link href="/">
-                    <Image
-                      src="/assets/icon-twitter.png"
-                      width={32}
-                      height={32}
-                      alt="Twitter"
-                    />
-                  </Link>
-                  <Link href="/">
-                    <Image
-                      src="/assets/icon-linkedin.png"
-                      width={32}
-                      height={32}
-                      alt="LinkedIn"
-                    />
-                  </Link>
-                  <Link href="/">
-                    <Image
-                      src="/assets/icon-dribbble.png"
-                      width={32}
-                      height={32}
-                      alt="Dribbble"
-                    />
-                  </Link>
-                </div>
               </div>
               <div className="lg:w-[50%]">
-                <div className="flex justify-between">
+                <div className="flex flex-col gap-[2.5rem] lg:flex-row justify-between">
                   <div>
-                    <p className="font-inter font-bold text-neutral-10">Sell</p>
-                    <div className="flex flex-col items-start mt-[1rem] gap-[0.75rem]">
-                      <Link href="/" className="font-inter text-neutral-10">
-                        Products
-                      </Link>
-                      <Link href="/" className="font-inter text-neutral-10">
-                        Events
-                      </Link>
-                      <Link href="/" className="font-inter text-neutral-10">
-                        Wishlist
-                      </Link>
+                    <p className="font-inter font-bold text-neutral-10">
+                      Produk
+                    </p>
+                    <div className="grid grid-cols-2 gap-x-[5rem] mt-[1rem] gap-y-[0.75rem]">
+                      {categories?.categories?.map((c) => {
+                        return (
+                          <Link
+                            key={c.id}
+                            href="/"
+                            className="font-inter text-neutral-10"
+                          >
+                            {c.name}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                   <div>
@@ -306,43 +281,9 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-[1rem] items-center mt-[0.5rem] lg:hidden">
-                <Link href="/">
-                  <Image
-                    src="/assets/icon-facebook.png"
-                    width={32}
-                    height={32}
-                    alt="Facebook"
-                  />
-                </Link>
-                <Link href="/">
-                  <Image
-                    src="/assets/icon-twitter.png"
-                    width={32}
-                    height={32}
-                    alt="Twitter"
-                  />
-                </Link>
-                <Link href="/">
-                  <Image
-                    src="/assets/icon-linkedin.png"
-                    width={32}
-                    height={32}
-                    alt="LinkedIn"
-                  />
-                </Link>
-                <Link href="/">
-                  <Image
-                    src="/assets/icon-dribbble.png"
-                    width={32}
-                    height={32}
-                    alt="Dribbble"
-                  />
-                </Link>
-              </div>
             </div>
-            <p className="font-inter text-neutral-10 mt-[1.25rem] lg:mt-[2.5rem]">
-              &copy; 2023 PT Mencari Cinta Sejati
+            <p className="font-inter text-neutral-10 mt-[2.5rem]">
+              &copy; 2023 PT Tama Impresi Baik
             </p>
           </div>
         </div>
