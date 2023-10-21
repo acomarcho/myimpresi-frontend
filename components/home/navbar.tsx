@@ -222,7 +222,7 @@ const Navbar = () => {
                 <Accordion.Control
                   styles={{
                     control: {
-                      padding: 0,
+                      padding: "0.5rem 0",
                     },
                   }}
                 >
@@ -244,7 +244,7 @@ const Navbar = () => {
                 <Accordion.Control
                   styles={{
                     control: {
-                      padding: 0,
+                      padding: "0.5rem 0",
                     },
                   }}
                 >
