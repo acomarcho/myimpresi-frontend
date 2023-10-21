@@ -49,6 +49,12 @@
   .grid-ev4 {
     grid-area: ev4;
   }
+  .truncate-two {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
 }
 
 .grecaptcha-badge {

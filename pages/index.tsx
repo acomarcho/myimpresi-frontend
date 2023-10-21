@@ -45,7 +45,7 @@ const dummyProducts = [
   {
     id: 1,
     imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci A",
+    name: "Gantungan Kunci A ini tes nama yang super panjang untuk melihat truncatenya",
     price: 12000,
     minQuantity: 10,
     soldAmount: 200,
@@ -195,7 +195,7 @@ export default function Home() {
                       className="object-cover"
                     />
                     <div className="p-[0.75rem]">
-                      <p className="h-[42px] font-inter text-neutral-100 text-[0.875rem]">
+                      <p className="h-[3rem] font-inter text-neutral-100 text-[0.875rem] truncate-two">
                         {p.name}
                       </p>
                       <p className="font-inter text-neutral-100">
