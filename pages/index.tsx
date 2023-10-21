@@ -109,8 +109,6 @@ const dummyProducts = [
 ];
 
 export default function Home() {
-  const { categories } = useCategories();
-
   return (
     <>
       <Head>
