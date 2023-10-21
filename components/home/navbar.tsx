@@ -3,9 +3,32 @@ import { IconSearch, IconCaretDownFilled } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import useCategories from "@/hooks/use-categories";
+import { useDebouncedValue } from "@mantine/hooks";
+import { useState, useEffect } from "react";
+
+type AutocompleteData = {
+  name: string;
+};
 
 const Navbar = () => {
   const { categories } = useCategories();
+  const [search, setSearch] = useState("");
+  const [autocomplete, setAutocomplete] = useState<AutocompleteData[]>([]);
+  const [debouncedSearch] = useDebouncedValue(search, 200);
+
+  useEffect(() => {
+    if (debouncedSearch.length >= 2) {
+      setAutocomplete(
+        categories?.categories?.map((c) => {
+          return {
+            name: c.name,
+          };
+        }) || []
+      );
+    } else {
+      setAutocomplete([]);
+    }
+  }, [debouncedSearch, setAutocomplete, categories]);
 
   return (
     <div className="w-screen fixed top-0 left-0 z-[100] bg-white shadow-md">
@@ -20,6 +43,10 @@ const Navbar = () => {
             />
           </Link>
           <Autocomplete
+            value={search}
+            onChange={(e) => {
+              setSearch(e);
+            }}
             leftSection={<IconSearch size={16} stroke={4} />}
             styles={{
               section: {
@@ -37,6 +64,9 @@ const Navbar = () => {
               },
             }}
             placeholder="Mau cari produk apa...?"
+            data={autocomplete.map((a) => {
+              return a.name;
+            })}
           />
           <Link href="/" className="transition-all hover:scale-[1.05]">
             <Image src="/assets/heart.svg" width={28} height={32} alt="Love" />
