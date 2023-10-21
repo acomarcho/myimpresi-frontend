@@ -53,7 +53,7 @@ const Toast = ({
 
   return (
     <div
-      className="fixed top-0 left-0 w-screen p-[1.25rem] transition-all"
+      className="fixed top-0 left-0 w-screen p-[1.25rem] transition-all z-[999]"
       style={{
         backgroundColor: type === "success" ? "#229A16" : "#E52222",
         transform: isOpen ? "translateX(0%)" : "translateX(-100%)",
