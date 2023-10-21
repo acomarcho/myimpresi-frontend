@@ -1,4 +1,4 @@
-import { Autocomplete, Menu } from "@mantine/core";
+import { Autocomplete, Menu, Drawer } from "@mantine/core";
 import {
   IconSearch,
   IconCaretDownFilled,
@@ -7,7 +7,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import useCategories from "@/hooks/use-categories";
-import { useDebouncedValue } from "@mantine/hooks";
+import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
 import { useState, useEffect } from "react";
 
 type AutocompleteData = {
@@ -19,6 +19,7 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const [autocomplete, setAutocomplete] = useState<AutocompleteData[]>([]);
   const [debouncedSearch] = useDebouncedValue(search, 200);
+  const [opened, { open, close }] = useDisclosure(false);
 
   useEffect(() => {
     if (debouncedSearch.length >= 2) {
@@ -164,12 +165,52 @@ const Navbar = () => {
                   alt="Wishlist"
                 />
               </Link>
-              <button>
+              <button onClick={open}>
                 <IconMenu2 size={25} />
               </button>
             </div>
           </div>
         </div>
+        <Drawer opened={opened} onClose={close} position="bottom" size="80%">
+          <div className="flex flex-col">
+            <Link
+              href="/"
+              className="py-[1rem] border-b-[1px] border-neutral-20"
+            >
+              Home
+            </Link>
+            <Link
+              href="/"
+              className="py-[1rem] border-b-[1px] border-neutral-20"
+            >
+              Produk
+            </Link>
+            <Link
+              href="/"
+              className="py-[1rem] border-b-[1px] border-neutral-20"
+            >
+              Events
+            </Link>
+            <Link
+              href="/"
+              className="py-[1rem] border-b-[1px] border-neutral-20"
+            >
+              Kontak Kami
+            </Link>
+            <Link
+              href="/"
+              className="py-[1rem] border-b-[1px] border-neutral-20"
+            >
+              Tentang Impresi
+            </Link>
+            <Link
+              href="/"
+              className="py-[1rem] border-b-[1px] border-neutral-20"
+            >
+              Kebijakan Impresi
+            </Link>
+          </div>
+        </Drawer>
       </div>
     </>
   );
