@@ -2,16 +2,14 @@ import Head from "next/head";
 import Image from "next/image";
 import Heading from "@/components/home/heading";
 import Subheading from "@/components/home/subheading";
-import Link from "next/link";
 import Event from "@/components/home/event";
 import Form from "@/components/home/form";
 import Categories from "@/components/home/categories";
 import Banner from "@/components/home/banner";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
-import Navbar from "@/components/home/navbar";
-import useCategories from "@/hooks/use-categories";
-import Footer from "@/components/home/footer";
+import Navbar from "@/components/common/navbar";
+import Footer from "@/components/common/footer";
 
 const events = [
   {

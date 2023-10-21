@@ -80,7 +80,7 @@ const Navbar = () => {
                 return a.name;
               })}
             />
-            <Link href="/" className="transition-all hover:scale-[1.05]">
+            <Link href="/wishlist" className="transition-all hover:scale-[1.05]">
               <Image
                 src="/assets/heart.svg"
                 width={28}
@@ -162,7 +162,7 @@ const Navbar = () => {
               alt="Logo Impresi"
             />
             <div className="flex gap-[1.25rem] items-center">
-              <Link href="/">
+              <Link href="/wishlist">
                 <Image
                   src="/assets/heart.svg"
                   width={25}
