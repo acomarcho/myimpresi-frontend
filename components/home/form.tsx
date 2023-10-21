@@ -38,10 +38,7 @@ const Toast = ({
 }: ToastProps) => {
   useEffect(() => {
     if (isOpen === true) {
-      console.log("Membuka");
-
       const timeout = setTimeout(() => {
-        console.log("Menutup");
         setIsOpen(false);
       }, durationInMs);
 
