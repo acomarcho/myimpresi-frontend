@@ -18,7 +18,7 @@ const Navbar = () => {
   const { categories } = useCategories();
   const [search, setSearch] = useState("");
   const [autocomplete, setAutocomplete] = useState<AutocompleteData[]>([]);
-  const [debouncedSearch] = useDebouncedValue(search, 200);
+  const [debouncedSearch] = useDebouncedValue(search, 500);
   const [opened, { open, close }] = useDisclosure(false);
 
   useEffect(() => {
@@ -68,6 +68,11 @@ const Navbar = () => {
                   fontFamily: "var(--font-inter)",
                   color: "var(--neutral-100)",
                   fontSize: "1rem",
+                },
+                option: {
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "1rem",
+                  color: "var(--neutral-100",
                 },
               }}
               placeholder="Mau cari produk apa...?"
@@ -169,6 +174,39 @@ const Navbar = () => {
                 <IconMenu2 size={25} />
               </button>
             </div>
+          </div>
+          <div className="mt-[1rem]">
+            <Autocomplete
+              value={search}
+              onChange={(e) => {
+                setSearch(e);
+              }}
+              leftSection={<IconSearch size={16} stroke={4} />}
+              styles={{
+                section: {
+                  paddingLeft: "1rem",
+                },
+                input: {
+                  borderRadius: "100px",
+                  paddingTop: "0.25rem",
+                  paddingBottom: "0.25rem",
+                  height: "auto",
+                  paddingLeft: "2.75rem",
+                  fontFamily: "var(--font-inter)",
+                  color: "var(--neutral-100)",
+                  fontSize: "1rem",
+                },
+                option: {
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "1rem",
+                  color: "var(--neutral-100",
+                },
+              }}
+              placeholder="Mau cari produk apa...?"
+              data={autocomplete.map((a) => {
+                return a.name;
+              })}
+            />
           </div>
         </div>
         <Drawer opened={opened} onClose={close} position="bottom" size="80%">
