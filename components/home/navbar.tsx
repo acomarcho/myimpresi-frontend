@@ -1,4 +1,4 @@
-import { Autocomplete, Menu, Drawer } from "@mantine/core";
+import { Autocomplete, Menu, Drawer, Accordion } from "@mantine/core";
 import {
   IconSearch,
   IconCaretDownFilled,
@@ -175,37 +175,67 @@ const Navbar = () => {
           <div className="flex flex-col">
             <Link
               href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
               Home
             </Link>
+            <Accordion>
+              <Accordion.Item value="Produk">
+                <Accordion.Control
+                  styles={{
+                    control: {
+                      padding: 0,
+                    },
+                  }}
+                >
+                  Produk
+                </Accordion.Control>
+                <Accordion.Panel>
+                  <div className="flex flex-col gap-[1rem]">
+                    {categories?.categories?.map((c) => {
+                      return (
+                        <Link key={c.id} href="/">
+                          {c.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </Accordion.Panel>
+              </Accordion.Item>
+              <Accordion.Item value="Events">
+                <Accordion.Control
+                  styles={{
+                    control: {
+                      padding: 0,
+                    },
+                  }}
+                >
+                  Events
+                </Accordion.Control>
+                <Accordion.Panel>
+                  <div className="flex flex-col gap-[1rem]">
+                    <Link href="/">Sample Event 1</Link>
+                    <Link href="/">Sample Event 2</Link>
+                    <Link href="/">Sample Event 3</Link>
+                  </div>
+                </Accordion.Panel>
+              </Accordion.Item>
+            </Accordion>
             <Link
               href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20"
-            >
-              Produk
-            </Link>
-            <Link
-              href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20"
-            >
-              Events
-            </Link>
-            <Link
-              href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
               Kontak Kami
             </Link>
             <Link
               href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
               Tentang Impresi
             </Link>
             <Link
               href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
               Kebijakan Impresi
             </Link>
