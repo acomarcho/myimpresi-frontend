@@ -79,7 +79,7 @@ const Products = () => {
           return (
             <div
               key={p.id}
-              className="shadow-md rounded-xl bg-neutral-10 w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
+              className="bg-neutral-10 w-[50%] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
             >
               <Image
                 src={p.imagePath}
