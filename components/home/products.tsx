@@ -92,13 +92,15 @@ const Products = () => {
                 <p className="h-[3rem] font-inter text-neutral-100 text-[0.875rem] truncate-two">
                   {p.name}
                 </p>
-                <p className="font-inter text-neutral-100">
-                  <span className="font-bold text-[1.125rem]">
+                <p className="font-inter text-neutral-100 text-[0.875rem]">
+                  <span className="font-bold lg:text-[1.125rem]">
                     {formatToRupiah(p.price)}
                   </span>
-                  <span className="text-neutral-60">/{p.minQuantity} pcs</span>
+                  <span className="text-neutral-60">
+                    /Min {p.minQuantity} pcs
+                  </span>
                 </p>
-                <p className="font-inter text-neutral-60">
+                <p className="font-inter text-neutral-60 mt-[0.5rem]">
                   {p.soldAmount}+ terjual
                 </p>
               </div>
