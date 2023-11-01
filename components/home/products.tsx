@@ -7,64 +7,64 @@ const dummyProducts = [
   {
     id: 1,
     imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci A ini tes nama yang super panjang untuk melihat truncatenya",
-    price: 12000,
+    name: "BANUM",
+    price: 120000,
     minQuantity: 10,
     soldAmount: 200,
   },
   {
     id: 2,
     imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci B",
-    price: 12000,
+    name: "HATIVE",
+    price: 120000,
     minQuantity: 10,
     soldAmount: 200,
   },
   {
     id: 3,
     imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci C",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-  {
-    id: 5,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci D",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-  {
-    id: 6,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci E",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-  {
-    id: 7,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci F",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-  {
-    id: 8,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci G",
-    price: 12000,
+    name: "HATIVE",
+    price: 120000,
     minQuantity: 10,
     soldAmount: 200,
   },
   {
     id: 4,
     imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci H",
-    price: 12000,
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 5,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 6,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 7,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 8,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
     minQuantity: 10,
     soldAmount: 200,
   },
@@ -73,13 +73,13 @@ const dummyProducts = [
 const Products = () => {
   return (
     <div className="mt-[2rem] lg:mt-[5rem] mb-[2rem] lg:mb-[5rem]">
-      <Heading text="Produk Best Selling Tahun Ini" />
+      <Heading text="Produk Pilihan" />
       <ScrollContainer className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem] px-[0.5rem] pb-[1rem]">
         {dummyProducts.map((p) => {
           return (
             <div
               key={p.id}
-              className="bg-neutral-10 w-[50%] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
+              className="bg-neutral-10 w-[50%] min-w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
             >
               <Image
                 src={p.imagePath}
@@ -89,29 +89,25 @@ const Products = () => {
                 className="object-cover"
               />
               <div className="p-[0.75rem]">
-                <p className="h-[3rem] font-inter text-neutral-100 text-[0.875rem] truncate-two">
-                  {p.name}
+                <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
+                <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Ipsum numquam reprehenderit et, earum deleniti nostrum tempore
+                  enim nihil corporis optio!
                 </p>
-                <p className="font-inter text-neutral-100 text-[0.875rem]">
-                  <span className="font-bold lg:text-[1.125rem]">
+                <div className="flex justify-between items-center mt-[0.5rem]">
+                  <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
                     {formatToRupiah(p.price)}
-                  </span>
-                  <span className="text-neutral-60">
-                    /Min {p.minQuantity} pcs
-                  </span>
-                </p>
-                <p className="font-inter text-neutral-60 mt-[0.5rem]">
-                  {p.soldAmount}+ terjual
-                </p>
-              </div>
-              <div className="absolute w-[2rem] h-[2rem] bg-neutral-10 rounded-full top-[1rem] right-[1rem] flex items-center justify-center">
-                <Image
-                  src="/assets/heart.svg"
-                  height={16}
-                  width={16}
-                  alt="Heart"
-                  className="transition-all hover:scale-[1.2]"
-                />
+                  </p>
+                  <button className="transition-all hover:scale-[1.2]">
+                    <Image
+                      src="/assets/heart.svg"
+                      width={16}
+                      height={16}
+                      alt="Add to wishlist"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           );

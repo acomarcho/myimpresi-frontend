@@ -21,8 +21,6 @@ export default function Home() {
           <Banner />
           {/* Kategori Pilihan */}
           <Categories />
-          {/* Events */}
-          <Events />
           {/* Products */}
           <Products />
         </div>
