@@ -21,16 +21,6 @@ export default function Categories() {
                 key={c.id}
                 className="cursor-pointer flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.05]"
               >
-                {c.isFeatured && (
-                  <>
-                    <div className="bg-red px-[0.25rem] h-[22px] flex items-center absolute left-[-6px] top-[12px]">
-                      <p className="font-inter text-bold text-[0.75rem] text-neutral-10">
-                        Terlaris
-                      </p>
-                    </div>
-                    <div className="bg-red clip-triangle absolute left-[-6px] top-[34px]" />
-                  </>
-                )}
                 <Image
                   src={c.imagePath}
                   width={150}
