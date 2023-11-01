@@ -25,6 +25,7 @@ const config: Config = {
         "primary-pressed": "#153261",
         "primary-base": "#E3ECFC",
         "primary-default": "#0057E2",
+        gray: "#FBFBFB",
       },
     },
   },
