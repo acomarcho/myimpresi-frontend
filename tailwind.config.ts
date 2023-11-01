@@ -26,6 +26,21 @@ const config: Config = {
         "primary-base": "#E3ECFC",
         "primary-default": "#0057E2",
         gray: "#FBFBFB",
+        serviceorange: {
+          500: "#FF9A04",
+          300: "#FFC062",
+          900: "#332513",
+        },
+        servicered: {
+          500: "#E9190C",
+          300: "#FFA7A1",
+          900: "#332120",
+        },
+        servicegreen: {
+          500: "#288990",
+          300: "#A6C1C2",
+          900: "#212626",
+        },
       },
     },
   },
