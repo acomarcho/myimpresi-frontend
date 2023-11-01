@@ -4,9 +4,10 @@ import Categories from "@/components/home/categories";
 import Banner from "@/components/home/banner";
 import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
-import Products from "@/components/home/products";
-import Events from "@/components/home/events";
+import FeaturedProducts from "@/components/home/featured-products";
+import BestSellingProducts from "@/components/home/best-selling-products";
 import FloatingWAIcon from "@/components/common/floating-wa";
+import SectionDivider from "@/components/common/section-divider";
 
 export default function Home() {
   return (
@@ -21,8 +22,11 @@ export default function Home() {
           <Banner />
           {/* Kategori Pilihan */}
           <Categories />
+          <SectionDivider />
           {/* Products */}
-          <Products />
+          <FeaturedProducts />
+          <SectionDivider />
+          <BestSellingProducts />
         </div>
         {/* Contact field */}
         <Form />
