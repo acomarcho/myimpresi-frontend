@@ -41,6 +41,7 @@ const config: Config = {
           300: "#A6C1C2",
           900: "#212626",
         },
+        whitetransparent: "rgba(255, 255, 255, 0.5)",
       },
     },
   },
