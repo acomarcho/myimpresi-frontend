@@ -19,23 +19,17 @@ export default function Home() {
       <Navbar />
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
-          {/* Banner image */}
           <Banner />
-          {/* Kategori Pilihan */}
           <Categories />
           <SectionDivider />
-          {/* Products */}
           <FeaturedProducts />
           <SectionDivider />
           <BestSellingProducts />
           <SectionDivider />
           <OurServices />
         </div>
-        {/* Contact field */}
         <Form />
-        {/* Footer */}
         <Footer />
-        {/* Floating WA Icon */}
         <FloatingWAIcon />
       </div>
     </>
