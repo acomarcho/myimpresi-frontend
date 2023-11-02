@@ -10,6 +10,9 @@ import OurServices from "@/components/home/our-services";
 import FloatingWAIcon from "@/components/common/floating-wa";
 import SectionDivider from "@/components/common/section-divider";
 
+import Heading from "@/components/home/heading";
+import Image from "next/image";
+
 export default function Home() {
   return (
     <>
@@ -25,6 +28,44 @@ export default function Home() {
           <FeaturedProducts />
           <SectionDivider />
           <BestSellingProducts />
+          <SectionDivider />
+          <div>
+            <Heading text="Temukan Inspirasi Produk yang Cocok" />
+            <div className="mt-[2rem] grid inspiration-grid-mobile lg:inspiration-grid-desktop gap-[1rem] lg:gap-[2rem]">
+              <div className="grid-ins1 relative">
+                <Image
+                  src="/assets/inspo-1.png"
+                  fill
+                  className="object-cover"
+                  alt=""
+                />
+              </div>
+              <div className="grid-ins2 relative">
+                <Image
+                  src="/assets/inspo-2.png"
+                  fill
+                  className="object-cover"
+                  alt=""
+                />
+              </div>
+              <div className="grid-ins3 relative">
+                <Image
+                  src="/assets/inspo-3.png"
+                  fill
+                  className="object-cover"
+                  alt=""
+                />
+              </div>
+              <div className="grid-ins4 relative">
+                <Image
+                  src="/assets/inspo-4.png"
+                  fill
+                  className="object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
           <SectionDivider />
           <OurServices />
         </div>

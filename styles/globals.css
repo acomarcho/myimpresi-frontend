@@ -26,7 +26,6 @@
       "ev1 ev2"
       "ev3 ev4";
   }
-
   .event-grid-desktop {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 180px 180px;
@@ -49,11 +48,40 @@
   .grid-ev4 {
     grid-area: ev4;
   }
+
   .truncate-two {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+  }
+
+  .inspiration-grid-mobile {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 160px 160px 160px;
+    grid-template-areas:
+      "ins1 ins1"
+      "ins2 ins2"
+      "ins3 ins4";
+  }
+  .inspiration-grid-desktop {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 250px 250px;
+    grid-template-areas:
+      "ins1 ins1 ins2 ins3"
+      "ins1 ins1 ins2 ins4";
+  }
+  .grid-ins1 {
+    grid-area: ins1;
+  }
+  .grid-ins2 {
+    grid-area: ins2;
+  }
+  .grid-ins3 {
+    grid-area: ins3;
+  }
+  .grid-ins4 {
+    grid-area: ins4;
   }
 }
 

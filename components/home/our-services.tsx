@@ -14,8 +14,14 @@ const OurServices = () => {
             className="w-full"
             alt=""
           />
-          <div className="mt-[0.5rem] bg-serviceorange-500 p-[2rem] flex justify-between items-center gap-[2rem]">
-            <Image src="/assets/icon-chat.png" width={78} height={81} alt="" />
+          <div className="mt-[0.5rem] bg-serviceorange-500 p-[2rem] flex justify-between items-center gap-[2rem] lg:h-[221px]">
+            <Image
+              src="/assets/icon-chat.png"
+              width={78}
+              height={81}
+              alt=""
+              className="w-[20%] lg:max-w-[78px]"
+            />
             <div className="flex flex-col gap-[0.5rem]">
               <p className="text-neutral-10 font-bold text-[1.5rem]">
                 Beritahu kami kebutuhanmu
@@ -40,8 +46,14 @@ const OurServices = () => {
             className="w-full"
             alt=""
           />
-          <div className="mt-[0.5rem] bg-servicered-500 p-[2rem] flex justify-between items-center gap-[2rem]">
-            <Image src="/assets/icon-chat.png" width={78} height={81} alt="" />
+          <div className="mt-[0.5rem] bg-servicered-500 p-[2rem] flex justify-between items-center gap-[2rem] lg:h-[221px]">
+            <Image
+              src="/assets/icon-chat.png"
+              width={78}
+              height={81}
+              alt=""
+              className="w-[20%] lg:max-w-[78px]"
+            />
             <div className="flex flex-col gap-[0.5rem]">
               <p className="text-neutral-10 font-bold text-[1.5rem]">
                 Bebas biaya sample
@@ -66,8 +78,14 @@ const OurServices = () => {
             className="w-full"
             alt=""
           />
-          <div className="mt-[0.5rem] bg-servicegreen-500 p-[2rem] flex justify-between items-center gap-[2rem]">
-            <Image src="/assets/icon-chat.png" width={78} height={81} alt="" />
+          <div className="mt-[0.5rem] bg-servicegreen-500 p-[2rem] flex justify-between items-center gap-[2rem] lg:h-[221px]">
+            <Image
+              src="/assets/icon-chat.png"
+              width={78}
+              height={81}
+              alt=""
+              className="w-[20%] lg:max-w-[78px]"
+            />
             <div className="flex flex-col gap-[0.5rem]">
               <p className="text-neutral-10 font-bold text-[1.5rem]">
                 Pengaturan pengantaran
