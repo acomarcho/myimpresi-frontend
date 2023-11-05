@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Navbar from "@/components/common/navbar";
 import Heading from "@/components/home/heading";
+import Footer from "@/components/common/footer";
+import FloatingWAIcon from "@/components/common/floating-wa";
 import CategoryScroll from "@/components/common/category-scroll";
 import { Select, Pagination, Accordion } from "@mantine/core";
 import { useState } from "react";
@@ -219,6 +221,8 @@ export default function Products() {
             />
           </div>
         </div>
+        <FloatingWAIcon />
+        <Footer />
       </div>
     </>
   );
