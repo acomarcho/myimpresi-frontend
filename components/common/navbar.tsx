@@ -74,7 +74,17 @@ const Navbar = () => {
                 option: {
                   fontFamily: "var(--font-inter)",
                   fontSize: "1rem",
-                  color: "var(--neutral-100",
+                  color: "var(--neutral-100)",
+                  padding: "0.5rem 1rem",
+                },
+                options: {
+                  padding: 0,
+                  background: "#ECECECFF",
+                },
+                dropdown: {
+                  padding: 0,
+                  background: "#ECECECFF",
+                  borderRadius: "100px",
                 },
               }}
               placeholder={`Coba "Jam Dinding" ...`}
@@ -206,7 +216,17 @@ const Navbar = () => {
                 option: {
                   fontFamily: "var(--font-inter)",
                   fontSize: "1rem",
-                  color: "var(--neutral-100",
+                  color: "var(--neutral-100)",
+                  padding: "0.5rem 1rem",
+                },
+                options: {
+                  padding: 0,
+                  background: "#ECECECFF",
+                },
+                dropdown: {
+                  padding: 0,
+                  background: "#ECECECFF",
+                  borderRadius: "100px",
                 },
               }}
               placeholder={`Coba "Jam Dinding" ...`}
