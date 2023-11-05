@@ -193,25 +193,25 @@ const Navbar = () => {
           <div className="flex flex-col">
             <Link
               href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
             >
               Home
             </Link>
             <Link
               href="/product"
-              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
             >
               Produk
             </Link>
             <Link
               href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
             >
               Acara
             </Link>
             <Link
               href="/"
-              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
+              className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
             >
               Artikel
             </Link>
