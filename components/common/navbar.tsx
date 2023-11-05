@@ -105,64 +105,15 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex gap-[2rem] mt-[1.5rem]">
-            <Link href="/" className="font-inter text-neutral-60 font-bold">
-              Home
+            <Link href="/" className="font-inter text-neutral-100 font-bold">
+              Produk
             </Link>
-            <Menu shadow="md" width={150}>
-              <Menu.Target>
-                <p className="font-inter text-neutral-60 font-bold cursor-pointer flex gap-[0.25rem] items-center">
-                  Product <IconCaretDownFilled />
-                </p>
-              </Menu.Target>
-              <Menu.Dropdown>
-                {categories &&
-                  categories.categories?.map((c) => {
-                    return (
-                      <Menu.Item key={c.id}>
-                        <Link
-                          href="/"
-                          className="font-inter text-neutral-60 font-bold"
-                        >
-                          {c.name}
-                        </Link>
-                      </Menu.Item>
-                    );
-                  })}
-              </Menu.Dropdown>
-            </Menu>
-            <Menu shadow="md" width={150}>
-              <Menu.Target>
-                <p className="font-inter text-neutral-60 font-bold cursor-pointer flex gap-[0.25rem] items-center">
-                  Events <IconCaretDownFilled />
-                </p>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item>
-                  <Link
-                    href="/"
-                    className="font-inter text-neutral-60 font-bold"
-                  >
-                    Seminar Kit
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link
-                    href="/"
-                    className="font-inter text-neutral-60 font-bold"
-                  >
-                    Pameran Kit
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link
-                    href="/"
-                    className="font-inter text-neutral-60 font-bold"
-                  >
-                    Rapat Formal
-                  </Link>
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
+            <Link href="/" className="font-inter text-neutral-100 font-bold">
+              Acara
+            </Link>
+            <Link href="/" className="font-inter text-neutral-100 font-bold">
+              Artikel
+            </Link>
           </div>
         </div>
       </div>
@@ -244,65 +195,23 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Accordion>
-              <Accordion.Item value="Produk">
-                <Accordion.Control
-                  styles={{
-                    control: {
-                      padding: "0.5rem 0",
-                    },
-                  }}
-                >
-                  Produk
-                </Accordion.Control>
-                <Accordion.Panel>
-                  <div className="flex flex-col gap-[1rem]">
-                    {categories?.categories?.map((c) => {
-                      return (
-                        <Link key={c.id} href="/">
-                          {c.name}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </Accordion.Panel>
-              </Accordion.Item>
-              <Accordion.Item value="Events">
-                <Accordion.Control
-                  styles={{
-                    control: {
-                      padding: "0.5rem 0",
-                    },
-                  }}
-                >
-                  Events
-                </Accordion.Control>
-                <Accordion.Panel>
-                  <div className="flex flex-col gap-[1rem]">
-                    <Link href="/">Sample Event 1</Link>
-                    <Link href="/">Sample Event 2</Link>
-                    <Link href="/">Sample Event 3</Link>
-                  </div>
-                </Accordion.Panel>
-              </Accordion.Item>
-            </Accordion>
             <Link
               href="/"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
-              Kontak Kami
+              Produk
             </Link>
             <Link
               href="/"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
-              Tentang Impresi
+              Acara
             </Link>
             <Link
               href="/"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
-              Kebijakan Impresi
+              Artikel
             </Link>
           </div>
         </Drawer>
