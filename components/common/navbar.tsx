@@ -1,9 +1,5 @@
-import { Autocomplete, Menu, Drawer, Accordion } from "@mantine/core";
-import {
-  IconSearch,
-  IconCaretDownFilled,
-  IconMenu2,
-} from "@tabler/icons-react";
+import { Autocomplete, Drawer } from "@mantine/core";
+import { IconSearch, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import useCategories from "@/hooks/use-categories";
