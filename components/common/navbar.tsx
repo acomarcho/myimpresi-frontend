@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop navbar */}
-      <div className="hidden lg:block w-screen fixed top-0 left-0 z-[100] bg-white shadow-md">
+      <div className="hidden lg:block w-screen fixed top-0 left-0 z-[100] bg-white">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           <div className="grid grid-cols-[auto_1fr_auto] gap-[2rem] items-center">
             <Link href="/">
@@ -157,7 +157,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* Mobile navbar */}
-      <div className="lg:hidden w-screen fixed top-0 left-0 z-[100] bg-white shadow-md">
+      <div className="lg:hidden w-screen fixed top-0 left-0 z-[100] bg-white">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           <div className="flex justify-between items-center">
             <Image
