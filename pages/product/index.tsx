@@ -4,7 +4,8 @@ import Heading from "@/components/home/heading";
 import Footer from "@/components/common/footer";
 import FloatingWAIcon from "@/components/common/floating-wa";
 import CategoryScroll from "@/components/common/category-scroll";
-import { Select, Pagination, Accordion } from "@mantine/core";
+import { Select, Pagination, Accordion, Drawer } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -80,6 +81,7 @@ const dummyProducts = Array.from({ length: 20 }, (_, index) => ({
 export default function Products() {
   const [sortFilter, setSortFilter] = useState<string | null>("Rekomendasi");
   const [activePage, setActivePage] = useState(1);
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
@@ -209,7 +211,10 @@ export default function Products() {
           </div>
           {/* Products >> MOBILE ONLY */}
           <div className="relative lg:hidden mt-[2rem]">
-            <button className="sticky top-[8.5rem] z-[999] bg-gray p-[0.5rem] rounded-full shadow-md transition-all hover:scale-[1.2]">
+            <button
+              className="sticky top-[8.5rem] z-[10] bg-gray p-[0.5rem] rounded-full shadow-md transition-all hover:scale-[1.2]"
+              onClick={() => open()}
+            >
               <IconAdjustments />
             </button>
             <div className="grid grid-cols-2 gap-[0.5rem] mt-[1rem]">
@@ -252,6 +257,56 @@ export default function Products() {
                   </div>
                 );
               })}
+              <Drawer
+                opened={opened}
+                onClose={close}
+                position="bottom"
+                size="80%"
+              >
+                <div className="flex flex-col">
+                  <p className="font-inter font-bold text-neutral-100">
+                    Semua Kategori
+                  </p>
+                  <hr className="text-neutral-20 mt-[0.5rem]" />
+                  <Accordion
+                    styles={{
+                      control: {
+                        border: "none",
+                      },
+                      item: {
+                        border: "none",
+                      },
+                    }}
+                  >
+                    {dummyData.map((d) => {
+                      return (
+                        <Accordion.Item key={d.id} value={d.name}>
+                          <Accordion.Control>
+                            <p className="font-bold font-inter text-neutral-100">
+                              {d.name}
+                            </p>
+                          </Accordion.Control>
+                          <Accordion.Panel>
+                            <div className="flex flex-col gap-[0.5rem]">
+                              {d.subcategories.map((s) => {
+                                return (
+                                  <Link
+                                    href="/product"
+                                    key={s.id}
+                                    className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem]"
+                                  >
+                                    {s.name}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </Accordion.Panel>
+                        </Accordion.Item>
+                      );
+                    })}
+                  </Accordion>
+                </div>
+              </Drawer>
             </div>
           </div>
           {/* Bottom pagination */}
