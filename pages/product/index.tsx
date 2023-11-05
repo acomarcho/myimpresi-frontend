@@ -9,6 +9,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
+import { IconAdjustments } from "@tabler/icons-react";
 
 const dummyData = [
   {
@@ -208,7 +209,10 @@ export default function Products() {
           </div>
           {/* Products >> MOBILE ONLY */}
           <div className="relative lg:hidden mt-[2rem]">
-            <div className="grid grid-cols-2 gap-[0.5rem]">
+            <button className="sticky top-[8.5rem] z-[999] bg-gray p-[0.5rem] rounded-full shadow-md transition-all hover:scale-[1.2]">
+              <IconAdjustments />
+            </button>
+            <div className="grid grid-cols-2 gap-[0.5rem] mt-[1rem]">
               {dummyProducts.map((p) => {
                 return (
                   <div
