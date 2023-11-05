@@ -105,7 +105,10 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex gap-[2rem] mt-[1.5rem]">
-            <Link href="/" className="font-inter text-neutral-100 font-bold">
+            <Link
+              href="/product"
+              className="font-inter text-neutral-100 font-bold"
+            >
               Produk
             </Link>
             <Link href="/" className="font-inter text-neutral-100 font-bold">
@@ -196,7 +199,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/"
+              href="/product"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter"
             >
               Produk
