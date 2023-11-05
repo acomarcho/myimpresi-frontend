@@ -60,6 +60,7 @@ const Navbar = () => {
                   paddingLeft: "1rem",
                 },
                 input: {
+                  border: "none",
                   borderRadius: "100px",
                   paddingTop: "0.25rem",
                   paddingBottom: "0.25rem",
@@ -68,6 +69,7 @@ const Navbar = () => {
                   fontFamily: "var(--font-inter)",
                   color: "var(--neutral-100)",
                   fontSize: "1rem",
+                  background: "#ECECECB2",
                 },
                 option: {
                   fontFamily: "var(--font-inter)",
@@ -75,12 +77,15 @@ const Navbar = () => {
                   color: "var(--neutral-100",
                 },
               }}
-              placeholder="Mau cari produk apa...?"
+              placeholder={`Coba "Jam Dinding" ...`}
               data={autocomplete.map((a) => {
                 return a.name;
               })}
             />
-            <Link href="/wishlist" className="transition-all hover:scale-[1.05]">
+            <Link
+              href="/wishlist"
+              className="transition-all hover:scale-[1.05]"
+            >
               <Image
                 src="/assets/heart.svg"
                 width={28}
@@ -187,6 +192,7 @@ const Navbar = () => {
                   paddingLeft: "1rem",
                 },
                 input: {
+                  border: "none",
                   borderRadius: "100px",
                   paddingTop: "0.25rem",
                   paddingBottom: "0.25rem",
@@ -195,6 +201,7 @@ const Navbar = () => {
                   fontFamily: "var(--font-inter)",
                   color: "var(--neutral-100)",
                   fontSize: "1rem",
+                  background: "#ECECECB2",
                 },
                 option: {
                   fontFamily: "var(--font-inter)",
@@ -202,7 +209,7 @@ const Navbar = () => {
                   color: "var(--neutral-100",
                 },
               }}
-              placeholder="Mau cari produk apa...?"
+              placeholder={`Coba "Jam Dinding" ...`}
               data={autocomplete.map((a) => {
                 return a.name;
               })}
