@@ -124,12 +124,15 @@ const Navbar = () => {
       <div className="lg:hidden w-screen fixed top-0 left-0 z-[100] bg-white">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           <div className="flex justify-between items-center">
-            <Image
-              src="/assets/logo-impresi-blue.png"
-              width={104}
-              height={26}
-              alt="Logo Impresi"
-            />
+            <Link href="/">
+              <Image
+                src="/assets/logo-impresi-blue.png"
+                width={104}
+                height={26}
+                alt="Logo Impresi"
+              />
+            </Link>
+
             <div className="flex gap-[1.25rem] items-center">
               <Link href="/wishlist">
                 <Image
