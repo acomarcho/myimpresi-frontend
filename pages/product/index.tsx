@@ -123,7 +123,7 @@ export default function Products() {
           {/* Sidebar and products >> DESKTOP ONLY */}
           <div className="hidden items-start gap-[1rem] mt-[2rem] relative hidden lg:flex">
             {/* Sidebar */}
-            <div className="w-[10rem] sticky top-[8.5rem] flex-shrink-0">
+            <div className="w-[10rem] sticky top-[10rem] flex-shrink-0">
               <p className="font-inter font-bold text-neutral-100">
                 Semua Kategori
               </p>
@@ -147,7 +147,7 @@ export default function Products() {
                         </p>
                       </Accordion.Control>
                       <Accordion.Panel>
-                        <div className="flex flex-col gap-[0.25rem]">
+                        <div className="flex flex-col gap-[0.5rem]">
                           {d.subcategories.map((s) => {
                             return (
                               <Link
