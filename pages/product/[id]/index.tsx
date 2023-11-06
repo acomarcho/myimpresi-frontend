@@ -180,10 +180,10 @@ const SingleProduct = () => {
                 {dummyProduct.description}
               </p>
               <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20] lg:static lg:w-full">
-                <button className="p-[1rem] rounded-full border-[1px] border-neutral-20">
+                <button className="p-[1rem] rounded-full border-[1px] border-neutral-20 transition-all hover:scale-[1.1]">
                   <IconHeart />
                 </button>
-                <button className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full">
+                <button className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full transition-all hover:opacity-[0.9]">
                   Pesan Sekarang
                 </button>
               </div>
