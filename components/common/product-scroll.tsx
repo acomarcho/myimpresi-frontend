@@ -3,6 +3,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import { useRef } from "react";
+import Link from "next/link";
 
 type Product = {
   id: number;
@@ -41,9 +42,10 @@ const ProductScroll = ({ products }: Props) => {
       >
         {products.map((p) => {
           return (
-            <div
+            <Link
               key={p.id}
-              className="bg-neutral-10 w-[50%] min-w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
+              className="bg-neutral-10 w-[50%] min-w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative block"
+              href={`/product/${p.id}`}
             >
               <Image
                 src={p.imagePath}
@@ -73,7 +75,7 @@ const ProductScroll = ({ products }: Props) => {
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </ScrollContainer>

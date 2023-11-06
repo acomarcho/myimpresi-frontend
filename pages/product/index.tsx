@@ -170,9 +170,10 @@ export default function Products() {
             <div className="grid grid-cols-4 gap-[1rem]">
               {dummyProducts.map((p) => {
                 return (
-                  <div
+                  <Link
                     key={p.id}
-                    className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative"
+                    className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
+                    href={`/product/${p.id}`}
                   >
                     <Image
                       src={p.imagePath}
@@ -204,7 +205,7 @@ export default function Products() {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
