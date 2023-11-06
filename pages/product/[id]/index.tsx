@@ -177,7 +177,7 @@ const SingleProduct = () => {
           <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
             {dummyProduct.description}
           </p>
-          <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20]">
+          <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20] lg:hidden">
             <button className="p-[1rem] rounded-full border-[1px] border-neutral-20">
               <IconHeart />
             </button>
