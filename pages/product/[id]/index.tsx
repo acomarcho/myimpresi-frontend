@@ -10,6 +10,7 @@ import { IconHeart } from "@tabler/icons-react";
 import ProductScroll from "@/components/common/product-scroll";
 import Heading from "@/components/home/heading";
 import CategoryScroll from "@/components/common/category-scroll";
+import { useState } from "react";
 
 const dummyProduct = {
   name: "TAWIRI",
@@ -99,6 +100,8 @@ const dummyProducts = [
 ];
 
 const SingleProduct = () => {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
   return (
     <>
       <Head>
@@ -108,22 +111,62 @@ const SingleProduct = () => {
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           <div className="grid grid-cols-1 gap-[0rem] lg:gap-[2rem] lg:grid-cols-2">
-            <Carousel swipeable emulateTouch infiniteLoop>
-              {dummyProduct.images.map((img) => {
-                return (
-                  <div key={img} className="w-full cursor-pointer">
-                    <Image
-                      src={img}
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      className="w-full h-full object-cover"
-                      alt={dummyProduct.name}
-                    />
-                  </div>
-                );
-              })}
-            </Carousel>
+            <div>
+              <div className="block lg:hidden">
+                <Carousel swipeable emulateTouch infiniteLoop>
+                  {dummyProduct.images.map((img) => {
+                    return (
+                      <div key={img} className="w-full cursor-pointer">
+                        <Image
+                          src={img}
+                          width={0}
+                          height={0}
+                          sizes="100%"
+                          className="w-full h-full object-cover"
+                          alt={dummyProduct.name}
+                        />
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              </div>
+              <div className="hidden lg:block">
+                <Image
+                  src={dummyProduct.images[activeImageIndex]}
+                  width={0}
+                  height={0}
+                  sizes="100%"
+                  className="w-full h-full object-cover"
+                  alt={dummyProduct.name}
+                />
+                <div className="grid grid-cols-4 gap-[1rem] mt-[1rem]">
+                  {dummyProduct.images
+                    .filter((_, idx) => idx !== activeImageIndex)
+                    .map((img) => {
+                      return (
+                        <button
+                          key={img}
+                          className="transition-all hover:opacity-[0.8]"
+                          onClick={() =>
+                            setActiveImageIndex(
+                              dummyProduct.images.findIndex((v) => v === img)
+                            )
+                          }
+                        >
+                          <Image
+                            src={img}
+                            width={0}
+                            height={0}
+                            sizes="100%"
+                            className="w-full h-full object-cover"
+                            alt={dummyProduct.name}
+                          />
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+            </div>
             <div>
               <h1 className="font-inter font-bold text-[2rem] text-neutral-100">
                 {dummyProduct.name}
