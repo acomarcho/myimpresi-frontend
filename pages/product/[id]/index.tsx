@@ -6,6 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
+import { IconHeart } from "@tabler/icons-react";
 
 const dummyProduct = {
   name: "TAWIRI",
@@ -106,9 +107,17 @@ const SingleProduct = () => {
           <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
             {dummyProduct.description}
           </p>
+          <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem]">
+            <button className="p-[1rem] rounded-full border-[1px] border-neutral-20">
+              <IconHeart />
+            </button>
+            <button className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full">
+              Pesan Sekarang
+            </button>
+          </div>
         </div>
       </div>
-      <FloatingWAIcon />
+      <FloatingWAIcon customBottomHeight="6rem" />
       <Footer />
     </>
   );

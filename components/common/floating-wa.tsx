@@ -1,12 +1,23 @@
 import Image from "next/image";
 
-const FloatingWAIcon = () => {
+type Props = {
+  customBottomHeight?: string;
+};
+
+const FloatingWAIcon = ({ customBottomHeight }: Props) => {
   return (
     <a
       href="https:/wa.me"
       target="_blank"
       rel="noreferrer"
-      className="fixed right-[1.5rem] bottom-[1.5rem] lg:right-[3.75rem] lg:bottom-[3.75rem]"
+      className="fixed right-[1.5rem] bottom-[1.5rem] lg:right-[3.75rem] lg:!bottom-[3.75rem]"
+      style={
+        customBottomHeight
+          ? {
+              bottom: customBottomHeight,
+            }
+          : {}
+      }
     >
       <Image
         src="/assets/icon-wa.png"
