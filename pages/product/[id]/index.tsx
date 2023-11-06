@@ -23,6 +23,8 @@ const dummyProduct = {
     "/dummy/produk4.png",
     "/dummy/produk5.png",
   ],
+  description:
+    "Unik, stylish dan fungsional merupakan kesan yang ditampilkan oleh TAWIRI, tumbler premium ini cocok untuk anda yang menginginkan kreativitas dan dinamis menjadi kesan yang ditinggalkan oleh souvenir dari perusahaan / instansi anda.",
 };
 
 const SingleProduct = () => {
@@ -58,6 +60,51 @@ const SingleProduct = () => {
           </p>
           <p className="font-inter text-[1.25rem] text-neutral-100 font-bold mt-[1rem]">
             {formatToRupiah(dummyProduct.price)}
+          </p>
+          <p className="font-inter text-[1rem] text-neutral-60">
+            {dummyProduct.soldAmount} membeli produk ini
+          </p>
+          <hr className="text-neutral-20 mt-[0.5rem]" />
+          <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
+            Warna:
+          </p>
+          <div className="flex gap-[0.5rem] flex-wrap">
+            {dummyProduct.colors.map((c) => {
+              return (
+                <div
+                  className="w-[30px] h-[30px] rounded-full shadow-md"
+                  style={{
+                    backgroundColor: c,
+                  }}
+                  key={c}
+                />
+              );
+            })}
+          </div>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
+            Bahan:
+          </p>
+          <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            {dummyProduct.material}
+          </p>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
+            Ukuran:
+          </p>
+          <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            {dummyProduct.size}
+          </p>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
+            Minimal order hanya:
+          </p>
+          <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            {dummyProduct.minimalOrder} pcs
+          </p>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            {dummyProduct.description}
           </p>
         </div>
       </div>
