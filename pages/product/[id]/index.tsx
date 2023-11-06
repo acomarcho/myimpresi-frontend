@@ -9,6 +9,7 @@ import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { IconHeart } from "@tabler/icons-react";
 import ProductScroll from "@/components/common/product-scroll";
 import Heading from "@/components/home/heading";
+import CategoryScroll from "@/components/common/category-scroll";
 
 const dummyProduct = {
   name: "TAWIRI",
@@ -209,6 +210,11 @@ const SingleProduct = () => {
                 Harga seluruh produk sudah termasuk biaya custom
               </p>
             </div>
+          </div>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <div className="mt-[2rem]">
+            <Heading text="Kategori Pilihan" />
+            <CategoryScroll />
           </div>
         </div>
       </div>
