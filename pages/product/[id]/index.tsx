@@ -196,7 +196,7 @@ const SingleProduct = () => {
             <ProductScroll products={dummyProducts} />
           </div>
           <hr className="text-neutral-20 mt-[1rem]" />
-          <div className="mt-[2rem] flex flex-col lg:flex-row justify-between items-start gap-[2rem]">
+          <div className="mt-[2rem] flex flex-col lg:flex-row justify-between items-start gap-[2rem] lg:justify-center">
             <Image
               src="/assets/paint-palette.png"
               width={142}
@@ -211,7 +211,7 @@ const SingleProduct = () => {
               </p>
             </div>
           </div>
-          <hr className="text-neutral-20 mt-[1rem]" />
+          <hr className="text-neutral-20 mt-[2rem]" />
           <div className="mt-[2rem]">
             <Heading text="Kategori Pilihan" />
             <CategoryScroll />
