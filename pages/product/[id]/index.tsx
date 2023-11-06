@@ -7,6 +7,8 @@ import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { IconHeart } from "@tabler/icons-react";
+import ProductScroll from "@/components/common/product-scroll";
+import Heading from "@/components/home/heading";
 
 const dummyProduct = {
   name: "TAWIRI",
@@ -27,6 +29,73 @@ const dummyProduct = {
   description:
     "Unik, stylish dan fungsional merupakan kesan yang ditampilkan oleh TAWIRI, tumbler premium ini cocok untuk anda yang menginginkan kreativitas dan dinamis menjadi kesan yang ditinggalkan oleh souvenir dari perusahaan / instansi anda.",
 };
+
+const dummyProducts = [
+  {
+    id: 1,
+    imagePath: "/dummy/produk.png",
+    name: "BANUM",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 2,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 3,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 4,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 5,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 6,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 7,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+  {
+    id: 8,
+    imagePath: "/dummy/produk.png",
+    name: "HATIVE",
+    price: 120000,
+    minQuantity: 10,
+    soldAmount: 200,
+  },
+];
 
 const SingleProduct = () => {
   return (
@@ -107,7 +176,7 @@ const SingleProduct = () => {
           <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
             {dummyProduct.description}
           </p>
-          <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem]">
+          <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20]">
             <button className="p-[1rem] rounded-full border-[1px] border-neutral-20">
               <IconHeart />
             </button>
@@ -115,9 +184,19 @@ const SingleProduct = () => {
               Pesan Sekarang
             </button>
           </div>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <div className="mt-[2rem]">
+            <Heading text="Produk Serupa" />
+            <ProductScroll products={dummyProducts} />
+          </div>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <div className="mt-[2rem]">
+            <Heading text="Produk Terlaris" />
+            <ProductScroll products={dummyProducts} />
+          </div>
         </div>
       </div>
-      <FloatingWAIcon customBottomHeight="6rem" />
+      <FloatingWAIcon customBottomHeight="7rem" />
       <Footer />
     </>
   );
