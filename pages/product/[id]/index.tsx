@@ -194,6 +194,22 @@ const SingleProduct = () => {
             <Heading text="Produk Terlaris" />
             <ProductScroll products={dummyProducts} />
           </div>
+          <hr className="text-neutral-20 mt-[1rem]" />
+          <div className="mt-[2rem] flex flex-col lg:flex-row justify-between items-start gap-[2rem]">
+            <Image
+              src="/assets/paint-palette.png"
+              width={142}
+              height={142}
+              alt=""
+              className="flex-shrink-0"
+            />
+            <div>
+              <Heading text="Gratis custom logomu pada seluruh produk!" />
+              <p className="mt-[0.5rem] font-inter text-neutral-60">
+                Harga seluruh produk sudah termasuk biaya custom
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <FloatingWAIcon customBottomHeight="7rem" />
