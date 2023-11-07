@@ -73,7 +73,7 @@ const BestSellingProducts = () => {
 
   return (
     <div className="mt-[2rem]">
-      <Heading text="Produk Serupa" />
+      <Heading text="Produk Terlaris" />
       <ProductScroll products={products} />
     </div>
   );
