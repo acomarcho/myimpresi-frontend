@@ -113,7 +113,12 @@ const SingleProduct = () => {
           <div className="grid grid-cols-1 gap-[0rem] lg:gap-[2rem] lg:grid-cols-2">
             <div>
               <div className="block lg:hidden">
-                <Carousel swipeable emulateTouch infiniteLoop>
+                <Carousel
+                  swipeable
+                  emulateTouch
+                  infiniteLoop
+                  showThumbs={false}
+                >
                   {dummyProduct.images.map((img) => {
                     return (
                       <div key={img} className="w-full cursor-pointer">
