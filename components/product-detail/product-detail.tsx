@@ -1,8 +1,7 @@
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { IconHeart } from "@tabler/icons-react";
-import { Carousel } from "react-responsive-carousel";
-import Image from "next/image";
-import { useState } from "react";
+import ImageSelector from "./image-selector";
+import ImageCarousel from "./image-carousel";
 
 type Props = {
   product: Product;
@@ -22,64 +21,14 @@ type Product = {
 };
 
 const ProductDetail = ({ product }: Props) => {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
-
   return (
     <div className="grid grid-cols-1 gap-[0rem] lg:gap-[2rem] lg:grid-cols-2">
       <div>
         <div className="block lg:hidden">
-          <Carousel swipeable emulateTouch infiniteLoop showThumbs={false}>
-            {product.images.map((img) => {
-              return (
-                <div key={img} className="w-full cursor-pointer">
-                  <Image
-                    src={img}
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    className="w-full h-full object-cover"
-                    alt={product.name}
-                  />
-                </div>
-              );
-            })}
-          </Carousel>
+          <ImageCarousel product={product} />
         </div>
         <div className="hidden lg:block">
-          <Image
-            src={product.images[activeImageIndex]}
-            width={0}
-            height={0}
-            sizes="100%"
-            className="w-full h-full object-cover"
-            alt={product.name}
-          />
-          <div className="grid grid-cols-4 gap-[1rem] mt-[1rem]">
-            {product.images
-              .filter((_, idx) => idx !== activeImageIndex)
-              .map((img) => {
-                return (
-                  <button
-                    key={img}
-                    className="transition-all hover:opacity-[0.8]"
-                    onClick={() =>
-                      setActiveImageIndex(
-                        product.images.findIndex((v) => v === img)
-                      )
-                    }
-                  >
-                    <Image
-                      src={img}
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      className="w-full h-full object-cover"
-                      alt={product.name}
-                    />
-                  </button>
-                );
-              })}
-          </div>
+          <ImageSelector product={product} />
         </div>
       </div>
       <div>
