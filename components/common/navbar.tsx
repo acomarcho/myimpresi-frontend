@@ -110,7 +110,10 @@ const Navbar = () => {
             <Link href="/" className="font-inter text-neutral-100 font-bold">
               Acara
             </Link>
-            <Link href="/" className="font-inter text-neutral-100 font-bold">
+            <Link
+              href="/article"
+              className="font-inter text-neutral-100 font-bold"
+            >
               Artikel
             </Link>
           </div>
@@ -210,7 +213,7 @@ const Navbar = () => {
               Acara
             </Link>
             <Link
-              href="/"
+              href="/article"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
             >
               Artikel

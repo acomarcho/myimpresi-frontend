@@ -84,12 +84,12 @@ export default function Products() {
   return (
     <>
       <Head>
-        <title>Semua produk</title>
+        <title>Semua Produk</title>
       </Head>
       <Navbar />
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
-          <Heading text="Semua produk" />
+          <Heading text="Semua Produk" />
           <CategoryScroll />
           <FilterAndPagination
             sortFilter={sortFilter}
