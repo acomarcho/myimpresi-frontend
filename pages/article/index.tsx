@@ -1,6 +1,11 @@
 import Head from "next/head";
 import Navbar from "@/components/common/navbar";
 import Heading from "@/components/home/heading";
+import FloatingWAIcon from "@/components/common/floating-wa";
+import Footer from "@/components/common/footer";
+import Image from "next/image";
+
+import _ from "lodash";
 
 const dummyArticles = [
   {
@@ -48,6 +53,8 @@ const dummyArticles = [
 ];
 
 const Articles = () => {
+  const articles = dummyArticles;
+
   return (
     <>
       <Head>
@@ -57,7 +64,54 @@ const Articles = () => {
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           <Heading text="Artikel Inspirasi Produk" />
+          <div className="mt-[2rem] cursor-pointer transition-all hover:scale-[1.05]">
+            <Image
+              src={articles[0].imagePath}
+              alt={articles[0].title}
+              sizes="100"
+              width={0}
+              height={0}
+              className="w-full max-h-[412px] object-cover"
+            />
+            <h1 className="font-inter font-bold text-[1.125rem] lg:text-[1.25rem] mt-[1rem] text-neutral-100">
+              {articles[0].title}
+            </h1>
+            <p className="font-inter mt-[1rem] text-neutral-60">
+              {_.truncate(articles[0].description[0], {
+                length: 200,
+              })}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-[1rem] lg:grid-cols-3 gap-[2rem] mt-[2rem]">
+            {articles.slice(1).map((article) => {
+              return (
+                <div key={article.id}>
+                  <div className="cursor-pointer transition-all hover:scale-[1.05]">
+                    <Image
+                      src={article.imagePath}
+                      alt={article.title}
+                      sizes="100"
+                      width={0}
+                      height={0}
+                      className="w-full max-h-[412px] object-cover"
+                    />
+                    <h1 className="font-inter font-bold text-[1.125rem] lg:text-[1.25rem] mt-[1rem] text-neutral-100">
+                      {article.title}
+                    </h1>
+                    <p className="font-inter mt-[1rem] text-neutral-60">
+                      {_.truncate(article.description[0], {
+                        length: 200,
+                      })}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-[2rem]" />
         </div>
+        <FloatingWAIcon />
+        <Footer />
       </div>
     </>
   );
