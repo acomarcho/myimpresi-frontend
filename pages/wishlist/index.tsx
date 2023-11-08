@@ -3,52 +3,28 @@ import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
 import FloatingWAIcon from "@/components/common/floating-wa";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
+import Link from "next/link";
 
 import { useState } from "react";
-import { Modal } from "@mantine/core";
+import { Modal, Pagination } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { colors } from "@/utils/colors";
 
 import Image from "next/image";
 
-const dummyWishlists = [
-  {
-    id: 1,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci A ini tes nama yang super panjang untuk melihat truncatenya",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-  {
-    id: 2,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci B ini tes nama yang super panjang untuk melihat truncatenya",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-  {
-    id: 3,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci C ini tes nama yang super panjang untuk melihat truncatenya",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-  {
-    id: 4,
-    imagePath: "/dummy/produk.png",
-    name: "Gantungan Kunci D ini tes nama yang super panjang untuk melihat truncatenya",
-    price: 12000,
-    minQuantity: 10,
-    soldAmount: 200,
-  },
-];
+const dummyWishlists = Array.from({ length: 20 }, (_, index) => ({
+  id: index + 1,
+  imagePath: "/dummy/produk.png",
+  name: "BANUM",
+  price: 120000,
+  minQuantity: 10,
+  soldAmount: 200,
+}));
 
 export default function Wishlist() {
   const wishlist = dummyWishlists;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activePage, setActivePage] = useState(1);
 
   return (
     <>
@@ -59,14 +35,28 @@ export default function Wishlist() {
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem] min-h-[calc(100vh-8.5rem)]">
           <h1 className="font-inter font-bold text-[1.125rem] lg:text-[1.75rem]">
-            Wishlist Saya ({wishlist.length})
+            Wishlist Kamu
           </h1>
-          <div className="grid grid-cols-2 gap-[1rem] mt-[2.5rem] lg:mt-[5rem] lg:grid-cols-4">
+          <div className="flex justify-start lg:justify-end mt-[2rem]">
+            <Pagination
+              value={activePage}
+              onChange={setActivePage}
+              total={10}
+              withControls={false}
+              styles={{
+                control: {
+                  border: "none",
+                },
+              }}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-[1rem] mt-[2rem] lg:grid-cols-4">
             {wishlist.map((w) => {
               return (
-                <div
+                <Link
                   key={w.id}
-                  className="bg-neutral-10 w-[100%] flex-shrink-0 transition-all cursor-pointer relative"
+                  className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
+                  href={`/product/${w.id}`}
                 >
                   <Image
                     src={w.imagePath}
@@ -76,42 +66,53 @@ export default function Wishlist() {
                     className="object-cover"
                   />
                   <div className="p-[0.75rem]">
-                    <p className="h-[3rem] font-inter text-neutral-100 text-[0.875rem] truncate-two">
-                      {w.name}
+                    <p className="font-inter font-bold">
+                      {w.name.toUpperCase()}
                     </p>
-                    <p className="font-inter text-neutral-100 text-[0.875rem]">
-                      <span className="font-bold lg:text-[1.125rem]">
+                    <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two">
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                      Ipsum numquam reprehenderit et, earum deleniti nostrum
+                      tempore enim nihil corporis optio!
+                    </p>
+                    <div className="flex justify-between items-center mt-[0.5rem]">
+                      <p className="font-inter font-bold text-neutral-100 text-[0.8rem] lg:text-[1rem]">
                         {formatToRupiah(w.price)}
-                      </span>
-                      <span className="text-neutral-60">
-                        /Min {w.minQuantity} pcs
-                      </span>
-                    </p>
-                    <p className="font-inter text-neutral-60 mt-[0.5rem]">
-                      {w.soldAmount}+ terjual
-                    </p>
-                    <button className="bg-primary-default w-full p-[0.75rem] text-white font-inter mt-[0.5rem] font-bold rounded-xl transition-all hover:opacity-[0.8]">
-                      Pesan Sekarang
-                    </button>
+                      </p>
+                      <button
+                        className="transition-all hover:scale-[1.2]"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsModalOpen(true);
+                        }}
+                      >
+                        <Image
+                          src="/assets/heart-filled.svg"
+                          width={16}
+                          height={16}
+                          alt="Add to wishlist"
+                        />
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    onClick={() => {
-                      setIsModalOpen(true);
-                    }}
-                    className="absolute w-[2rem] h-[2rem] bg-neutral-10 rounded-full top-[1rem] right-[1rem] flex items-center justify-center"
-                  >
-                    <Image
-                      src="/assets/heart-filled.svg"
-                      height={16}
-                      width={16}
-                      alt="Heart"
-                      className="transition-all hover:scale-[1.2]"
-                    />
-                  </button>
-                </div>
+                </Link>
               );
             })}
           </div>
+          <div className="flex justify-start lg:justify-end mt-[2rem]">
+            <Pagination
+              value={activePage}
+              onChange={setActivePage}
+              total={10}
+              withControls={false}
+              styles={{
+                control: {
+                  border: "none",
+                },
+              }}
+            />
+          </div>
+          <div className="mt-[2rem]" />
           <Modal
             opened={isModalOpen}
             onClose={() => setIsModalOpen(false)}
