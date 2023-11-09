@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import _ from "lodash";
 
 type Props = {
@@ -17,7 +18,7 @@ const Articles = ({ articles }: Props) => {
     <div className="grid grid-cols-2 gap-[1rem] lg:grid-cols-3 gap-[2rem] mt-[2rem]">
       {articles.slice(1).map((article) => {
         return (
-          <div key={article.id}>
+          <Link href={`/article/${article.id}`} key={article.id}>
             <div className="cursor-pointer transition-all hover:scale-[1.05]">
               <Image
                 src={article.imagePath}
@@ -36,7 +37,7 @@ const Articles = ({ articles }: Props) => {
                 })}
               </p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

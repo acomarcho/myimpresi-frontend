@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import _ from "lodash";
 
 type Props = {
@@ -14,7 +15,10 @@ type Article = {
 
 const MainArticle = ({ article }: Props) => {
   return (
-    <div className="mt-[2rem] cursor-pointer transition-all hover:scale-[1.05]">
+    <Link
+      href={`/article/${article.id}`}
+      className="mt-[2rem] cursor-pointer transition-all hover:scale-[1.05]"
+    >
       <Image
         src={article.imagePath}
         alt={article.title}
@@ -31,7 +35,7 @@ const MainArticle = ({ article }: Props) => {
           length: 200,
         })}
       </p>
-    </div>
+    </Link>
   );
 };
 
