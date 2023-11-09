@@ -17,7 +17,7 @@ const MainArticle = ({ article }: Props) => {
   return (
     <Link
       href={`/article/${article.id}`}
-      className="mt-[2rem] cursor-pointer transition-all hover:scale-[1.05]"
+      className="block mt-[2rem] cursor-pointer transition-all hover:scale-[1.05]"
     >
       <Image
         src={article.imagePath}
