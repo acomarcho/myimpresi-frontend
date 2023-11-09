@@ -4,6 +4,7 @@ import FloatingWAIcon from "@/components/common/floating-wa";
 import Footer from "@/components/common/footer";
 import Image from "next/image";
 import Link from "next/link";
+import { formatToRupiah } from "@/utils/format-to-rupiah";
 
 const dummyArticle = {
   id: 1,
@@ -51,9 +52,19 @@ const dummyOtherArticles = [
   },
 ];
 
+const dummyProducts = Array.from({ length: 3 }, (_, index) => ({
+  id: index + 1,
+  imagePath: "/dummy/produk.png",
+  name: "BANUM",
+  price: 120000,
+  minQuantity: 10,
+  soldAmount: 200,
+}));
+
 const ArticleDetailPage = () => {
   const article = dummyArticle;
   const otherArticles = dummyOtherArticles;
+  const products = dummyProducts;
 
   return (
     <>
@@ -111,9 +122,62 @@ const ArticleDetailPage = () => {
                   })}
                 </div>
               </div>
+              <hr className="text-neutral-20 mt-[2rem]" />
+              <div className="mt-[1rem]">
+                <div>
+                  <h1 className="font-inter font-bold text-[1.25rem] text-neutral-100">
+                    Produk terkait artikel
+                  </h1>
+                  <div className="flex flex-col gap-[1rem] mt-[1rem]">
+                    {products.map((p) => {
+                      return (
+                        <Link
+                          href={`/product/${p.id}`}
+                          key={p.id}
+                          className="block grid grid-cols-2 gap-[1rem] transition-all hover:scale-[1.05]"
+                        >
+                          <Image
+                            src={p.imagePath}
+                            sizes="100%"
+                            height={0}
+                            width={0}
+                            className="w-full max-h-[160px] object-cover"
+                            alt={p.name}
+                          />
+                          <div className="self-end">
+                            <h1 className="font-inter font-bold text-neutral-100 text-[1.25rem]">
+                              {p.name}
+                            </h1>
+                            <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two">
+                              Lorem ipsum dolor sit amet consectetur,
+                              adipisicing elit. Ipsum numquam reprehenderit et,
+                              earum deleniti nostrum tempore enim nihil corporis
+                              optio!
+                            </p>
+                            <div className="flex justify-between items-center mt-[0.5rem]">
+                              <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
+                                {formatToRupiah(p.price)}
+                              </p>
+                              <button className="transition-all hover:scale-[1.2]">
+                                <Image
+                                  src="/assets/heart.svg"
+                                  width={16}
+                                  height={16}
+                                  alt="Add to wishlist"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div className="mt-[2rem]" />
         <FloatingWAIcon />
         <Footer />
       </div>
