@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useRef } from "react";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
+import Link from "next/link";
 
 const CategoryScroll = () => {
   const { categories, isLoading } = useCategories();
@@ -33,9 +34,10 @@ const CategoryScroll = () => {
         {!isLoading &&
           categories?.categories?.map((c) => {
             return (
-              <div
+              <Link
+                href={`/product?categoryId=${c.id}`}
                 key={c.id}
-                className="cursor-pointer flex flex-col w-[50%] lg:w-[25%] gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.02]"
+                className="cursor-pointer flex flex-col w-[50%] lg:w-[25%] gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.02] block"
               >
                 <Image
                   src={c.imagePath}
@@ -48,7 +50,7 @@ const CategoryScroll = () => {
                 <p className="font-inter font-bold text-neutral-100 text-[1rem]">
                   {c.name}
                 </p>
-              </div>
+              </Link>
             );
           })}
       </ScrollContainer>

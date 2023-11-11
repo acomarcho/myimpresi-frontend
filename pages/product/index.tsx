@@ -64,6 +64,7 @@ export default function Products() {
         ...newFilter,
         subcategoryId: subcategoryId as string,
       };
+      delete newFilter.categoryId;
     }
 
     setFilter(newFilter);
@@ -93,6 +94,7 @@ export default function Products() {
 
   const changeSubcategoryId = (subcategoryId: string) => {
     const filterCopy = { ...filter };
+    delete filterCopy.categoryId;
     delete filterCopy.subcategoryId;
 
     let newFilter = {
