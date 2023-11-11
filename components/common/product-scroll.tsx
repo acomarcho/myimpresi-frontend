@@ -4,18 +4,10 @@ import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import { useRef } from "react";
 import Link from "next/link";
-
-type Product = {
-  id: number;
-  imagePath: string;
-  name: string;
-  price: number;
-  minQuantity: number;
-  soldAmount: number;
-};
+import { ProductWithImages } from "@/types/responses/product";
 
 type Props = {
-  products: Product[];
+  products: ProductWithImages[];
 };
 
 const ProductScroll = ({ products }: Props) => {
@@ -44,22 +36,23 @@ const ProductScroll = ({ products }: Props) => {
           return (
             <Link
               key={p.id}
-              className="bg-neutral-10 w-[50%] min-w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative block"
+              className="bg-neutral-10 w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
               href={`/product/${p.id}`}
             >
-              <Image
-                src={p.imagePath}
-                width={280}
-                height={280}
-                alt={p.name}
-                className="object-cover"
-              />
+              {p.productImage && (
+                <Image
+                  src={p.productImage[0].path}
+                  sizes="100%"
+                  width={0}
+                  height={0}
+                  alt={p.name}
+                  className="w-[180px] h-[180px] lg:w-[280px] lg:h-[280px] object-cover"
+                />
+              )}
               <div className="p-[0.75rem]">
                 <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
                 <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Ipsum numquam reprehenderit et, earum deleniti nostrum tempore
-                  enim nihil corporis optio!
+                  {`${p.material}, ${p.size}`}
                 </p>
                 <div className="flex justify-between items-center mt-[0.5rem]">
                   <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
