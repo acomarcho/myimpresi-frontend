@@ -179,6 +179,7 @@ export default function Products() {
             products={products}
           />
           <MobileProducts
+            filter={filter}
             changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
             products={products}

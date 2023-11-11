@@ -6,14 +6,18 @@ import { useDisclosure } from "@mantine/hooks";
 import { Accordion, Drawer } from "@mantine/core";
 import { Category } from "@/types/responses";
 import { ProductWithImages } from "@/types/responses/product";
+import { FindProductsFilter } from "@/types/requests";
+import { colors } from "@/utils/colors";
 
 type Props = {
+  filter: FindProductsFilter;
   changeSubcategoryId: (subcategoryId: string) => void;
   filterData: Category[] | undefined;
   products: ProductWithImages[] | undefined;
 };
 
 const MobileProducts = ({
+  filter,
   changeSubcategoryId,
   filterData,
   products,
@@ -85,7 +89,16 @@ const MobileProducts = ({
                 return (
                   <Accordion.Item key={d.id} value={d.name}>
                     <Accordion.Control>
-                      <p className="font-bold font-inter text-neutral-100">
+                      <p
+                        className="font-bold font-inter text-neutral-100"
+                        style={{
+                          color: d.subcategory.find(
+                            (s) => s.id === filter.subcategoryId
+                          )
+                            ? colors.primaryDefault
+                            : "",
+                        }}
+                      >
                         {d.name}
                       </p>
                     </Accordion.Control>
@@ -97,6 +110,14 @@ const MobileProducts = ({
                               key={s.id}
                               className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer text-left"
                               onClick={() => changeSubcategoryId(s.id)}
+                              style={{
+                                color:
+                                  filter.subcategoryId === s.id
+                                    ? colors.primaryDefault
+                                    : "",
+                                fontWeight:
+                                  filter.subcategoryId === s.id ? "bold" : "",
+                              }}
                             >
                               {s.name}
                             </button>
