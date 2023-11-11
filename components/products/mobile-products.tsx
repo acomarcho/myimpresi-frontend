@@ -8,11 +8,16 @@ import { Category } from "@/types/responses";
 import { ProductWithImages } from "@/types/responses/product";
 
 type Props = {
+  changeSubcategoryId: (subcategoryId: string) => void;
   filterData: Category[] | undefined;
   products: ProductWithImages[] | undefined;
 };
 
-const MobileProducts = ({ filterData, products }: Props) => {
+const MobileProducts = ({
+  changeSubcategoryId,
+  filterData,
+  products,
+}: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -88,13 +93,13 @@ const MobileProducts = ({ filterData, products }: Props) => {
                       <div className="flex flex-col gap-[1rem]">
                         {d.subcategory.map((s) => {
                           return (
-                            <Link
-                              href="/product"
+                            <div
                               key={s.id}
-                              className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem]"
+                              className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer"
+                              onClick={() => changeSubcategoryId(s.id)}
                             >
                               {s.name}
-                            </Link>
+                            </div>
                           );
                         })}
                       </div>

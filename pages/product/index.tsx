@@ -13,7 +13,6 @@ import { useState, useEffect } from "react";
 import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
 import { FindProductsFilter } from "@/types/requests";
-import Router from "next/router";
 import { useRouter } from "next/router";
 import _ from "lodash";
 
@@ -54,6 +53,18 @@ export default function Products() {
         sort: sort as string,
       };
     }
+    if (categoryId) {
+      newFilter = {
+        ...newFilter,
+        categoryId: categoryId as string,
+      };
+    }
+    if (subcategoryId) {
+      newFilter = {
+        ...newFilter,
+        subcategoryId: subcategoryId as string,
+      };
+    }
 
     setFilter(newFilter);
   }, [router]);
@@ -80,6 +91,18 @@ export default function Products() {
     });
   };
 
+  const changeSubcategoryId = (subcategoryId: string) => {
+    const newFilter = {
+      ...filter,
+      page: 1, // Reset page to 1
+      subcategoryId,
+    };
+
+    router.push(`/product?${generateParams(newFilter)}`, undefined, {
+      shallow: true,
+    });
+  };
+
   const generateParams = (filter: FindProductsFilter) => {
     let urlFilter: {
       [name: string]: string;
@@ -93,6 +116,12 @@ export default function Products() {
     }
     if (filter.sort) {
       urlFilter.sort = filter.sort;
+    }
+    if (filter.categoryId) {
+      urlFilter.categoryId = filter.categoryId;
+    }
+    if (filter.subcategoryId) {
+      urlFilter.subcategoryId = filter.subcategoryId;
     }
 
     return new URLSearchParams(urlFilter).toString();
@@ -117,10 +146,12 @@ export default function Products() {
             pageCount={pageCount}
           />
           <DesktopProducts
+            changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
             products={products}
           />
           <MobileProducts
+            changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
             products={products}
           />

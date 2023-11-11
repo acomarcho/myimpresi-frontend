@@ -18,6 +18,12 @@ export default function useProducts(filter: FindProductsFilter) {
   if (filter.sort) {
     queryData = { ...queryData, sort: filter.sort };
   }
+  if (filter.categoryId) {
+    queryData = { ...queryData, categoryId: filter.categoryId };
+  }
+  if (filter.subcategoryId) {
+    queryData = { ...queryData, subcategoryId: filter.subcategoryId };
+  }
 
   const { data, error, isLoading } = useSWR(
     filter.page && filter.pageSize
