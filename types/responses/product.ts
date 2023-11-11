@@ -1,3 +1,5 @@
+import { PaginationData } from "./pagination";
+
 export type Product = {
   id: string;
   name: string;
@@ -35,4 +37,9 @@ export type GetPromoProductsResponse = {
 
 export type GetSingleProductResponse = {
   data: ProductWithImages;
+};
+
+export type GetProductsResponse = {
+  data: ProductWithImages[];
+  pagination: PaginationData;
 };

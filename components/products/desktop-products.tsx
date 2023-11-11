@@ -3,19 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { Category } from "@/types/responses";
+import { ProductWithImages } from "@/types/responses/product";
 
 type Props = {
   filterData: Category[] | undefined;
-  products: Product[];
-};
-
-type Product = {
-  id: number;
-  imagePath: string;
-  name: string;
-  price: number;
-  minQuantity: number;
-  soldAmount: number;
+  products: ProductWithImages[] | undefined;
 };
 
 const DesktopProducts = ({ filterData, products }: Props) => {
@@ -65,7 +57,7 @@ const DesktopProducts = ({ filterData, products }: Props) => {
       </div>
       {/* Products */}
       <div className="grid grid-cols-4 gap-[1rem]">
-        {products.map((p) => {
+        {products?.map((p) => {
           return (
             <Link
               key={p.id}
@@ -73,18 +65,16 @@ const DesktopProducts = ({ filterData, products }: Props) => {
               href={`/product/${p.id}`}
             >
               <Image
-                src={p.imagePath}
+                src={p.productImage[0].path}
                 width={280}
                 height={280}
                 alt={p.name}
-                className="object-cover"
+                className="w-full h-[250px] object-cover"
               />
               <div className="p-[0.75rem]">
                 <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
-                <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Ipsum numquam reprehenderit et, earum deleniti nostrum tempore
-                  enim nihil corporis optio!
+                <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
+                  {`${p.material}, ${p.size}`}
                 </p>
                 <div className="flex justify-between items-center mt-[0.5rem]">
                   <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">

@@ -11,6 +11,8 @@ import BottomPagination from "@/components/products/bottom-pagination";
 
 import { useState } from "react";
 import useCategories from "@/hooks/use-categories";
+import useProducts from "@/hooks/use-products";
+import { FindProductsFilter } from "@/types/requests";
 
 const dummyData = [
   {
@@ -79,9 +81,14 @@ const dummyProducts = Array.from({ length: 20 }, (_, index) => ({
 }));
 
 export default function Products() {
+  const [filter, setFilter] = useState<FindProductsFilter>({
+    page: 1,
+    pageSize: 4,
+  });
   const [sortFilter, setSortFilter] = useState<string | null>("Rekomendasi");
   const [activePage, setActivePage] = useState(1);
   const { categories } = useCategories();
+  const { products, pagination } = useProducts(filter);
 
   return (
     <>
@@ -101,11 +108,11 @@ export default function Products() {
           />
           <DesktopProducts
             filterData={categories?.categories}
-            products={dummyProducts}
+            products={products}
           />
           <MobileProducts
             filterData={categories?.categories}
-            products={dummyProducts}
+            products={products}
           />
           <BottomPagination
             activePage={activePage}
