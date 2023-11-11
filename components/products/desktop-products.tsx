@@ -13,6 +13,7 @@ type Props = {
   changeSubcategoryId: (subcategoryId: string) => void;
   filterData: Category[] | undefined;
   products: ProductWithImages[] | undefined;
+  isLoading: boolean;
 };
 
 const DesktopProducts = ({
@@ -20,6 +21,7 @@ const DesktopProducts = ({
   changeSubcategoryId,
   filterData,
   products,
+  isLoading,
 }: Props) => {
   return (
     <div className="hidden items-start gap-[1rem] mt-[2rem] relative hidden lg:flex">
@@ -123,7 +125,7 @@ const DesktopProducts = ({
           })}
         </div>
       )}
-      {(!products || products.length === 0) && (
+      {!isLoading && (!products || products.length === 0) && (
         <div className="p-[1rem]">
           <IconZoomExclamation size={128} color={colors.redIcon} />
           <h1 className="font-inter font-bold text-[1.5rem] text-neutral-100 mt-[1rem]">

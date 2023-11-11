@@ -25,7 +25,7 @@ const defaultFilters: FindProductsFilter = {
 export default function Products() {
   const [filter, setFilter] = useState<FindProductsFilter>(defaultFilters);
   const { categories } = useCategories();
-  const { products, pagination } = useProducts(filter);
+  const { products, pagination, isLoading } = useProducts(filter);
 
   const router = useRouter();
 
@@ -179,12 +179,14 @@ export default function Products() {
             changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
             products={products}
+            isLoading={isLoading}
           />
           <MobileProducts
             filter={filter}
             changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
             products={products}
+            isLoading={isLoading}
           />
           <BottomPagination
             filter={filter}
