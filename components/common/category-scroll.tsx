@@ -35,14 +35,15 @@ const CategoryScroll = () => {
             return (
               <div
                 key={c.id}
-                className="cursor-pointer flex flex-col gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.05]"
+                className="cursor-pointer flex flex-col w-[50%] lg:w-[25%] gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.02]"
               >
                 <Image
                   src={c.imagePath}
-                  width={150}
-                  height={150}
+                  width={0}
+                  height={0}
+                  sizes="100%"
                   alt={c.name}
-                  className="object-cover rounded-xl"
+                  className="w-full object-cover"
                 />
                 <p className="font-inter font-bold text-neutral-100 text-[1rem]">
                   {c.name}
