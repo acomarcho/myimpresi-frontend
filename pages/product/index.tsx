@@ -10,6 +10,7 @@ import MobileProducts from "@/components/products/mobile-products";
 import BottomPagination from "@/components/products/bottom-pagination";
 
 import { useState } from "react";
+import useCategories from "@/hooks/use-categories";
 
 const dummyData = [
   {
@@ -80,6 +81,7 @@ const dummyProducts = Array.from({ length: 20 }, (_, index) => ({
 export default function Products() {
   const [sortFilter, setSortFilter] = useState<string | null>("Rekomendasi");
   const [activePage, setActivePage] = useState(1);
+  const { categories } = useCategories();
 
   return (
     <>
@@ -97,8 +99,14 @@ export default function Products() {
             activePage={activePage}
             setActivePage={setActivePage}
           />
-          <DesktopProducts filterData={dummyData} products={dummyProducts} />
-          <MobileProducts filterData={dummyData} products={dummyProducts} />
+          <DesktopProducts
+            filterData={categories?.categories}
+            products={dummyProducts}
+          />
+          <MobileProducts
+            filterData={categories?.categories}
+            products={dummyProducts}
+          />
           <BottomPagination
             activePage={activePage}
             setActivePage={setActivePage}

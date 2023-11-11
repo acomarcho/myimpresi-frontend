@@ -2,21 +2,11 @@ import { Accordion } from "@mantine/core";
 import Link from "next/link";
 import Image from "next/image";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
+import { Category } from "@/types/responses";
 
 type Props = {
-  filterData: Category[];
+  filterData: Category[] | undefined;
   products: Product[];
-};
-
-type Category = {
-  id: number;
-  name: string;
-  subcategories: Subcategory[];
-};
-
-type Subcategory = {
-  id: number;
-  name: string;
 };
 
 type Product = {
@@ -45,7 +35,7 @@ const DesktopProducts = ({ filterData, products }: Props) => {
             },
           }}
         >
-          {filterData.map((d) => {
+          {filterData?.map((d) => {
             return (
               <Accordion.Item key={d.id} value={d.name}>
                 <Accordion.Control>
@@ -54,11 +44,11 @@ const DesktopProducts = ({ filterData, products }: Props) => {
                   </p>
                 </Accordion.Control>
                 <Accordion.Panel>
-                  <div className="flex flex-col gap-[0.5rem]">
-                    {d.subcategories.map((s) => {
+                  <div className="flex flex-col gap-[1rem]">
+                    {d.subcategory.map((s) => {
                       return (
                         <Link
-                          href="/product"
+                          href={`/product?subcategoryId=${s.id}`}
                           key={s.id}
                           className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem]"
                         >
