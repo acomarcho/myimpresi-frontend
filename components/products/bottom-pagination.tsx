@@ -1,18 +1,20 @@
 import { Pagination } from "@mantine/core";
-import { Dispatch, SetStateAction } from "react";
+import { FindProductsFilter } from "@/types/requests";
 
 type Props = {
-  activePage: number;
-  setActivePage: Dispatch<SetStateAction<number>>;
+  filter: FindProductsFilter;
+  changeActivePage: (page: number) => void;
   pageCount: number;
 };
 
-const BottomPagination = ({ activePage, setActivePage, pageCount }: Props) => {
+const BottomPagination = ({ filter, changeActivePage, pageCount }: Props) => {
   return (
     <div className="flex justify-start lg:justify-end mt-[2rem]">
       <Pagination
-        value={activePage}
-        onChange={setActivePage}
+        value={filter.page}
+        onChange={(v) => {
+          changeActivePage(v);
+        }}
         total={pageCount}
         withControls={false}
         styles={{

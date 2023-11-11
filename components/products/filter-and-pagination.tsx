@@ -1,19 +1,33 @@
 import { Select, Pagination } from "@mantine/core";
-import { Dispatch, SetStateAction } from "react";
+import { FindProductsFilter } from "@/types/requests";
 
 type Props = {
-  sortFilter: string | null;
-  setSortFilter: Dispatch<SetStateAction<string | null>>;
-  activePage: number;
-  setActivePage: Dispatch<SetStateAction<number>>;
+  filter: FindProductsFilter;
+  changeSortFilter: (value: string) => void;
+  changeActivePage: (page: number) => void;
   pageCount: number;
 };
 
+const sortMappings: {
+  [name: string]: string;
+} = {
+  RECOMMENDED: "Rekomendasi",
+  LOWEST_PRICE: "Harga Terendah",
+  HIGHEST_PRICE: "Harga Tertinggi",
+};
+
+const reverseSortMappings: {
+  [name: string]: string;
+} = {
+  Rekomendasi: "RECOMMENDED",
+  "Harga Terendah": "LOWEST_PRICE",
+  "Harga Tertinggi": "HIGHEST_PRICE",
+};
+
 const FilterAndPagination = ({
-  sortFilter,
-  setSortFilter,
-  activePage,
-  setActivePage,
+  filter,
+  changeSortFilter,
+  changeActivePage,
   pageCount,
 }: Props) => {
   return (
@@ -22,18 +36,23 @@ const FilterAndPagination = ({
         <p className="font-inter font-bold">Urutkan: </p>
         <Select
           data={["Rekomendasi", "Harga Terendah", "Harga Tertinggi"]}
-          value={sortFilter}
-          onChange={setSortFilter}
+          value={sortMappings[filter.sort ?? "RECOMMENDED"]}
+          onChange={(v) => {
+            changeSortFilter(reverseSortMappings[v ?? "RECOMMENDED"]);
+          }}
           styles={{
             input: {
               borderRadius: "100px",
             },
           }}
+          allowDeselect={false}
         />
       </div>
       <Pagination
-        value={activePage}
-        onChange={setActivePage}
+        value={filter.page}
+        onChange={(v) => {
+          changeActivePage(v);
+        }}
         total={pageCount}
         withControls={false}
         styles={{

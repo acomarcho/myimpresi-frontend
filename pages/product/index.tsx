@@ -84,20 +84,30 @@ export default function Products() {
   const [filter, setFilter] = useState<FindProductsFilter>({
     page: 1,
     pageSize: 4,
+    sort: "RECOMMENDED",
   });
-  const [sortFilter, setSortFilter] = useState<string | null>("Rekomendasi");
-  const [activePage, setActivePage] = useState(1);
   const { categories } = useCategories();
   const { products, pagination } = useProducts(filter);
 
-  useEffect(() => {
+  const changeSortFilter = (value: string) => {
     setFilter((f) => {
       return {
         ...f,
-        page: activePage,
+        sort: value,
       };
     });
-  }, [activePage]);
+  };
+
+  const changeActivePage = (page: number) => {
+    setFilter((f) => {
+      return {
+        ...f,
+        page: page,
+      };
+    });
+  };
+
+  const pageCount = pagination?.totalPages ?? 1;
 
   return (
     <>
@@ -110,11 +120,10 @@ export default function Products() {
           <Heading text="Semua Produk" />
           <CategoryScroll />
           <FilterAndPagination
-            sortFilter={sortFilter}
-            setSortFilter={setSortFilter}
-            activePage={activePage}
-            setActivePage={setActivePage}
-            pageCount={pagination?.totalPages ?? 1}
+            filter={filter}
+            changeSortFilter={changeSortFilter}
+            changeActivePage={changeActivePage}
+            pageCount={pageCount}
           />
           <DesktopProducts
             filterData={categories?.categories}
@@ -125,9 +134,9 @@ export default function Products() {
             products={products}
           />
           <BottomPagination
-            activePage={activePage}
-            setActivePage={setActivePage}
-            pageCount={pagination?.totalPages ?? 1}
+            filter={filter}
+            changeActivePage={changeActivePage}
+            pageCount={pageCount}
           />
         </div>
         <FloatingWAIcon />
