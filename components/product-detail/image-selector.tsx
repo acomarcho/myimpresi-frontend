@@ -1,30 +1,24 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ProductWithImages } from "@/types/responses/product";
+import { useRouter } from "next/router";
 
 type Props = {
-  product: Product;
-};
-
-type Product = {
-  name: string;
-  subtitle: string;
-  price: number;
-  soldAmount: number;
-  colors: string[];
-  material: string;
-  size: string;
-  minimalOrder: number;
-  images: string[];
-  description: string;
+  product: ProductWithImages;
 };
 
 const ImageSelector = ({ product }: Props) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
+  const router = useRouter();
+  useEffect(() => {
+    setActiveImageIndex(0);
+  }, [router]);
+
   return (
     <>
       <Image
-        src={product.images[activeImageIndex]}
+        src={product.productImage[activeImageIndex]?.path}
         width={0}
         height={0}
         sizes="100%"
@@ -32,21 +26,21 @@ const ImageSelector = ({ product }: Props) => {
         alt={product.name}
       />
       <div className="grid grid-cols-4 gap-[1rem] mt-[1rem]">
-        {product.images
+        {product.productImage
           .filter((_, idx) => idx !== activeImageIndex)
           .map((img) => {
             return (
               <button
-                key={img}
+                key={img.id}
                 className="transition-all hover:opacity-[0.8]"
                 onClick={() =>
                   setActiveImageIndex(
-                    product.images.findIndex((v) => v === img)
+                    product.productImage.findIndex((v) => v.id === img.id)
                   )
                 }
               >
                 <Image
-                  src={img}
+                  src={img.path}
                   width={0}
                   height={0}
                   sizes="100%"

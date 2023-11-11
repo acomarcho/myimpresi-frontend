@@ -32,3 +32,7 @@ export type GetFeaturedProductsResponse = {
 export type GetPromoProductsResponse = {
   data: ProductWithImages[];
 };
+
+export type GetSingleProductResponse = {
+  data: ProductWithImages;
+};

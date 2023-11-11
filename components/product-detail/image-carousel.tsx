@@ -1,31 +1,19 @@
 import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
+import { ProductWithImages } from "@/types/responses/product";
 
 type Props = {
-  product: Product;
-};
-
-type Product = {
-  name: string;
-  subtitle: string;
-  price: number;
-  soldAmount: number;
-  colors: string[];
-  material: string;
-  size: string;
-  minimalOrder: number;
-  images: string[];
-  description: string;
+  product: ProductWithImages;
 };
 
 const ImageCarousel = ({ product }: Props) => {
   return (
     <Carousel swipeable emulateTouch infiniteLoop showThumbs={false}>
-      {product.images.map((img) => {
+      {product.productImage.map((img) => {
         return (
-          <div key={img} className="w-full cursor-pointer">
+          <div key={img.id} className="w-full cursor-pointer">
             <Image
-              src={img}
+              src={img.path}
               width={0}
               height={0}
               sizes="100%"

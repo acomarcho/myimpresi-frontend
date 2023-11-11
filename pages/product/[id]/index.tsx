@@ -8,37 +8,27 @@ import SimilarProducts from "@/components/product-detail/similar-products";
 import BestSellingProducts from "@/components/product-detail/best-selling-products";
 import CustomLogoSection from "@/components/product-detail/custom-logo-section";
 import SelectedCategories from "@/components/product-detail/selected-categories";
-
-const dummyProduct = {
-  name: "TAWIRI",
-  subtitle: "Tumbler grafir, 500ml, menahan panas maupun dingin",
-  price: 99000,
-  soldAmount: 675,
-  colors: ["#000000", "#eeeeee", "#ff0000"],
-  material: "Besi & Plastik Rubber",
-  size: "500ml",
-  minimalOrder: 10,
-  images: [
-    "/dummy/produk.png",
-    "/dummy/produk2.png",
-    "/dummy/produk3.png",
-    "/dummy/produk4.png",
-    "/dummy/produk5.png",
-  ],
-  description:
-    "Unik, stylish dan fungsional merupakan kesan yang ditampilkan oleh TAWIRI, tumbler premium ini cocok untuk anda yang menginginkan kreativitas dan dinamis menjadi kesan yang ditinggalkan oleh souvenir dari perusahaan / instansi anda.",
-};
+import { useRouter } from "next/router";
+import useProduct from "@/hooks/use-product";
 
 const SingleProduct = () => {
+  const router = useRouter();
+  const productId = router.query.id as string;
+
+  const { product, isLoading } = useProduct(productId);
+
   return (
     <>
       <Head>
-        <title>TAWIRI</title>
+        <title>{product?.data?.name.toUpperCase() ?? "Detail Produk"}</title>
       </Head>
       <Navbar />
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
-          <ProductDetail product={dummyProduct} />
+          <ProductDetail
+            product={product?.data}
+            isLoading={isLoading}
+          />
           <hr className="text-neutral-20 mt-[1rem]" />
           <SimilarProducts />
           <hr className="text-neutral-20 mt-[1rem]" />
