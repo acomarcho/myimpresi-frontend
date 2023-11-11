@@ -1,7 +1,7 @@
 import { Subcategory } from "./subcategory";
 
 export type Category = {
-  id: number;
+  id: string;
   name: string;
   isFeatured: boolean;
   imagePath: string;

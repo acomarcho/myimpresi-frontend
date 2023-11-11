@@ -135,15 +135,36 @@ export default function Products() {
 
   const pageCount = pagination?.totalPages ?? 1;
 
+  const getPageTitle = () => {
+    if (filter.subcategoryId) {
+      const category = categories?.categories.find((c) =>
+        c.subcategory.find((s) => s.id === filter.subcategoryId)
+      );
+      return (
+        category?.subcategory.find((s) => s.id === filter.subcategoryId)
+          ?.name || "Loading ..."
+      );
+    }
+
+    if (filter.categoryId) {
+      return (
+        categories?.categories.find((c) => c.id === filter.categoryId)?.name ||
+        "Loading ..."
+      );
+    }
+
+    return "Semua Produk";
+  };
+
   return (
     <>
       <Head>
-        <title>Semua Produk</title>
+        <title>{getPageTitle()}</title>
       </Head>
       <Navbar />
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
-          <Heading text="Semua Produk" />
+          <Heading text={getPageTitle()} />
           <CategoryScroll />
           <FilterAndPagination
             filter={filter}
