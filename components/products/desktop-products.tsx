@@ -6,6 +6,7 @@ import { Category } from "@/types/responses";
 import { ProductWithImages } from "@/types/responses/product";
 import { colors } from "@/utils/colors";
 import { FindProductsFilter } from "@/types/requests";
+import { IconZoomExclamation } from "@tabler/icons-react";
 
 type Props = {
   filter: FindProductsFilter;
@@ -82,44 +83,62 @@ const DesktopProducts = ({
         </Accordion>
       </div>
       {/* Products */}
-      <div className="grid grid-cols-4 gap-[1rem]">
-        {products?.map((p) => {
-          return (
-            <Link
-              key={p.id}
-              className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
-              href={`/product/${p.id}`}
-            >
-              <Image
-                src={p.productImage[0].path}
-                width={280}
-                height={280}
-                alt={p.name}
-                className="w-full h-[250px] object-cover"
-              />
-              <div className="p-[0.75rem]">
-                <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
-                <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
-                  {`${p.material}, ${p.size}`}
-                </p>
-                <div className="flex justify-between items-center mt-[0.5rem]">
-                  <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
-                    {formatToRupiah(p.price)}
+      {products && products.length > 0 && (
+        <div className="grid grid-cols-4 gap-[1rem]">
+          {products?.map((p) => {
+            return (
+              <Link
+                key={p.id}
+                className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
+                href={`/product/${p.id}`}
+              >
+                <Image
+                  src={p.productImage[0].path}
+                  width={280}
+                  height={280}
+                  alt={p.name}
+                  className="w-full h-[250px] object-cover"
+                />
+                <div className="p-[0.75rem]">
+                  <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
+                  <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
+                    {`${p.material}, ${p.size}`}
                   </p>
-                  <button className="transition-all hover:scale-[1.2]">
-                    <Image
-                      src="/assets/heart.svg"
-                      width={16}
-                      height={16}
-                      alt="Add to wishlist"
-                    />
-                  </button>
+                  <div className="flex justify-between items-center mt-[0.5rem]">
+                    <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
+                      {formatToRupiah(p.price)}
+                    </p>
+                    <button className="transition-all hover:scale-[1.2]">
+                      <Image
+                        src="/assets/heart.svg"
+                        width={16}
+                        height={16}
+                        alt="Add to wishlist"
+                      />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+              </Link>
+            );
+          })}
+        </div>
+      )}
+      {(!products || products.length === 0) && (
+        <div className="p-[1rem]">
+          <IconZoomExclamation size={128} color={colors.redIcon} />
+          <h1 className="font-inter font-bold text-[1.5rem] text-neutral-100 mt-[1rem]">
+            Hasil pencarian tidak ditemukan!
+          </h1>
+          <p className="font=inter text-neutral-60 mt-[1rem]">
+            Belum ada produk yang sesuai dengan pencarianmu. Coba ganti filter
+            atau kata kunci, atau hubungi admin untuk berkonsultasi terkait
+            produk yang dicari.
+          </p>
+          <button className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9]">
+            Yuk, tanya admin!
+          </button>
+        </div>
+      )}
     </div>
   );
 };
