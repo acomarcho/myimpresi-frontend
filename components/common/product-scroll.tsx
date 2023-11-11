@@ -51,7 +51,7 @@ const ProductScroll = ({ products }: Props) => {
               )}
               <div className="p-[0.75rem]">
                 <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
-                <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two">
+                <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
                   {`${p.material}, ${p.size}`}
                 </p>
                 <div className="flex justify-between items-center mt-[0.5rem]">
