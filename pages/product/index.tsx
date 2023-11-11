@@ -9,7 +9,7 @@ import DesktopProducts from "@/components/products/desktop-products";
 import MobileProducts from "@/components/products/mobile-products";
 import BottomPagination from "@/components/products/bottom-pagination";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
 import { FindProductsFilter } from "@/types/requests";
@@ -90,6 +90,15 @@ export default function Products() {
   const { categories } = useCategories();
   const { products, pagination } = useProducts(filter);
 
+  useEffect(() => {
+    setFilter((f) => {
+      return {
+        ...f,
+        page: activePage,
+      };
+    });
+  }, [activePage]);
+
   return (
     <>
       <Head>
@@ -105,6 +114,7 @@ export default function Products() {
             setSortFilter={setSortFilter}
             activePage={activePage}
             setActivePage={setActivePage}
+            pageCount={pagination?.totalPages ?? 1}
           />
           <DesktopProducts
             filterData={categories?.categories}
@@ -117,6 +127,7 @@ export default function Products() {
           <BottomPagination
             activePage={activePage}
             setActivePage={setActivePage}
+            pageCount={pagination?.totalPages ?? 1}
           />
         </div>
         <FloatingWAIcon />

@@ -6,6 +6,7 @@ type Props = {
   setSortFilter: Dispatch<SetStateAction<string | null>>;
   activePage: number;
   setActivePage: Dispatch<SetStateAction<number>>;
+  pageCount: number;
 };
 
 const FilterAndPagination = ({
@@ -13,6 +14,7 @@ const FilterAndPagination = ({
   setSortFilter,
   activePage,
   setActivePage,
+  pageCount,
 }: Props) => {
   return (
     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mt-[4rem] gap-[1rem]">
@@ -32,7 +34,7 @@ const FilterAndPagination = ({
       <Pagination
         value={activePage}
         onChange={setActivePage}
-        total={10}
+        total={pageCount}
         withControls={false}
         styles={{
           control: {
