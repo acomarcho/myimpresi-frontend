@@ -9,76 +9,10 @@ import DesktopProducts from "@/components/products/desktop-products";
 import MobileProducts from "@/components/products/mobile-products";
 import BottomPagination from "@/components/products/bottom-pagination";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
 import { FindProductsFilter } from "@/types/requests";
-
-const dummyData = [
-  {
-    id: 1,
-    name: "Jam",
-    subcategories: [
-      {
-        id: 1,
-        name: "Jam Dinding",
-      },
-      {
-        id: 2,
-        name: "Jam Meja",
-      },
-      {
-        id: 3,
-        name: "Jam Tangan",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Payung",
-    subcategories: [
-      {
-        id: 1,
-        name: "Payung Golf",
-      },
-      {
-        id: 2,
-        name: "Payung Lipat",
-      },
-      {
-        id: 3,
-        name: "Payung Standard",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Pakaian",
-    subcategories: [
-      {
-        id: 1,
-        name: "Kaos",
-      },
-      {
-        id: 2,
-        name: "Kaos dan kerah",
-      },
-      {
-        id: 3,
-        name: "Kemeja",
-      },
-    ],
-  },
-];
-
-const dummyProducts = Array.from({ length: 20 }, (_, index) => ({
-  id: index + 1,
-  imagePath: "/dummy/produk.png",
-  name: "BANUM",
-  price: 120000,
-  minQuantity: 10,
-  soldAmount: 200,
-}));
 
 export default function Products() {
   const [filter, setFilter] = useState<FindProductsFilter>({

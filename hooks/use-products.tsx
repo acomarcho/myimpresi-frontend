@@ -15,6 +15,9 @@ export default function useProducts(filter: FindProductsFilter) {
   if (filter.pageSize) {
     queryData = { ...queryData, pageSize: filter.pageSize };
   }
+  if (filter.sort) {
+    queryData = { ...queryData, sort: filter.sort };
+  }
 
   const { data, error, isLoading } = useSWR(
     filter.page && filter.pageSize
