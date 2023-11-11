@@ -18,7 +18,7 @@ import _ from "lodash";
 
 const defaultFilters: FindProductsFilter = {
   page: 1,
-  pageSize: 4,
+  pageSize: 20,
   sort: "RECOMMENDED",
 };
 
