@@ -59,7 +59,7 @@ const DesktopProducts = ({
                       return (
                         <button
                           key={s.id}
-                          className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer"
+                          className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer text-left"
                           onClick={() => changeSubcategoryId(s.id)}
                           style={{
                             color:
