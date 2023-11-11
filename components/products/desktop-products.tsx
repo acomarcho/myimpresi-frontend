@@ -4,14 +4,18 @@ import Image from "next/image";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { Category } from "@/types/responses";
 import { ProductWithImages } from "@/types/responses/product";
+import { colors } from "@/utils/colors";
+import { FindProductsFilter } from "@/types/requests";
 
 type Props = {
+  filter: FindProductsFilter;
   changeSubcategoryId: (subcategoryId: string) => void;
   filterData: Category[] | undefined;
   products: ProductWithImages[] | undefined;
 };
 
 const DesktopProducts = ({
+  filter,
   changeSubcategoryId,
   filterData,
   products,
@@ -36,7 +40,16 @@ const DesktopProducts = ({
             return (
               <Accordion.Item key={d.id} value={d.name}>
                 <Accordion.Control>
-                  <p className="font-bold font-inter text-neutral-100">
+                  <p
+                    className="font-bold font-inter text-neutral-100"
+                    style={{
+                      color: d.subcategory.find(
+                        (s) => s.id === filter.subcategoryId
+                      )
+                        ? colors.primaryDefault
+                        : "",
+                    }}
+                  >
                     {d.name}
                   </p>
                 </Accordion.Control>
@@ -44,13 +57,21 @@ const DesktopProducts = ({
                   <div className="flex flex-col gap-[1rem]">
                     {d.subcategory.map((s) => {
                       return (
-                        <div
+                        <button
                           key={s.id}
                           className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer"
                           onClick={() => changeSubcategoryId(s.id)}
+                          style={{
+                            color:
+                              filter.subcategoryId === s.id
+                                ? colors.primaryDefault
+                                : "",
+                            fontWeight:
+                              filter.subcategoryId === s.id ? "bold" : "",
+                          }}
                         >
                           {s.name}
-                        </div>
+                        </button>
                       );
                     })}
                   </div>

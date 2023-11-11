@@ -92,11 +92,17 @@ export default function Products() {
   };
 
   const changeSubcategoryId = (subcategoryId: string) => {
-    const newFilter = {
-      ...filter,
+    const filterCopy = { ...filter };
+    delete filterCopy.subcategoryId;
+
+    let newFilter = {
+      ...filterCopy,
       page: 1, // Reset page to 1
-      subcategoryId,
     };
+
+    if (subcategoryId !== filter.subcategoryId) {
+      newFilter.subcategoryId = subcategoryId;
+    }
 
     router.push(`/product?${generateParams(newFilter)}`, undefined, {
       shallow: true,
@@ -146,6 +152,7 @@ export default function Products() {
             pageCount={pageCount}
           />
           <DesktopProducts
+            filter={filter}
             changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
             products={products}

@@ -93,13 +93,13 @@ const MobileProducts = ({
                       <div className="flex flex-col gap-[1rem]">
                         {d.subcategory.map((s) => {
                           return (
-                            <div
+                            <button
                               key={s.id}
                               className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer"
                               onClick={() => changeSubcategoryId(s.id)}
                             >
                               {s.name}
-                            </div>
+                            </button>
                           );
                         })}
                       </div>
