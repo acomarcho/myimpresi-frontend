@@ -28,3 +28,7 @@ export type ProductWithImages = Product & {
 export type GetFeaturedProductsResponse = {
   data: ProductWithImages[];
 };
+
+export type GetPromoProductsResponse = {
+  data: ProductWithImages[];
+};
