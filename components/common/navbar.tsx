@@ -71,53 +71,61 @@ const Navbar = () => {
                 alt="Logo MyImpresi"
               />
             </Link>
-            <Autocomplete
-              value={search}
-              onChange={(e) => {
-                setSearch(e);
-              }}
-              leftSection={<IconSearch size={16} stroke={4} />}
-              styles={{
-                section: {
-                  paddingLeft: "1rem",
-                },
-                input: {
-                  border: "none",
-                  borderRadius: "100px",
-                  paddingTop: "0.25rem",
-                  paddingBottom: "0.25rem",
-                  height: "auto",
-                  paddingLeft: "2.75rem",
-                  fontFamily: "var(--font-inter)",
-                  color: "var(--neutral-100)",
-                  fontSize: "1rem",
-                  background: "#ECECECB2",
-                },
-                option: {
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "1rem",
-                  color: "var(--neutral-100)",
-                  padding: "0.5rem 1rem",
-                },
-                options: {
-                  padding: 0,
-                  background: "#ECECECFF",
-                },
-                dropdown: {
-                  padding: 0,
-                  background: "#ECECECFF",
-                  borderRadius: "100px",
-                },
-              }}
-              placeholder={`Coba "Jam Dinding" ...`}
-              data={
-                (debouncedSearch.length >= 2 &&
-                  autocomplete.map((a) => {
-                    return a.name;
-                  })) ||
-                []
-              }
-            />
+            <div className="flex gap-[1rem]">
+              <Autocomplete
+                value={search}
+                onChange={(e) => {
+                  setSearch(e);
+                }}
+                styles={{
+                  input: {
+                    border: "none",
+                    borderRadius: "100px",
+                    paddingTop: "0.25rem",
+                    paddingBottom: "0.25rem",
+                    height: "auto",
+                    paddingLeft: "1rem",
+                    fontFamily: "var(--font-inter)",
+                    color: "var(--neutral-100)",
+                    fontSize: "1rem",
+                    background: "#ECECECB2",
+                  },
+                  option: {
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "1rem",
+                    color: "var(--neutral-100)",
+                    padding: "0.5rem 1rem",
+                  },
+                  options: {
+                    padding: 0,
+                    background: "#ECECECFF",
+                  },
+                  dropdown: {
+                    padding: 0,
+                    background: "#ECECECFF",
+                    borderRadius: "100px",
+                  },
+                }}
+                placeholder={`Coba "Jam Dinding" ...`}
+                data={
+                  (debouncedSearch.length >= 2 &&
+                    autocomplete.map((a) => {
+                      return a.name;
+                    })) ||
+                  []
+                }
+                className="w-full"
+              />
+              {debouncedSearch !== "" && (
+                <Link
+                  href={`/product/?search=${debouncedSearch}`}
+                  className="grid place-items-center bg-primary-default px-[1rem] rounded-full"
+                >
+                  <IconSearch size={16} color={"#ffffff"} />
+                </Link>
+              )}
+            </div>
+
             <Link
               href="/wishlist"
               className="transition-all hover:scale-[1.05] relative"
@@ -189,49 +197,56 @@ const Navbar = () => {
             </div>
           </div>
           <div className="mt-[1rem]">
-            <Autocomplete
-              value={search}
-              onChange={(e) => {
-                setSearch(e);
-              }}
-              leftSection={<IconSearch size={16} stroke={4} />}
-              styles={{
-                section: {
-                  paddingLeft: "1rem",
-                },
-                input: {
-                  border: "none",
-                  borderRadius: "100px",
-                  paddingTop: "0.25rem",
-                  paddingBottom: "0.25rem",
-                  height: "auto",
-                  paddingLeft: "2.75rem",
-                  fontFamily: "var(--font-inter)",
-                  color: "var(--neutral-100)",
-                  fontSize: "1rem",
-                  background: "#ECECECB2",
-                },
-                option: {
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "1rem",
-                  color: "var(--neutral-100)",
-                  padding: "0.5rem 1rem",
-                },
-                options: {
-                  padding: 0,
-                  background: "#ECECECFF",
-                },
-                dropdown: {
-                  padding: 0,
-                  background: "#ECECECFF",
-                  borderRadius: "100px",
-                },
-              }}
-              placeholder={`Coba "Jam Dinding" ...`}
-              data={autocomplete.map((a) => {
-                return a.name;
-              })}
-            />
+            <div className="flex gap-[1rem]">
+              <Autocomplete
+                value={search}
+                onChange={(e) => {
+                  setSearch(e);
+                }}
+                styles={{
+                  input: {
+                    border: "none",
+                    borderRadius: "100px",
+                    paddingTop: "0.25rem",
+                    paddingBottom: "0.25rem",
+                    height: "auto",
+                    paddingLeft: "1rem",
+                    fontFamily: "var(--font-inter)",
+                    color: "var(--neutral-100)",
+                    fontSize: "1rem",
+                    background: "#ECECECB2",
+                  },
+                  option: {
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "1rem",
+                    color: "var(--neutral-100)",
+                    padding: "0.5rem 1rem",
+                  },
+                  options: {
+                    padding: 0,
+                    background: "#ECECECFF",
+                  },
+                  dropdown: {
+                    padding: 0,
+                    background: "#ECECECFF",
+                    borderRadius: "100px",
+                  },
+                }}
+                placeholder={`Coba "Jam Dinding" ...`}
+                data={autocomplete.map((a) => {
+                  return a.name;
+                })}
+                className="w-full"
+              />{" "}
+              {debouncedSearch !== "" && (
+                <Link
+                  href={`/product/?search=${debouncedSearch}`}
+                  className="grid place-items-center bg-primary-default px-[1rem] rounded-full"
+                >
+                  <IconSearch size={16} color={"#ffffff"} />
+                </Link>
+              )}
+            </div>
           </div>
         </div>
         <Drawer opened={opened} onClose={close} position="bottom" size="80%">
