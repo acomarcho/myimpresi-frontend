@@ -121,6 +121,14 @@ const Navbar = () => {
     const handleKeydown = (event: KeyboardEvent) => {
       if (event.key === "Enter" && search) {
         Router.push(`/product/?search=${search}`);
+
+        if (desktopInputElement) {
+          desktopInputElement.blur();
+        }
+
+        if (mobileInputElement) {
+          mobileInputElement.blur();
+        }
       }
     };
 
