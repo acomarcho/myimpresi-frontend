@@ -16,7 +16,9 @@ type Props = {
 const ProductScroll = ({ products }: Props) => {
   const scrollContainer = useRef<HTMLDivElement>(null);
 
-  const wishlistProducts = useAppSelector((state) => state.wishlist.value);
+  const wishlistProducts = useAppSelector(
+    (state) => state.wishlist.wishlistProducts
+  );
   const dispatch = useAppDispatch();
 
   return (

@@ -11,14 +11,16 @@ type WishlistAction = {
 export const wishlistSlice = createSlice({
   name: "wishlist",
   initialState: {
-    value: defaultWishlistProducts,
+    wishlistProducts: defaultWishlistProducts,
   },
   reducers: {
     addProduct: (state, action: WishlistAction) => {
-      state.value.push(action.payload);
+      state.wishlistProducts.push(action.payload);
     },
     removeProduct: (state, action: WishlistAction) => {
-      state.value = state.value.filter((p) => p.id !== action.payload.id);
+      state.wishlistProducts = state.wishlistProducts.filter(
+        (p) => p.id !== action.payload.id
+      );
     },
   },
 });
