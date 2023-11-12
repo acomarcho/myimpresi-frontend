@@ -2,12 +2,14 @@ import { Autocomplete, Drawer } from "@mantine/core";
 import { IconSearch, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
+import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
 import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
 import { useState, useEffect } from "react";
 
 import { useAppSelector } from "@/hooks/use-redux";
 import { FindProductsFilter } from "@/types/requests";
+import { Subcategory } from "@/types/responses/subcategory";
 import { useRouter } from "next/router";
 
 type AutocompleteData = {
@@ -25,6 +27,7 @@ const Navbar = () => {
     search: "",
   });
   const { products } = useProducts(filter);
+  const { categories } = useCategories();
 
   const router = useRouter();
 
@@ -62,14 +65,50 @@ const Navbar = () => {
   useEffect(() => {
     const uniqueNames = Array.from(new Set(products?.map((p) => p.name) || []));
 
-    const newAutocomplete = uniqueNames.slice(0, 5).map((n) => {
-      return {
-        name: n.toUpperCase(),
-      };
+    const matchingCategories = categories?.categories.filter((c) =>
+      c.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+    );
+
+    const categoriesWithMatchingSubcategories = categories?.categories.filter(
+      (c) =>
+        c.subcategory.find((s) =>
+          s.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+        )
+    );
+    const matchingSubcategories: Subcategory[] = [];
+    categoriesWithMatchingSubcategories?.forEach((c) => {
+      c.subcategory.forEach((s) => {
+        if (s.name.toLowerCase().includes(debouncedSearch.toLowerCase())) {
+          matchingSubcategories.push(s);
+        }
+      });
     });
 
+    let newAutocomplete = [
+      ...uniqueNames.slice(0, 5).map((n) => {
+        return {
+          name: n.toUpperCase(),
+        };
+      }),
+      ...matchingSubcategories.map((s) => {
+        return {
+          name: s.name,
+        };
+      }),
+    ];
+    if (matchingCategories) {
+      newAutocomplete = [
+        ...newAutocomplete,
+        ...matchingCategories.map((c) => {
+          return {
+            name: c.name,
+          };
+        }),
+      ];
+    }
+
     setAutocomplete(newAutocomplete);
-  }, [products]);
+  }, [products, categories, debouncedSearch]);
 
   const wishlistAmount =
     wishlistProducts.length < 10 ? `${wishlistProducts.length}` : "9+";
