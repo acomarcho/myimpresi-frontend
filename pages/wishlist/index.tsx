@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/use-redux";
 
+import { ProductWithImages } from "@/types/responses/product";
+
 import WishlistTitle from "@/components/wishlist/title";
 import WishlistPagination from "@/components/wishlist/pagination";
 import WishlistProducts from "@/components/wishlist/products";
@@ -29,6 +31,8 @@ export default function Wishlist() {
 
   const [filter, setFilter] = useState(defaultFilters);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] =
+    useState<ProductWithImages | null>(null);
 
   const router = useRouter();
 
@@ -104,6 +108,7 @@ export default function Wishlist() {
           <WishlistProducts
             wishlist={shownProducts}
             setIsModalOpen={setIsModalOpen}
+            setSelectedProduct={setSelectedProduct}
           />
           <div className="flex justify-start lg:justify-end mt-[2rem]">
             <WishlistPagination
@@ -116,6 +121,7 @@ export default function Wishlist() {
           <DeleteWishlistConfirmationModal
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
+            selectedProduct={selectedProduct}
           />
         </div>
         <FloatingWAIcon />

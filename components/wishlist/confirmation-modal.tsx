@@ -3,15 +3,24 @@ import { IconTrash } from "@tabler/icons-react";
 import { colors } from "@/utils/colors";
 import { Dispatch, SetStateAction } from "react";
 
+import { ProductWithImages } from "@/types/responses/product";
+
+import { removeProduct } from "@/redux/slices/wishlist-slice";
+import { useAppDispatch } from "@/hooks/use-redux";
+
 type Props = {
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  selectedProduct: ProductWithImages | null;
 };
 
 const DeleteWishlistConfirmationModal = ({
   isModalOpen,
   setIsModalOpen,
+  selectedProduct,
 }: Props) => {
+  const dispatch = useAppDispatch();
+
   return (
     <Modal opened={isModalOpen} onClose={() => setIsModalOpen(false)} centered>
       <div className="flex flex-col justify-center gap-[0.5rem] text-[1.5rem] p-[1rem]">
@@ -30,7 +39,13 @@ const DeleteWishlistConfirmationModal = ({
             Batal
           </button>
           <button
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => {
+              if (selectedProduct) {
+                dispatch(removeProduct(selectedProduct));
+              }
+
+              setIsModalOpen(false);
+            }}
             className="rounded-xl bg-red text-white font-bold text-[1rem] p-[0.75rem] font-inter"
           >
             Ya, Hapus

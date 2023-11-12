@@ -7,9 +7,14 @@ import { ProductWithImages } from "@/types/responses/product";
 type Props = {
   wishlist: ProductWithImages[];
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  setSelectedProduct: Dispatch<SetStateAction<ProductWithImages | null>>;
 };
 
-const WishlistProducts = ({ wishlist, setIsModalOpen }: Props) => {
+const WishlistProducts = ({
+  wishlist,
+  setIsModalOpen,
+  setSelectedProduct,
+}: Props) => {
   return (
     <div className="grid grid-cols-2 gap-[1rem] mt-[2rem] lg:grid-cols-4">
       {wishlist.map((w) => {
@@ -40,6 +45,7 @@ const WishlistProducts = ({ wishlist, setIsModalOpen }: Props) => {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    setSelectedProduct(w);
                     setIsModalOpen(true);
                   }}
                 >
