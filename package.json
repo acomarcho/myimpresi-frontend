@@ -13,7 +13,7 @@
     "@mantine/hooks": "^7.1.5",
     "@reduxjs/toolkit": "^1.9.7",
     "@tabler/icons-react": "^2.39.0",
-    "axios": "^1.5.1",
+    "axios": "^1.6.1",
     "lodash": "^4.17.21",
     "next": "13.5.4",
     "react": "^18",
