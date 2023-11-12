@@ -91,7 +91,7 @@ const OurServices = () => {
                 Pengaturan pengantaran
               </p>
               <p className="text-neutral-10">
-                Pengantaran dalam jumlah besar atau satu-satu ke alamat tertentu
+                pengantaran dalam jumlah besar atau satu-satu ke alamat tertentu
               </p>
             </div>
           </div>
