@@ -6,6 +6,9 @@ import useCategories from "@/hooks/use-categories";
 import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
 import { useState, useEffect } from "react";
 
+import { useAppSelector } from "@/hooks/use-redux";
+import WishlistProducts from "../wishlist/products";
+
 type AutocompleteData = {
   name: string;
 };
@@ -16,6 +19,10 @@ const Navbar = () => {
   const [autocomplete, setAutocomplete] = useState<AutocompleteData[]>([]);
   const [debouncedSearch] = useDebouncedValue(search, 500);
   const [opened, { open, close }] = useDisclosure(false);
+
+  const wishlistProducts = useAppSelector(
+    (state) => state.wishlist.wishlistProducts
+  );
 
   useEffect(() => {
     if (debouncedSearch.length >= 2) {
@@ -30,6 +37,9 @@ const Navbar = () => {
       setAutocomplete([]);
     }
   }, [debouncedSearch, setAutocomplete, categories]);
+
+  const wishlistAmount =
+    wishlistProducts.length < 10 ? `${wishlistProducts.length}` : "9+";
 
   return (
     <>
@@ -90,14 +100,17 @@ const Navbar = () => {
             />
             <Link
               href="/wishlist"
-              className="transition-all hover:scale-[1.05]"
+              className="transition-all hover:scale-[1.05] relative"
             >
               <Image
                 src="/assets/heart.svg"
                 width={28}
                 height={32}
-                alt="Love"
+                alt="Wishlist"
               />
+              <p className="font-inter text-neutral-10 rounded-full absolute top-[-0.5rem] right-[-0.5rem] bg-red h-[1.25rem] w-[1.25rem] grid place-items-center text-[0.75rem] font-bold">
+                {wishlistAmount}
+              </p>
             </Link>
           </div>
           <div className="flex gap-[2rem] mt-[1.5rem]">
