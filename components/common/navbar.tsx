@@ -114,7 +114,11 @@ const Navbar = () => {
       ];
     }
 
-    setAutocomplete(newAutocomplete);
+    if (debouncedSearch.length >= 2) {
+      setAutocomplete(newAutocomplete);
+    } else {
+      setAutocomplete([]);
+    }
   }, [products, categories, debouncedSearch]);
 
   useEffect(() => {
