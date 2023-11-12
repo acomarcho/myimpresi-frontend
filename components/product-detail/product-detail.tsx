@@ -3,7 +3,6 @@ import ImageSelector from "./image-selector";
 import ImageCarousel from "./image-carousel";
 import { ProductWithImages } from "@/types/responses/product";
 import { LoadingOverlay } from "@mantine/core";
-import { useEffect } from "react";
 import Image from "next/image";
 
 import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";

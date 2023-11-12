@@ -124,6 +124,10 @@ const Navbar = () => {
       }
     };
 
+    if (search.length < 2) {
+      setAutocomplete([]);
+    }
+
     const desktopInputElement = desktopInputRef.current;
     if (desktopInputElement) {
       desktopInputElement.addEventListener("keydown", handleKeydown);
