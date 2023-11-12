@@ -149,13 +149,19 @@ const Navbar = () => {
             </Link>
 
             <div className="flex gap-[1.25rem] items-center">
-              <Link href="/wishlist">
+              <Link
+                href="/wishlist"
+                className="transition-all hover:scale-[1.05] relative"
+              >
                 <Image
                   src="/assets/heart.svg"
                   width={25}
                   height={25}
                   alt="Wishlist"
                 />
+                <p className="font-inter text-neutral-10 rounded-full absolute top-[-0.5rem] right-[-0.5rem] bg-red h-[1.25rem] w-[1.25rem] grid place-items-center text-[0.6rem] font-bold">
+                  {wishlistAmount}
+                </p>
               </Link>
               <button onClick={open}>
                 <IconMenu2 size={25} />
