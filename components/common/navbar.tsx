@@ -2,23 +2,28 @@ import { Autocomplete, Drawer } from "@mantine/core";
 import { IconSearch, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
-import useCategories from "@/hooks/use-categories";
+import useProducts from "@/hooks/use-products";
 import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
 import { useState, useEffect } from "react";
 
 import { useAppSelector } from "@/hooks/use-redux";
-import WishlistProducts from "../wishlist/products";
+import { FindProductsFilter } from "@/types/requests";
 
 type AutocompleteData = {
   name: string;
 };
 
 const Navbar = () => {
-  const { categories } = useCategories();
   const [search, setSearch] = useState("");
   const [autocomplete, setAutocomplete] = useState<AutocompleteData[]>([]);
   const [debouncedSearch] = useDebouncedValue(search, 500);
   const [opened, { open, close }] = useDisclosure(false);
+  const [filter, setFilter] = useState<FindProductsFilter>({
+    page: 1,
+    pageSize: 20,
+    search: "",
+  });
+  const { products } = useProducts(filter);
 
   const wishlistProducts = useAppSelector(
     (state) => state.wishlist.wishlistProducts
@@ -26,17 +31,28 @@ const Navbar = () => {
 
   useEffect(() => {
     if (debouncedSearch.length >= 2) {
-      setAutocomplete(
-        categories?.categories?.map((c) => {
-          return {
-            name: c.name,
-          };
-        }) || []
-      );
+      setFilter((f) => {
+        return {
+          ...f,
+          search: debouncedSearch,
+        };
+      });
     } else {
       setAutocomplete([]);
     }
-  }, [debouncedSearch, setAutocomplete, categories]);
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    const uniqueNames = Array.from(new Set(products?.map((p) => p.name) || []));
+
+    const newAutocomplete = uniqueNames.slice(0, 5).map((n) => {
+      return {
+        name: n.toUpperCase(),
+      };
+    });
+
+    setAutocomplete(newAutocomplete);
+  }, [products]);
 
   const wishlistAmount =
     wishlistProducts.length < 10 ? `${wishlistProducts.length}` : "9+";
@@ -94,9 +110,13 @@ const Navbar = () => {
                 },
               }}
               placeholder={`Coba "Jam Dinding" ...`}
-              data={autocomplete.map((a) => {
-                return a.name;
-              })}
+              data={
+                (debouncedSearch.length >= 2 &&
+                  autocomplete.map((a) => {
+                    return a.name;
+                  })) ||
+                []
+              }
             />
             <Link
               href="/wishlist"

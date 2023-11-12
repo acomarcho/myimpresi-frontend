@@ -24,6 +24,9 @@ export default function useProducts(filter: FindProductsFilter) {
   if (filter.subcategoryId) {
     queryData = { ...queryData, subcategoryId: filter.subcategoryId };
   }
+  if (filter.search) {
+    queryData = { ...queryData, search: filter.search };
+  }
 
   const { data, error, isLoading } = useSWR(
     filter.page && filter.pageSize
