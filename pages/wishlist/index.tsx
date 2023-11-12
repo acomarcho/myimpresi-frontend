@@ -3,26 +3,87 @@ import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
 import FloatingWAIcon from "@/components/common/floating-wa";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAppSelector } from "@/hooks/use-redux";
 
 import WishlistTitle from "@/components/wishlist/title";
 import WishlistPagination from "@/components/wishlist/pagination";
 import WishlistProducts from "@/components/wishlist/products";
 import DeleteWishlistConfirmationModal from "@/components/wishlist/confirmation-modal";
 
-const dummyWishlists = Array.from({ length: 20 }, (_, index) => ({
-  id: index + 1,
-  imagePath: "/dummy/produk.png",
-  name: "BANUM",
-  price: 120000,
-  minQuantity: 10,
-  soldAmount: 200,
-}));
+type WishlistFilter = {
+  page: number;
+  pageSize: number;
+};
+
+const defaultFilters: WishlistFilter = {
+  page: 1,
+  pageSize: 20,
+};
 
 export default function Wishlist() {
-  const wishlist = dummyWishlists;
+  const wishlistProducts = useAppSelector(
+    (state) => state.wishlist.wishlistProducts
+  );
+
+  const [filter, setFilter] = useState(defaultFilters);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activePage, setActivePage] = useState(1);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    let newFilter = defaultFilters;
+
+    const { page, pageSize } = router.query;
+
+    if (page) {
+      newFilter = {
+        ...newFilter,
+        page: Number(page),
+      };
+    }
+    if (pageSize) {
+      newFilter = {
+        ...newFilter,
+        pageSize: Number(pageSize),
+      };
+    }
+
+    setFilter(newFilter);
+  }, [router]);
+
+  const changeActivePage = (page: number) => {
+    const newFilter = {
+      ...filter,
+      page: page,
+    };
+
+    router.push(`/wishlist?${generateParams(newFilter)}`, undefined, {
+      shallow: true,
+    });
+  };
+
+  const generateParams = (filter: WishlistFilter) => {
+    let urlFilter: {
+      [name: string]: string;
+    } = {};
+
+    if (filter.page) {
+      urlFilter.page = `${filter.page}`;
+    }
+    if (filter.pageSize) {
+      urlFilter.pageSize = `${filter.pageSize}`;
+    }
+
+    return new URLSearchParams(urlFilter).toString();
+  };
+
+  const shownProducts = wishlistProducts.slice(
+    (filter.page - 1) * filter.pageSize,
+    filter.page * filter.pageSize
+  );
+  const pageCount = Math.ceil(wishlistProducts.length / filter.pageSize);
 
   return (
     <>
@@ -35,18 +96,20 @@ export default function Wishlist() {
           <WishlistTitle />
           <div className="flex justify-start lg:justify-end mt-[2rem]">
             <WishlistPagination
-              activePage={activePage}
-              setActivePage={setActivePage}
+              filter={filter}
+              changeActivePage={changeActivePage}
+              pageCount={pageCount}
             />
           </div>
           <WishlistProducts
-            wishlist={wishlist}
+            wishlist={shownProducts}
             setIsModalOpen={setIsModalOpen}
           />
           <div className="flex justify-start lg:justify-end mt-[2rem]">
             <WishlistPagination
-              activePage={activePage}
-              setActivePage={setActivePage}
+              filter={filter}
+              changeActivePage={changeActivePage}
+              pageCount={pageCount}
             />
           </div>
           <div className="mt-[2rem]" />

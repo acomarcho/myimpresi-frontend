@@ -1,17 +1,22 @@
-import { Dispatch, SetStateAction } from "react";
 import { Pagination } from "@mantine/core";
 
 type Props = {
-  activePage: number;
-  setActivePage: Dispatch<SetStateAction<number>>;
+  filter: WishlistFilter;
+  changeActivePage: (page: number) => void;
+  pageCount: number;
 };
 
-const WishlistPagination = ({ activePage, setActivePage }: Props) => {
+type WishlistFilter = {
+  page: number;
+  pageSize: number;
+};
+
+const WishlistPagination = ({ filter, changeActivePage, pageCount }: Props) => {
   return (
     <Pagination
-      value={activePage}
-      onChange={setActivePage}
-      total={10}
+      value={filter.page}
+      onChange={(p) => changeActivePage(p)}
+      total={pageCount}
       withControls={false}
       styles={{
         control: {
