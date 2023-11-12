@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 
 import { useAppSelector } from "@/hooks/use-redux";
 import { FindProductsFilter } from "@/types/requests";
+import { useRouter } from "next/router";
 
 type AutocompleteData = {
   name: string;
@@ -25,6 +26,8 @@ const Navbar = () => {
   });
   const { products } = useProducts(filter);
 
+  const router = useRouter();
+
   const wishlistProducts = useAppSelector(
     (state) => state.wishlist.wishlistProducts
   );
@@ -41,6 +44,20 @@ const Navbar = () => {
       setAutocomplete([]);
     }
   }, [debouncedSearch]);
+
+  useEffect(() => {
+    const { search } = router.query;
+
+    if (typeof search === "string") {
+      if (search) {
+        setSearch(search);
+      }
+    }
+
+    if (!search) {
+      setSearch("");
+    }
+  }, [router.query]);
 
   useEffect(() => {
     const uniqueNames = Array.from(new Set(products?.map((p) => p.name) || []));
