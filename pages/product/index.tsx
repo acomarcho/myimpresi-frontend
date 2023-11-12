@@ -66,6 +66,12 @@ export default function Products() {
       };
       delete newFilter.categoryId;
     }
+    if (search) {
+      newFilter = {
+        ...newFilter,
+        search: search as string,
+      };
+    }
 
     setFilter(newFilter);
   }, [router]);
@@ -138,6 +144,10 @@ export default function Products() {
   const pageCount = pagination?.totalPages ?? 1;
 
   const getPageTitle = () => {
+    if (filter.search) {
+      return "Hasil Pencarian";
+    }
+
     if (filter.subcategoryId) {
       const category = categories?.categories.find((c) =>
         c.subcategory.find((s) => s.id === filter.subcategoryId)
