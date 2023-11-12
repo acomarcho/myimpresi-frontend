@@ -1,10 +1,15 @@
 import { formatToRupiah } from "@/utils/format-to-rupiah";
-import { IconHeart } from "@tabler/icons-react";
 import ImageSelector from "./image-selector";
 import ImageCarousel from "./image-carousel";
 import { ProductWithImages } from "@/types/responses/product";
 import { LoadingOverlay } from "@mantine/core";
 import { useEffect } from "react";
+import Image from "next/image";
+
+import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
+import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
+import { IconZoomExclamation } from "@tabler/icons-react";
+import { colors } from "@/utils/colors";
 
 type Props = {
   product?: ProductWithImages;
@@ -37,13 +42,32 @@ const dummyProduct: ProductWithImages = {
 };
 
 const ProductDetail = ({ product, isLoading }: Props) => {
+  const wishlistProducts = useAppSelector(
+    (state) => state.wishlist.wishlistProducts
+  );
+  const dispatch = useAppDispatch();
+
   if (isLoading) {
     product = dummyProduct;
   }
 
-  useEffect(() => {
-    console.log(product);
-  }, [isLoading, product]);
+  if (!isLoading && !product) {
+    return (
+      <div className="p-[1rem]">
+        <IconZoomExclamation size={128} color={colors.redIcon} />
+        <h1 className="font-inter font-bold text-[1.5rem] text-neutral-100 mt-[1rem]">
+          Produk tidak ditemukan!
+        </h1>
+        <p className="font=inter text-neutral-60 mt-[1rem]">
+          Produk yang Anda coba untuk buka tidak ditemukan dalam sistem. Coba
+          cari produk lain, ya, atau kontak admin melalui tombol di bawah ini!
+        </p>
+        <button className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9]">
+          Yuk, tanya admin!
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 gap-[0rem] lg:gap-[2rem] lg:grid-cols-2 relative">
@@ -123,8 +147,36 @@ const ProductDetail = ({ product, isLoading }: Props) => {
               {product.description}
             </p>
             <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20] lg:static lg:w-full">
-              <button className="p-[1rem] rounded-full border-[1px] border-neutral-20 transition-all hover:scale-[1.1]">
-                <IconHeart />
+              <button
+                className="p-[1rem] rounded-full border-[1px] border-neutral-20 transition-all hover:scale-[1.1]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  if (product) {
+                    if (wishlistProducts.find((wp) => wp.id === product?.id)) {
+                      dispatch(removeProduct(product));
+                    } else {
+                      dispatch(addProduct(product));
+                    }
+                  }
+                }}
+              >
+                {wishlistProducts.find((wp) => wp.id === product?.id) ? (
+                  <Image
+                    src="/assets/heart-filled.svg"
+                    width={16}
+                    height={16}
+                    alt="Remove from wishlist"
+                  />
+                ) : (
+                  <Image
+                    src="/assets/heart.svg"
+                    width={16}
+                    height={16}
+                    alt="Add to wishlist"
+                  />
+                )}
               </button>
               <button className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full transition-all hover:opacity-[0.9]">
                 Pesan Sekarang
