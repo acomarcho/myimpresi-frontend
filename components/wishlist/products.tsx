@@ -74,9 +74,9 @@ const WishlistProducts = ({
                 >
                   <Image
                     src="/assets/heart-filled.svg"
-                    width={16}
-                    height={16}
-                    alt="Add to wishlist"
+                    width={24}
+                    height={24}
+                    alt="Remove from wishlist"
                   />
                 </button>
               </div>

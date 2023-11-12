@@ -83,15 +83,15 @@ const MobileProducts = ({
                       {wishlistProducts.find((wp) => wp.id === p.id) ? (
                         <Image
                           src="/assets/heart-filled.svg"
-                          width={16}
-                          height={16}
+                          width={24}
+                          height={24}
                           alt="Remove from wishlist"
                         />
                       ) : (
                         <Image
                           src="/assets/heart.svg"
-                          width={16}
-                          height={16}
+                          width={24}
+                          height={24}
                           alt="Add to wishlist"
                         />
                       )}

@@ -161,8 +161,8 @@ const ArticleDetailPage = () => {
                               <button className="transition-all hover:scale-[1.2]">
                                 <Image
                                   src="/assets/heart.svg"
-                                  width={16}
-                                  height={16}
+                                  width={24}
+                                  height={24}
                                   alt="Add to wishlist"
                                 />
                               </button>
