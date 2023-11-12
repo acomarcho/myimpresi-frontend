@@ -9,6 +9,9 @@ import { ProductWithImages } from "@/types/responses/product";
 import { FindProductsFilter } from "@/types/requests";
 import { colors } from "@/utils/colors";
 
+import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
+import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
+
 type Props = {
   filter: FindProductsFilter;
   changeSubcategoryId: (subcategoryId: string) => void;
@@ -25,6 +28,11 @@ const MobileProducts = ({
   isLoading,
 }: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
+
+  const wishlistProducts = useAppSelector(
+    (state) => state.wishlist.wishlistProducts
+  );
+  const dispatch = useAppDispatch();
 
   return (
     <div className="relative lg:hidden mt-[2rem]">
@@ -59,13 +67,34 @@ const MobileProducts = ({
                     <p className="font-inter font-bold text-neutral-100 text-[0.8rem] lg:text-[1rem]">
                       {formatToRupiah(p.price)}
                     </p>
-                    <button className="transition-all hover:scale-[1.2]">
-                      <Image
-                        src="/assets/heart.svg"
-                        width={16}
-                        height={16}
-                        alt="Add to wishlist"
-                      />
+                    <button
+                      className="transition-all hover:scale-[1.2]"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        if (wishlistProducts.find((wp) => wp.id === p.id)) {
+                          dispatch(removeProduct(p));
+                        } else {
+                          dispatch(addProduct(p));
+                        }
+                      }}
+                    >
+                      {wishlistProducts.find((wp) => wp.id === p.id) ? (
+                        <Image
+                          src="/assets/heart-filled.svg"
+                          width={16}
+                          height={16}
+                          alt="Remove from wishlist"
+                        />
+                      ) : (
+                        <Image
+                          src="/assets/heart.svg"
+                          width={16}
+                          height={16}
+                          alt="Add to wishlist"
+                        />
+                      )}
                     </button>
                   </div>
                 </div>
