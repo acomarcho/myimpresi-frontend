@@ -5,12 +5,15 @@ import Image from "next/image";
 import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
 import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useAppSelector } from "@/hooks/use-redux";
+
 import { FindProductsFilter } from "@/types/requests";
 import { Subcategory } from "@/types/responses/subcategory";
+
 import { useRouter } from "next/router";
+import Router from "next/router";
 
 type AutocompleteData = {
   name: string;
@@ -26,8 +29,12 @@ const Navbar = () => {
     pageSize: 20,
     search: "",
   });
+
   const { products } = useProducts(filter);
   const { categories } = useCategories();
+
+  const desktopInputRef = useRef<HTMLInputElement>(null);
+  const mobileInputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
 
@@ -110,6 +117,34 @@ const Navbar = () => {
     setAutocomplete(newAutocomplete);
   }, [products, categories, debouncedSearch]);
 
+  useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && search) {
+        Router.push(`/product/?search=${search}`);
+      }
+    };
+
+    const desktopInputElement = desktopInputRef.current;
+    if (desktopInputElement) {
+      desktopInputElement.addEventListener("keydown", handleKeydown);
+    }
+
+    const mobileInputElement = mobileInputRef.current;
+    if (mobileInputElement) {
+      mobileInputElement.addEventListener("keydown", handleKeydown);
+    }
+
+    return () => {
+      if (desktopInputElement) {
+        desktopInputElement.removeEventListener("keydown", handleKeydown);
+      }
+
+      if (mobileInputElement) {
+        mobileInputElement.removeEventListener("keydown", handleKeydown);
+      }
+    };
+  }, [search]);
+
   const wishlistAmount =
     wishlistProducts.length < 10 ? `${wishlistProducts.length}` : "9+";
 
@@ -171,10 +206,11 @@ const Navbar = () => {
                   []
                 }
                 className="w-full"
+                ref={desktopInputRef}
               />
-              {debouncedSearch !== "" && (
+              {search !== "" && (
                 <Link
-                  href={`/product/?search=${debouncedSearch}`}
+                  href={`/product/?search=${search}`}
                   className="grid place-items-center bg-primary-default px-[1rem] rounded-full"
                 >
                   <IconSearch size={16} color={"#ffffff"} />
@@ -293,10 +329,11 @@ const Navbar = () => {
                   return a.name;
                 })}
                 className="w-full"
+                ref={mobileInputRef}
               />{" "}
-              {debouncedSearch !== "" && (
+              {search !== "" && (
                 <Link
-                  href={`/product/?search=${debouncedSearch}`}
+                  href={`/product/?search=${search}`}
                   className="grid place-items-center bg-primary-default px-[1rem] rounded-full"
                 >
                   <IconSearch size={16} color={"#ffffff"} />
