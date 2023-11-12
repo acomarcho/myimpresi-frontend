@@ -3,6 +3,8 @@ import Link from "next/link";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import { Dispatch, SetStateAction } from "react";
 import { ProductWithImages } from "@/types/responses/product";
+import { IconZoomExclamation } from "@tabler/icons-react";
+import { colors } from "@/utils/colors";
 
 type Props = {
   wishlist: ProductWithImages[];
@@ -15,6 +17,26 @@ const WishlistProducts = ({
   setIsModalOpen,
   setSelectedProduct,
 }: Props) => {
+  if (wishlist.length === 0) {
+    return (
+      <div className="p-[1rem]">
+        <IconZoomExclamation size={128} color={colors.redIcon} />
+        <h1 className="font-inter font-bold text-[1.5rem] text-neutral-100 mt-[1rem]">
+          Anda belum memiliki wishlist!
+        </h1>
+        <p className="font=inter text-neutral-60 mt-[1rem]">
+          Cari produk yang Anda sukai, lalu klik tombol hati pada produk
+          tersebut!
+        </p>
+        <Link
+          href="/product"
+          className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9] inline-block"
+        >
+          Yuk, cari produk!
+        </Link>
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-2 gap-[1rem] mt-[2rem] lg:grid-cols-4">
       {wishlist.map((w) => {
