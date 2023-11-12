@@ -37,6 +37,7 @@ const WishlistProducts = ({
       </div>
     );
   }
+
   return (
     <div className="grid grid-cols-2 gap-[1rem] mt-[2rem] lg:grid-cols-4">
       {wishlist.map((w) => {
@@ -51,7 +52,7 @@ const WishlistProducts = ({
               width={280}
               height={280}
               alt={w.name}
-              className="object-cover"
+              className="h-[200px] lg:h-[250px] object-cover"
             />
             <div className="p-[0.75rem]">
               <p className="font-inter font-bold">{w.name.toUpperCase()}</p>
