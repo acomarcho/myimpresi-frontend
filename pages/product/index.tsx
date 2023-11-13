@@ -15,6 +15,7 @@ import useProducts from "@/hooks/use-products";
 import { FindProductsFilter } from "@/types/requests";
 import { useRouter } from "next/router";
 import _ from "lodash";
+import { url } from "inspector";
 
 const defaultFilters: FindProductsFilter = {
   page: 1,
@@ -136,6 +137,9 @@ export default function Products() {
     }
     if (filter.subcategoryId) {
       urlFilter.subcategoryId = filter.subcategoryId;
+    }
+    if (filter.search) {
+      urlFilter.search = filter.search;
     }
 
     return new URLSearchParams(urlFilter).toString();
