@@ -13,6 +13,7 @@ import WishlistTitle from "@/components/wishlist/title";
 import WishlistPagination from "@/components/wishlist/pagination";
 import WishlistProducts from "@/components/wishlist/products";
 import DeleteWishlistConfirmationModal from "@/components/wishlist/confirmation-modal";
+import { Button } from "@mantine/core";
 
 type WishlistFilter = {
   page: number;
@@ -98,6 +99,11 @@ export default function Wishlist() {
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem] min-h-[calc(100vh-8.5rem)]">
           <WishlistTitle />
+          {wishlistProducts.length > 0 && (
+            <button className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9] inline-block">
+              Pesan Sekarang
+            </button>
+          )}
           <div className="flex justify-start lg:justify-end mt-[2rem]">
             <WishlistPagination
               filter={filter}

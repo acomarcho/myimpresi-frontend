@@ -19,7 +19,7 @@ const WishlistProducts = ({
 }: Props) => {
   if (wishlist.length === 0) {
     return (
-      <div className="p-[1rem]">
+      <div>
         <IconZoomExclamation size={128} color={colors.redIcon} />
         <h1 className="font-inter font-bold text-[1.5rem] text-neutral-100 mt-[1rem]">
           Anda belum memiliki wishlist!
