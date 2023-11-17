@@ -7,8 +7,12 @@ import Link from "next/link";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import CustomMarkdown from "@/components/common/markdown";
 
+import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
+import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
 import useProducts from "@/hooks/use-products";
 import _ from "lodash";
+import { useEffect, useState } from "react";
+import { ProductWithImages } from "@/types/responses/product";
 
 const dummyArticle = {
   id: 1,
@@ -59,15 +63,6 @@ const dummyOtherArticles = [
   },
 ];
 
-const dummyProducts = Array.from({ length: 3 }, (_, index) => ({
-  id: index + 1,
-  imagePath: "/dummy/produk.png",
-  name: "BANUM",
-  price: 120000,
-  minQuantity: 10,
-  soldAmount: 200,
-}));
-
 const ArticleDetailPage = () => {
   const article = dummyArticle;
   const otherArticles = dummyOtherArticles;
@@ -75,8 +70,18 @@ const ArticleDetailPage = () => {
     page: 1,
     pageSize: 20,
   });
+  const [shuffledProducts, setShuffledProducts] = useState<ProductWithImages[]>(
+    []
+  );
 
-  const shuffledProducts = _.shuffle(products || []).slice(0, 3);
+  const wishlistProducts = useAppSelector(
+    (state) => state.wishlist.wishlistProducts
+  );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setShuffledProducts(_.shuffle(products || []).slice(0, 3));
+  }, [products]);
 
   return (
     <>
@@ -154,7 +159,7 @@ const ArticleDetailPage = () => {
                             sizes="100%"
                             height={0}
                             width={0}
-                            className="w-full max-h-[160px] object-cover"
+                            className="w-full h-[160px] object-cover"
                             alt={p.name}
                           />
                           <div className="flex flex-col justify-between">
@@ -162,7 +167,7 @@ const ArticleDetailPage = () => {
                               <h1 className="font-inter font-bold text-neutral-100 text-[1.25rem]">
                                 {p.name.toUpperCase()}
                               </h1>
-                              <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two mt-[1rem]">
+                              <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two mt-[0.5rem]">
                                 {`${p.material}, ${p.size}`}
                               </p>
                             </div>
@@ -171,13 +176,40 @@ const ArticleDetailPage = () => {
                                 <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
                                   {formatToRupiah(p.price)}
                                 </p>
-                                <button className="transition-all hover:scale-[1.2]">
-                                  <Image
-                                    src="/assets/heart.svg"
-                                    width={24}
-                                    height={24}
-                                    alt="Add to wishlist"
-                                  />
+                                <button
+                                  className="transition-all hover:scale-[1.2]"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    if (
+                                      wishlistProducts.find(
+                                        (wp) => wp.id === p.id
+                                      )
+                                    ) {
+                                      dispatch(removeProduct(p));
+                                    } else {
+                                      dispatch(addProduct(p));
+                                    }
+                                  }}
+                                >
+                                  {wishlistProducts.find(
+                                    (wp) => wp.id === p.id
+                                  ) ? (
+                                    <Image
+                                      src="/assets/heart-filled.svg"
+                                      width={24}
+                                      height={24}
+                                      alt="Remove from wishlist"
+                                    />
+                                  ) : (
+                                    <Image
+                                      src="/assets/heart.svg"
+                                      width={24}
+                                      height={24}
+                                      alt="Add to wishlist"
+                                    />
+                                  )}
                                 </button>
                               </div>
                             </div>
