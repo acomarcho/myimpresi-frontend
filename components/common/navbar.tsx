@@ -70,7 +70,9 @@ const Navbar = () => {
   }, [router.query]);
 
   useEffect(() => {
-    const uniqueNames = Array.from(new Set(products?.map((p) => p.name) || []));
+    const uniqueNames = Array.from(
+      new Set(products?.map((p) => p.name.toUpperCase()) || [])
+    );
 
     const matchingCategories = categories?.categories.filter((c) =>
       c.name.toLowerCase().includes(debouncedSearch.toLowerCase())
