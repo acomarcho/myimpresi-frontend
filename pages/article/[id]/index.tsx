@@ -133,7 +133,7 @@ const ArticleDetailPage = () => {
                   <h1 className="font-inter font-bold text-[1.25rem] text-neutral-100">
                     Produk terkait artikel
                   </h1>
-                  <div className="flex flex-col gap-[1rem] mt-[1rem]">
+                  <div className="flex flex-col gap-[2rem] mt-[1rem]">
                     {products.map((p) => {
                       return (
                         <Link
@@ -149,28 +149,32 @@ const ArticleDetailPage = () => {
                             className="w-full max-h-[160px] object-cover"
                             alt={p.name}
                           />
-                          <div className="self-end">
-                            <h1 className="font-inter font-bold text-neutral-100 text-[1.25rem]">
-                              {p.name}
-                            </h1>
-                            <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two">
-                              Lorem ipsum dolor sit amet consectetur,
-                              adipisicing elit. Ipsum numquam reprehenderit et,
-                              earum deleniti nostrum tempore enim nihil corporis
-                              optio!
-                            </p>
-                            <div className="flex justify-between items-center mt-[0.5rem]">
-                              <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
-                                {formatToRupiah(p.price)}
+                          <div className="flex flex-col justify-between">
+                            <div>
+                              <h1 className="font-inter font-bold text-neutral-100 text-[1.25rem]">
+                                {p.name}
+                              </h1>
+                              <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two mt-[1rem]">
+                                Lorem ipsum dolor sit amet consectetur,
+                                adipisicing elit. Ipsum numquam reprehenderit
+                                et, earum deleniti nostrum tempore enim nihil
+                                corporis optio!
                               </p>
-                              <button className="transition-all hover:scale-[1.2]">
-                                <Image
-                                  src="/assets/heart.svg"
-                                  width={24}
-                                  height={24}
-                                  alt="Add to wishlist"
-                                />
-                              </button>
+                            </div>
+                            <div>
+                              <div className="flex justify-between items-center mt-[0.5rem]">
+                                <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
+                                  {formatToRupiah(p.price)}
+                                </p>
+                                <button className="transition-all hover:scale-[1.2]">
+                                  <Image
+                                    src="/assets/heart.svg"
+                                    width={24}
+                                    height={24}
+                                    alt="Add to wishlist"
+                                  />
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </Link>
