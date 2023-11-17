@@ -114,7 +114,14 @@ const ArticleDetailPage = () => {
                           className="w-full max-h-[100px] object-cover"
                           alt={a.title}
                         />
-                        <p className="font-inter font-bold">{a.title}</p>
+                        <div>
+                          <p className="font-inter font-bold text-neutral-100 truncate-two">
+                            {a.title}
+                          </p>
+                          <p className="font-inter text-neutral-60 truncate-two text-[0.9rem]">
+                            {a.description}
+                          </p>
+                        </div>
                       </Link>
                     );
                   })}
