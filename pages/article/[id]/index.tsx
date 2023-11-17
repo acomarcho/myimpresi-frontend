@@ -7,6 +7,9 @@ import Link from "next/link";
 import { formatToRupiah } from "@/utils/format-to-rupiah";
 import CustomMarkdown from "@/components/common/markdown";
 
+import useProducts from "@/hooks/use-products";
+import _ from "lodash";
+
 const dummyArticle = {
   id: 1,
   title:
@@ -68,7 +71,12 @@ const dummyProducts = Array.from({ length: 3 }, (_, index) => ({
 const ArticleDetailPage = () => {
   const article = dummyArticle;
   const otherArticles = dummyOtherArticles;
-  const products = dummyProducts;
+  const { products } = useProducts({
+    page: 1,
+    pageSize: 20,
+  });
+
+  const shuffledProducts = _.shuffle(products || []).slice(0, 3);
 
   return (
     <>
@@ -134,7 +142,7 @@ const ArticleDetailPage = () => {
                     Produk terkait artikel
                   </h1>
                   <div className="flex flex-col gap-[2rem] mt-[1rem]">
-                    {products.map((p) => {
+                    {shuffledProducts.map((p) => {
                       return (
                         <Link
                           href={`/product/${p.id}`}
@@ -142,7 +150,7 @@ const ArticleDetailPage = () => {
                           className="block grid grid-cols-2 gap-[1rem] transition-all hover:scale-[1.05]"
                         >
                           <Image
-                            src={p.imagePath}
+                            src={p.productImage[0].path}
                             sizes="100%"
                             height={0}
                             width={0}
@@ -152,13 +160,10 @@ const ArticleDetailPage = () => {
                           <div className="flex flex-col justify-between">
                             <div>
                               <h1 className="font-inter font-bold text-neutral-100 text-[1.25rem]">
-                                {p.name}
+                                {p.name.toUpperCase()}
                               </h1>
                               <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two mt-[1rem]">
-                                Lorem ipsum dolor sit amet consectetur,
-                                adipisicing elit. Ipsum numquam reprehenderit
-                                et, earum deleniti nostrum tempore enim nihil
-                                corporis optio!
+                                {`${p.material}, ${p.size}`}
                               </p>
                             </div>
                             <div>
