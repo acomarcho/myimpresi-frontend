@@ -109,11 +109,32 @@ const ProductDetail = ({ product, isLoading }: Props) => {
             </p>
             <div className="flex gap-[0.5rem] flex-wrap">
               {product.colors.map((c) => {
+                if (c !== "MIX") {
+                  return (
+                    <div
+                      className="w-[30px] h-[30px] rounded-full shadow-md"
+                      style={{
+                        backgroundColor: c,
+                      }}
+                      key={c}
+                    />
+                  );
+                }
                 return (
                   <div
                     className="w-[30px] h-[30px] rounded-full shadow-md"
                     style={{
-                      backgroundColor: c,
+                      background: `conic-gradient(
+                        from 90deg,
+                        violet,
+                        indigo,
+                        blue,
+                        green,
+                        yellow,
+                        orange,
+                        red,
+                        violet
+                      )`,
                     }}
                     key={c}
                   />
