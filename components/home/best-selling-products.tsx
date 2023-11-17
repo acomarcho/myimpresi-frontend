@@ -7,7 +7,7 @@ const Products = () => {
 
   return (
     <div>
-      <Heading text="Produk Promo" />
+      <Heading text="Berdasarkan Promosi" />
       <ProductScroll products={promoProducts?.data ?? []} />
     </div>
   );
