@@ -96,7 +96,7 @@ const Navbar = () => {
     let newAutocomplete = [
       ...uniqueNames.slice(0, 5).map((n) => {
         return {
-          name: n.toUpperCase(),
+          name: n,
         };
       }),
       ...matchingSubcategories.map((s) => {
