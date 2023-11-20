@@ -81,7 +81,7 @@ const ProductDetail = ({ product, isLoading }: Props) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-[0rem] lg:gap-[2rem] lg:grid-cols-2 relative">
+    <div className="grid grid-cols-1 gap-[0rem] lg:gap-[2rem] lg:grid-cols-[6fr_4fr] relative">
       {product && (
         <>
           <div>
