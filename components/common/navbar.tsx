@@ -28,7 +28,6 @@ const optionsFilter: OptionsFilter = ({ options, search }) => {
       option.label === "Semua Produk"
   );
 
-  filtered.sort((a, b) => a.label.localeCompare(b.label));
   return filtered;
 };
 
