@@ -36,7 +36,7 @@ const customPlaceholders = [
   `Coba "Peralatan Minum" ...`,
   `Coba "Payung" ...`,
   `Coba "Peralatan Kantor" ...`,
-  `Coba "Stationery" ...`,
+  `Coba "Stationary" ...`,
   `Coba "Tumblr" ...`,
   `Coba "Jam Dinding" ...`,
   `Coba "PIN" ...`,
@@ -308,7 +308,10 @@ const Navbar = () => {
             >
               Produk
             </Link>
-            <Link href="/event" className="font-inter text-neutral-100 font-bold">
+            <Link
+              href="/event"
+              className="font-inter text-neutral-100 font-bold"
+            >
               Acara
             </Link>
             <Link
