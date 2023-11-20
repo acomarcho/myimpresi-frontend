@@ -19,6 +19,7 @@ import { Subcategory } from "@/types/responses/subcategory";
 
 import { useRouter } from "next/router";
 import Router from "next/router";
+import _ from "lodash";
 
 const optionsFilter: OptionsFilter = ({ options, search }) => {
   const filtered = (options as ComboboxItem[]).filter(
@@ -30,6 +31,19 @@ const optionsFilter: OptionsFilter = ({ options, search }) => {
   filtered.sort((a, b) => a.label.localeCompare(b.label));
   return filtered;
 };
+
+const customPlaceholders = [
+  `Coba "Jam" ...`,
+  `Coba "Peralatan Minum" ...`,
+  `Coba "Payung" ...`,
+  `Coba "Peralatan Kantor" ...`,
+  `Coba "Stationery" ...`,
+  `Coba "Tumblr" ...`,
+  `Coba "Jam Dinding" ...`,
+  `Coba "PIN" ...`,
+  `Coba "Lanyard" ...`,
+  `Coba "USB" ...`,
+];
 
 type AutocompleteData = {
   name: string;
@@ -45,6 +59,13 @@ const Navbar = () => {
     pageSize: 20,
     search: "",
   });
+  const [searchPlaceholder, setSearchPlaceholder] = useState(
+    customPlaceholders[0]
+  );
+
+  useEffect(() => {
+    setSearchPlaceholder(_.sample(customPlaceholders)!);
+  }, []);
 
   const { products } = useProducts(filter);
   const { categories } = useCategories();
@@ -235,7 +256,7 @@ const Navbar = () => {
                     borderRadius: "100px",
                   },
                 }}
-                placeholder={`Coba "Jam Dinding" ...`}
+                placeholder={searchPlaceholder}
                 data={
                   (debouncedSearch.length >= 2 && [
                     ...autocomplete.map((a) => {
@@ -369,7 +390,7 @@ const Navbar = () => {
                     borderRadius: "100px",
                   },
                 }}
-                placeholder={`Coba "Jam Dinding" ...`}
+                placeholder={searchPlaceholder}
                 data={autocomplete.map((a) => {
                   return a.name;
                 })}
