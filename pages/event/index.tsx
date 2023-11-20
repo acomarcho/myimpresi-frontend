@@ -4,13 +4,13 @@ import Heading from "@/components/home/heading";
 import Footer from "@/components/common/footer";
 import FloatingWAIcon from "@/components/common/floating-wa";
 import CategoryScroll from "@/components/common/category-scroll";
-import FilterAndPagination from "@/components/products/filter-and-pagination";
-import DesktopProducts from "@/components/products/desktop-products";
-import MobileProducts from "@/components/products/mobile-products";
-import BottomPagination from "@/components/products/bottom-pagination";
+import FilterAndPagination from "@/components/events/filter-and-pagination";
+import DesktopProducts from "@/components/events/desktop-products";
+import MobileProducts from "@/components/events/mobile-products";
+import BottomPagination from "@/components/events/bottom-pagination";
 
 import { useState, useEffect } from "react";
-import useCategories from "@/hooks/use-categories";
+import useEvents from "@/hooks/use-events";
 import useProducts from "@/hooks/use-products";
 import { FindProductsFilter } from "@/types/requests";
 import { useRouter } from "next/router";
@@ -24,7 +24,7 @@ const defaultFilters: FindProductsFilter = {
 
 export default function Products() {
   const [filter, setFilter] = useState<FindProductsFilter>(defaultFilters);
-  const { categories } = useCategories();
+  const { events } = useEvents();
   const { products, pagination, isLoading } = useProducts(filter);
 
   const router = useRouter();
@@ -90,6 +90,17 @@ export default function Products() {
     });
   };
 
+  const changeEventId = (eventId: string) => {
+    const newFilter = {
+      ...filter,
+      eventId: eventId,
+    };
+
+    router.push(`/event?${generateParams(newFilter)}`, undefined, {
+      shallow: true,
+    });
+  };
+
   const generateParams = (filter: FindProductsFilter) => {
     let urlFilter: {
       [name: string]: string;
@@ -136,14 +147,14 @@ export default function Products() {
             changeActivePage={changeActivePage}
             pageCount={pageCount}
           />
-          {/* <DesktopProducts
+          <DesktopProducts
             filter={filter}
-            changeSubcategoryId={changeSubcategoryId}
-            filterData={categories?.categories}
+            changeEventId={changeEventId}
+            filterData={events?.events}
             products={products}
             isLoading={isLoading}
           />
-          <MobileProducts
+          {/* <MobileProducts
             filter={filter}
             changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
