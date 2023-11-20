@@ -106,13 +106,13 @@ const ProductDetail = ({ product, isLoading }: Props) => {
             <h1 className="font-inter font-bold text-[2rem] text-neutral-100">
               {product.name.toUpperCase()}
             </h1>
-            <p className="font-inter text-[1rem] text-neutral-60">
+            <p className="font-inter text-[0.9375rem] text-neutral-60">
               {`${product.material}, ${product.size}`}
             </p>
             <p className="font-inter text-[1.25rem] text-neutral-100 font-bold mt-[1rem]">
               {formatToRupiah(product.price)}
             </p>
-            <p className="font-inter text-[1rem] text-neutral-60">
+            <p className="font-inter text-[0.9375rem] text-neutral-60">
               {product.soldAmount} membeli produk ini
             </p>
             <hr className="text-neutral-20 mt-[0.5rem]" />
@@ -157,25 +157,25 @@ const ProductDetail = ({ product, isLoading }: Props) => {
             <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
               Bahan:
             </p>
-            <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
               {product.material}
             </p>
             <hr className="text-neutral-20 mt-[1rem]" />
             <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
               Ukuran:
             </p>
-            <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
               {product.size}
             </p>
             <hr className="text-neutral-20 mt-[1rem]" />
             <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
               Minimal order hanya:
             </p>
-            <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
               {product.minimumOrder} pcs
             </p>
             <hr className="text-neutral-20 mt-[1rem]" />
-            <p className="font-inter text-[1rem] text-neutral-60 mt-[0.5rem]">
+            <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
               {product.description}
             </p>
             <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20] lg:static lg:w-full">
