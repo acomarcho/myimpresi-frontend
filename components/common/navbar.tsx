@@ -308,7 +308,7 @@ const Navbar = () => {
             >
               Produk
             </Link>
-            <Link href="/" className="font-inter text-neutral-100 font-bold">
+            <Link href="/event" className="font-inter text-neutral-100 font-bold">
               Acara
             </Link>
             <Link
@@ -426,7 +426,7 @@ const Navbar = () => {
               Produk
             </Link>
             <Link
-              href="/"
+              href="/event"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
             >
               Acara
