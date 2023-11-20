@@ -14,6 +14,7 @@ export type Product = {
   size: string;
   rank: number | null;
   productPromo: string | null;
+  sku: string | null;
 };
 
 export type ProductImage = {

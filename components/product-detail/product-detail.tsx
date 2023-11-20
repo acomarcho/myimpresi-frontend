@@ -10,7 +10,11 @@ import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
 import { IconZoomExclamation } from "@tabler/icons-react";
 import { colors } from "@/utils/colors";
 
-import { sendWhatsappMessage, generalWhatsappMessage } from "@/utils/whatsapp";
+import {
+  sendWhatsappMessage,
+  generalWhatsappMessage,
+  productWhatsappMessage,
+} from "@/utils/whatsapp";
 
 type Props = {
   product?: ProductWithImages;
@@ -40,6 +44,7 @@ const dummyProduct: ProductWithImages = {
       isMainImage: true,
     },
   ],
+  sku: null,
 };
 
 const ProductDetail = ({ product, isLoading }: Props) => {
@@ -205,7 +210,18 @@ const ProductDetail = ({ product, isLoading }: Props) => {
                   />
                 )}
               </button>
-              <button className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full transition-all hover:opacity-[0.9]">
+              <button
+                onClick={() => {
+                  sendWhatsappMessage(
+                    productWhatsappMessage(
+                      product?.name || "",
+                      product?.sku || "",
+                      window.location.toString()
+                    )
+                  );
+                }}
+                className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full transition-all hover:opacity-[0.9]"
+              >
                 Pesan Sekarang
               </button>
             </div>
