@@ -1,4 +1,9 @@
-import { Autocomplete, Drawer } from "@mantine/core";
+import {
+  Autocomplete,
+  ComboboxItem,
+  Drawer,
+  OptionsFilter,
+} from "@mantine/core";
 import { IconSearch, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,6 +19,17 @@ import { Subcategory } from "@/types/responses/subcategory";
 
 import { useRouter } from "next/router";
 import Router from "next/router";
+
+const optionsFilter: OptionsFilter = ({ options, search }) => {
+  const filtered = (options as ComboboxItem[]).filter(
+    (option) =>
+      option.label.toLowerCase().trim().includes(search.toLowerCase().trim()) ||
+      option.label === "Semua Produk"
+  );
+
+  filtered.sort((a, b) => a.label.localeCompare(b.label));
+  return filtered;
+};
 
 type AutocompleteData = {
   name: string;
@@ -126,7 +142,11 @@ const Navbar = () => {
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
       if (event.key === "Enter" && search) {
-        Router.push(`/product/?search=${search}`);
+        if (search.toLowerCase() === "semua produk") {
+          Router.push(`/product/`);
+        } else {
+          Router.push(`/product/?search=${search}`);
+        }
 
         if (desktopInputElement) {
           desktopInputElement.blur();
@@ -217,18 +237,25 @@ const Navbar = () => {
                 }}
                 placeholder={`Coba "Jam Dinding" ...`}
                 data={
-                  (debouncedSearch.length >= 2 &&
-                    autocomplete.map((a) => {
+                  (debouncedSearch.length >= 2 && [
+                    ...autocomplete.map((a) => {
                       return a.name;
-                    })) ||
+                    }),
+                    "Semua Produk",
+                  ]) ||
                   []
                 }
                 className="w-full"
                 ref={desktopInputRef}
+                filter={optionsFilter}
               />
               {search !== "" && (
                 <Link
-                  href={`/product/?search=${search}`}
+                  href={
+                    search.toLowerCase() === "semua produk"
+                      ? `/product/`
+                      : `/product/?search=${search}`
+                  }
                   className="grid place-items-center bg-primary-default px-[1rem] rounded-full"
                 >
                   <IconSearch size={16} color={"#ffffff"} />
@@ -351,7 +378,11 @@ const Navbar = () => {
               />{" "}
               {search !== "" && (
                 <Link
-                  href={`/product/?search=${search}`}
+                  href={
+                    search.toLowerCase() === "semua produk"
+                      ? `/product/`
+                      : `/product/?search=${search}`
+                  }
                   className="grid place-items-center bg-primary-default px-[1rem] rounded-full"
                 >
                   <IconSearch size={16} color={"#ffffff"} />
