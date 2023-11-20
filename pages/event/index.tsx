@@ -147,7 +147,6 @@ export default function Products() {
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           <Heading text={getPageTitle()} />
-          <CategoryScroll />
           <FilterAndPagination
             filter={filter}
             changeSortFilter={changeSortFilter}
