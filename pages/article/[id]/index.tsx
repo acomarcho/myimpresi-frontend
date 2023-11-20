@@ -13,22 +13,8 @@ import useProducts from "@/hooks/use-products";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { ProductWithImages } from "@/types/responses/product";
-
-const dummyArticle = {
-  id: 1,
-  title:
-    "REKOR 1 juta Produk terjual dalam 60 Menit!! Keseruan Launching Produk terbaru Beautyme bertajuk “Honest Skin”",
-  description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat natus, voluptatem cupiditate nobis sint pariatur? Culpa temporibus illum vitae vel quia sequi eius! Eveniet tempore tenetur velit sint natus molestias!
-
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore corrupti vel beatae aut fugit inventore quia dicta provident, blanditiis tempore voluptatem non dignissimos nemo totam. Perferendis asperiores delectus molestiae tempore.
-
-  <a href="https://www.google.com">Buka link ini untuk membuka Google!</a>
-
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo pariatur dolor voluptatum exercitationem. Facere placeat reprehenderit ex minus porro, sequi voluptates inventore corrupti provident nemo dicta amet illo earum voluptas!
-
-  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque quas dolore necessitatibus officiis sit repellendus ex ipsum expedita tenetur doloribus. Odio molestiae quidem culpa alias. Vero labore nulla nesciunt quidem doloremque? Perferendis, iusto eaque odio amet doloremque enim provident doloribus?`,
-  imagePath: "/dummy/article-1.png",
-};
+import useArticle from "@/hooks/use-article";
+import { useRouter } from "next/router";
 
 const dummyOtherArticles = [
   {
@@ -64,7 +50,10 @@ const dummyOtherArticles = [
 ];
 
 const ArticleDetailPage = () => {
-  const article = dummyArticle;
+  const router = useRouter();
+  const articleId = router.query.id as string;
+  const { article } = useArticle(articleId);
+
   const otherArticles = dummyOtherArticles;
   const { products } = useProducts({
     page: 1,
@@ -94,17 +83,17 @@ const ArticleDetailPage = () => {
           <div className="flex flex-col gap-[2rem] lg:flex-row">
             <div>
               <h1 className="font-inter font-bold text-[1.5rem] text-neutral-100">
-                {article.title}
+                {article?.title}
               </h1>
               <Image
-                src={article.imagePath}
+                src={article?.imagePath || ""}
                 sizes="100%"
                 width="0"
                 height="0"
                 className="w-full mt-[2rem]"
-                alt={article.title}
+                alt={article?.title || ""}
               />
-              <CustomMarkdown>{article.description}</CustomMarkdown>
+              <CustomMarkdown>{article?.content || ""}</CustomMarkdown>
             </div>
             <div className="lg:w-[400px] flex-shrink-0">
               <div>

@@ -9,3 +9,7 @@ export type Article = {
 export type GetAllArticlesResponse = {
   articles: Article[];
 };
+
+export type GetSingleArticleResponse = {
+  data: Article;
+};
