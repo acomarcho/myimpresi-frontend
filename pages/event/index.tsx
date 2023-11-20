@@ -91,10 +91,17 @@ export default function Products() {
   };
 
   const changeEventId = (eventId: string) => {
-    const newFilter = {
-      ...filter,
-      eventId: eventId,
+    const filterCopy = { ...filter };
+    delete filterCopy.eventId;
+
+    let newFilter = {
+      ...filterCopy,
+      page: 1, // Reset page to 1
     };
+
+    if (eventId !== filter.eventId) {
+      newFilter.eventId = eventId;
+    }
 
     router.push(`/event?${generateParams(newFilter)}`, undefined, {
       shallow: true,
