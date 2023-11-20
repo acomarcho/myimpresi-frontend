@@ -128,6 +128,13 @@ export default function Products() {
   const pageCount = pagination?.totalPages ?? 1;
 
   const getPageTitle = () => {
+    if (filter.eventId) {
+      return (
+        events?.events.find((e) => e.id === filter.eventId)?.name ||
+        "Loading ..."
+      );
+    }
+
     return "Semua Acara";
   };
 
@@ -154,13 +161,13 @@ export default function Products() {
             products={products}
             isLoading={isLoading}
           />
-          {/* <MobileProducts
+          <MobileProducts
             filter={filter}
-            changeSubcategoryId={changeSubcategoryId}
-            filterData={categories?.categories}
+            changeEventId={changeEventId}
+            filterData={events?.events}
             products={products}
             isLoading={isLoading}
-          /> */}
+          />
           <BottomPagination
             filter={filter}
             changeActivePage={changeActivePage}

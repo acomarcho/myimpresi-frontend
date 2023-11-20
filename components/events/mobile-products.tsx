@@ -4,10 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useDisclosure } from "@mantine/hooks";
 import { Accordion, Drawer } from "@mantine/core";
-import { Category } from "@/types/responses";
 import { ProductWithImages } from "@/types/responses/product";
 import { FindProductsFilter } from "@/types/requests";
 import { colors } from "@/utils/colors";
+
+import { Event } from "@/types/responses";
 
 import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
 import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
@@ -15,15 +16,15 @@ import { generalWhatsappMessage, sendWhatsappMessage } from "@/utils/whatsapp";
 
 type Props = {
   filter: FindProductsFilter;
-  changeSubcategoryId: (subcategoryId: string) => void;
-  filterData: Category[] | undefined;
+  changeEventId: (eventId: string) => void;
+  filterData: Event[] | undefined;
   products: ProductWithImages[] | undefined;
   isLoading: boolean;
 };
 
 const MobileProducts = ({
   filter,
-  changeSubcategoryId,
+  changeEventId,
   filterData,
   products,
   isLoading,
@@ -129,60 +130,23 @@ const MobileProducts = ({
             Semua Kategori
           </p>
           <hr className="text-neutral-20 mt-[0.5rem]" />
-          <Accordion
-            styles={{
-              control: {
-                border: "none",
-              },
-              item: {
-                border: "none",
-              },
-            }}
-          >
-            {filterData?.map((d) => {
+          <div className="flex flex-col gap-[1rem] mt-[1rem]">
+            {filterData?.map((e) => {
               return (
-                <Accordion.Item key={d.id} value={d.name}>
-                  <Accordion.Control>
-                    <p
-                      className="font-bold font-inter text-neutral-100"
-                      style={{
-                        color: d.subcategory.find(
-                          (s) => s.id === filter.subcategoryId
-                        )
-                          ? colors.primaryDefault
-                          : "",
-                      }}
-                    >
-                      {d.name}
-                    </p>
-                  </Accordion.Control>
-                  <Accordion.Panel>
-                    <div className="flex flex-col gap-[1rem]">
-                      {d.subcategory.map((s) => {
-                        return (
-                          <button
-                            key={s.id}
-                            className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer text-left"
-                            onClick={() => changeSubcategoryId(s.id)}
-                            style={{
-                              color:
-                                filter.subcategoryId === s.id
-                                  ? colors.primaryDefault
-                                  : "",
-                              fontWeight:
-                                filter.subcategoryId === s.id ? "bold" : "",
-                            }}
-                          >
-                            {s.name}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </Accordion.Panel>
-                </Accordion.Item>
+                <button
+                  key={e.id}
+                  className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer text-left"
+                  onClick={() => changeEventId(e.id)}
+                  style={{
+                    color: filter.eventId === e.id ? colors.primaryDefault : "",
+                    fontWeight: filter.eventId === e.id ? "bold" : "",
+                  }}
+                >
+                  {e.name}
+                </button>
               );
             })}
-          </Accordion>
+          </div>
         </div>
       </Drawer>
     </div>
