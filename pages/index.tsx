@@ -28,7 +28,6 @@ export default function Home() {
           <BestSellingProducts />
           <SectionDivider />
           <Articles />
-          <SectionDivider />
           <OurServices />
         </div>
         <Form />
