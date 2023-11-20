@@ -2,16 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import _ from "lodash";
 import CustomMarkdown from "@/components/common/markdown";
+import { Article } from "@/types/responses";
 
 type Props = {
   articles: Article[];
-};
-
-type Article = {
-  id: number;
-  title: string;
-  description: string;
-  imagePath: string;
 };
 
 const Articles = ({ articles }: Props) => {
@@ -37,7 +31,7 @@ const Articles = ({ articles }: Props) => {
                 {article.title}
               </h1>
               <CustomMarkdown>
-                {_.truncate(article.description, {
+                {_.truncate(article.content, {
                   length: 200,
                 })}
               </CustomMarkdown>

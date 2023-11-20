@@ -3,12 +3,12 @@ import Navbar from "@/components/common/navbar";
 import Heading from "@/components/home/heading";
 import FloatingWAIcon from "@/components/common/floating-wa";
 import Footer from "@/components/common/footer";
-import Image from "next/image";
 
 import MainArticle from "@/components/articles/main-article";
 import Articles from "@/components/articles/articles";
 
 import _ from "lodash";
+import useArticles from "@/hooks/use-articles";
 
 const dummyArticles = [
   {
@@ -57,7 +57,7 @@ const dummyArticles = [
 ];
 
 const ArticlesPage = () => {
-  const articles = dummyArticles;
+  const { articles } = useArticles();
 
   return (
     <>
@@ -68,8 +68,12 @@ const ArticlesPage = () => {
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
           <Heading text="Artikel Inspirasi Produk" />
-          <MainArticle article={articles[0]} />
-          <Articles articles={articles} />
+          {articles && (
+            <>
+              <MainArticle article={articles[0]} />
+              <Articles articles={articles} />
+            </>
+          )}
           <div className="mt-[2rem]" />
         </div>
         <FloatingWAIcon />
