@@ -39,7 +39,7 @@ const dummyProduct: ProductWithImages = {
   productImage: [
     {
       id: "f1691ea5-a46d-4342-9ac4-9602f88133f3",
-      path: "/dummy/produk.png",
+      path: "/assets/placeholder-product.png",
       productId: "f8a3dd2b-d6fc-46f7-b815-91c38009d14b",
       isMainImage: true,
     },

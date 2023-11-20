@@ -20,7 +20,12 @@ export default function Banner() {
   return (
     <Slider {...settings}>
       {(!banners || !banners.banners || isLoading) && (
-        <Image src="/dummy/banner.jpg" width={1200} height={400} alt="" />
+        <Image
+          src="/assets/placeholder-banner.png"
+          width={1200}
+          height={400}
+          alt=""
+        />
       )}
       {banners?.banners.map((b) => {
         return (
