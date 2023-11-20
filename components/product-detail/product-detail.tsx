@@ -10,6 +10,8 @@ import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
 import { IconZoomExclamation } from "@tabler/icons-react";
 import { colors } from "@/utils/colors";
 
+import { sendWhatsappMessage, generalWhatsappMessage } from "@/utils/whatsapp";
+
 type Props = {
   product?: ProductWithImages;
   isLoading: boolean;
@@ -61,7 +63,12 @@ const ProductDetail = ({ product, isLoading }: Props) => {
           Produk yang Anda coba untuk buka tidak ditemukan dalam sistem. Coba
           cari produk lain, ya, atau kontak admin melalui tombol di bawah ini!
         </p>
-        <button className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9]">
+        <button
+          onClick={() => {
+            sendWhatsappMessage(generalWhatsappMessage);
+          }}
+          className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9]"
+        >
           Yuk, tanya admin!
         </button>
       </div>

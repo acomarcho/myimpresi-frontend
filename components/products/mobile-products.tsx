@@ -11,6 +11,7 @@ import { colors } from "@/utils/colors";
 
 import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
 import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
+import { generalWhatsappMessage, sendWhatsappMessage } from "@/utils/whatsapp";
 
 type Props = {
   filter: FindProductsFilter;
@@ -114,7 +115,10 @@ const MobileProducts = ({
             atau kata kunci, atau hubungi admin untuk berkonsultasi terkait
             produk yang dicari.
           </p>
-          <button className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9]">
+          <button
+            onClick={() => sendWhatsappMessage(generalWhatsappMessage)}
+            className="bg-primary-default px-[1rem] py-[0.5rem] font-bold font-inter text-neutral-10 mt-[1rem] transition-all hover:opacity-[0.9]"
+          >
             Yuk, tanya admin!
           </button>
         </div>
