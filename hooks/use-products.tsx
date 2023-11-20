@@ -27,6 +27,9 @@ export default function useProducts(filter: FindProductsFilter) {
   if (filter.search) {
     queryData = { ...queryData, search: filter.search };
   }
+  if (filter.eventId) {
+    queryData = { ...queryData, eventId: filter.eventId };
+  }
 
   const { data, error, isLoading } = useSWR(
     filter.page && filter.pageSize

@@ -5,4 +5,5 @@ export type FindProductsFilter = {
   subcategoryId?: string;
   sort?: string;
   search?: string;
+  eventId?: string;
 };

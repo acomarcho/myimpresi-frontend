@@ -32,8 +32,7 @@ export default function Products() {
   useEffect(() => {
     let newFilter = defaultFilters;
 
-    const { page, pageSize, categoryId, subcategoryId, sort, search } =
-      router.query;
+    const { page, pageSize, sort, search, eventId } = router.query;
 
     if (page) {
       newFilter = {
@@ -53,23 +52,16 @@ export default function Products() {
         sort: sort as string,
       };
     }
-    if (categoryId) {
-      newFilter = {
-        ...newFilter,
-        categoryId: categoryId as string,
-      };
-    }
-    if (subcategoryId) {
-      newFilter = {
-        ...newFilter,
-        subcategoryId: subcategoryId as string,
-      };
-      delete newFilter.categoryId;
-    }
     if (search) {
       newFilter = {
         ...newFilter,
         search: search as string,
+      };
+    }
+    if (eventId) {
+      newFilter = {
+        ...newFilter,
+        eventId: eventId as string,
       };
     }
 
@@ -82,7 +74,7 @@ export default function Products() {
       sort: value,
     };
 
-    router.push(`/product?${generateParams(newFilter)}`, undefined, {
+    router.push(`/event?${generateParams(newFilter)}`, undefined, {
       shallow: true,
     });
   };
@@ -93,26 +85,7 @@ export default function Products() {
       page: page,
     };
 
-    router.push(`/product?${generateParams(newFilter)}`, undefined, {
-      shallow: true,
-    });
-  };
-
-  const changeSubcategoryId = (subcategoryId: string) => {
-    const filterCopy = { ...filter };
-    delete filterCopy.categoryId;
-    delete filterCopy.subcategoryId;
-
-    let newFilter = {
-      ...filterCopy,
-      page: 1, // Reset page to 1
-    };
-
-    if (subcategoryId !== filter.subcategoryId) {
-      newFilter.subcategoryId = subcategoryId;
-    }
-
-    router.push(`/product?${generateParams(newFilter)}`, undefined, {
+    router.push(`/event?${generateParams(newFilter)}`, undefined, {
       shallow: true,
     });
   };
@@ -131,14 +104,11 @@ export default function Products() {
     if (filter.sort) {
       urlFilter.sort = filter.sort;
     }
-    if (filter.categoryId) {
-      urlFilter.categoryId = filter.categoryId;
-    }
-    if (filter.subcategoryId) {
-      urlFilter.subcategoryId = filter.subcategoryId;
-    }
     if (filter.search) {
       urlFilter.search = filter.search;
+    }
+    if (filter.eventId) {
+      urlFilter.eventId = filter.eventId;
     }
 
     return new URLSearchParams(urlFilter).toString();
@@ -147,28 +117,7 @@ export default function Products() {
   const pageCount = pagination?.totalPages ?? 1;
 
   const getPageTitle = () => {
-    if (filter.search) {
-      return "Hasil Pencarian";
-    }
-
-    if (filter.subcategoryId) {
-      const category = categories?.categories.find((c) =>
-        c.subcategory.find((s) => s.id === filter.subcategoryId)
-      );
-      return (
-        category?.subcategory.find((s) => s.id === filter.subcategoryId)
-          ?.name || "Loading ..."
-      );
-    }
-
-    if (filter.categoryId) {
-      return (
-        categories?.categories.find((c) => c.id === filter.categoryId)?.name ||
-        "Loading ..."
-      );
-    }
-
-    return "Semua Produk";
+    return "Semua Acara";
   };
 
   return (
@@ -187,7 +136,7 @@ export default function Products() {
             changeActivePage={changeActivePage}
             pageCount={pageCount}
           />
-          <DesktopProducts
+          {/* <DesktopProducts
             filter={filter}
             changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
@@ -200,7 +149,7 @@ export default function Products() {
             filterData={categories?.categories}
             products={products}
             isLoading={isLoading}
-          />
+          /> */}
           <BottomPagination
             filter={filter}
             changeActivePage={changeActivePage}
