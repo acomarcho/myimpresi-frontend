@@ -25,14 +25,11 @@ const SingleProduct = () => {
       <Navbar />
       <div className="relative pt-[8.5rem]">
         <div className="max-w-[1200px] mx-auto p-[1.5rem]">
-          <ProductDetail
-            product={product?.data}
-            isLoading={isLoading}
-          />
+          <ProductDetail product={product?.data} isLoading={isLoading} />
           <hr className="text-neutral-20 mt-[1rem]" />
           <SimilarProducts />
           <hr className="text-neutral-20 mt-[1rem]" />
-          <BestSellingProducts />
+          <BestSellingProducts productId={productId} />
           <hr className="text-neutral-20 mt-[1rem]" />
           <CustomLogoSection />
           <hr className="text-neutral-20 mt-[2rem]" />

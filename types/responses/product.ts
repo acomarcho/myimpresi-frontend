@@ -44,3 +44,7 @@ export type GetProductsResponse = {
   data: ProductWithImages[];
   pagination: PaginationData;
 };
+
+export type GetSimilarProductsResponse = {
+  data: ProductWithImages[];
+};
