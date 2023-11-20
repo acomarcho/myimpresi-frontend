@@ -14,7 +14,9 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import { ProductWithImages } from "@/types/responses/product";
 import useArticle from "@/hooks/use-article";
+import useArticles from "@/hooks/use-articles";
 import { useRouter } from "next/router";
+import { Article } from "@/types/responses";
 
 const dummyOtherArticles = [
   {
@@ -53,8 +55,7 @@ const ArticleDetailPage = () => {
   const router = useRouter();
   const articleId = router.query.id as string;
   const { article } = useArticle(articleId);
-
-  const otherArticles = dummyOtherArticles;
+  const { articles } = useArticles();
   const { products } = useProducts({
     page: 1,
     pageSize: 20,
@@ -62,6 +63,7 @@ const ArticleDetailPage = () => {
   const [shuffledProducts, setShuffledProducts] = useState<ProductWithImages[]>(
     []
   );
+  const [shuffledArticles, setShuffledArticles] = useState<Article[]>([]);
 
   const wishlistProducts = useAppSelector(
     (state) => state.wishlist.wishlistProducts
@@ -71,6 +73,12 @@ const ArticleDetailPage = () => {
   useEffect(() => {
     setShuffledProducts(_.shuffle(products || []).slice(0, 3));
   }, [products]);
+
+  useEffect(() => {
+    setShuffledArticles(
+      _.shuffle(articles?.filter((a) => a.id !== articleId) || []).slice(0, 3)
+    );
+  }, [articles, articleId]);
 
   return (
     <>
@@ -96,40 +104,41 @@ const ArticleDetailPage = () => {
               <CustomMarkdown>{article?.content || ""}</CustomMarkdown>
             </div>
             <div className="lg:w-[400px] flex-shrink-0">
-              <div>
-                <h1 className="font-inter font-bold text-[1.25rem] text-neutral-100">
-                  Artikel yang membantu
-                </h1>
-                <div className="flex flex-col gap-[1rem] mt-[1rem]">
-                  {otherArticles.map((a) => {
-                    return (
-                      <Link
-                        href={`/article/${a.id}`}
-                        key={a.id}
-                        className="block grid grid-cols-2 gap-[1rem] transition-all hover:scale-[1.05]"
-                      >
-                        <Image
-                          src={a.imagePath}
-                          sizes="100%"
-                          height={0}
-                          width={0}
-                          className="w-full max-h-[100px] object-cover"
-                          alt={a.title}
-                        />
-                        <div>
-                          <p className="font-inter font-bold text-neutral-100 truncate-two">
-                            {a.title}
-                          </p>
-                          <p className="font-inter text-neutral-60 truncate-two text-[0.9rem]">
-                            {a.description}
-                          </p>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-              <hr className="text-neutral-20 mt-[2rem]" />
+              {shuffledArticles.length > 0 && (
+                <>
+                  <div>
+                    <h1 className="font-inter font-bold text-[1.25rem] text-neutral-100">
+                      Artikel yang membantu
+                    </h1>
+                    <div className="flex flex-col gap-[1rem] mt-[1rem]">
+                      {shuffledArticles.map((a) => {
+                        return (
+                          <Link
+                            href={`/article/${a.id}`}
+                            key={a.id}
+                            className="block grid grid-cols-2 gap-[1rem] transition-all hover:scale-[1.05]"
+                          >
+                            <Image
+                              src={a.imagePath}
+                              sizes="100%"
+                              height={0}
+                              width={0}
+                              className="w-full max-h-[100px] object-cover"
+                              alt={a.title}
+                            />
+                            <div>
+                              <p className="font-inter font-bold text-neutral-100 truncate-two">
+                                {a.title}
+                              </p>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <hr className="text-neutral-20 mt-[2rem]" />
+                </>
+              )}
               <div className="mt-[1rem]">
                 <div>
                   <h1 className="font-inter font-bold text-[1.25rem] text-neutral-100">
