@@ -25,7 +25,7 @@ const Articles = ({ articles }: Props) => {
                 sizes="100"
                 width={0}
                 height={0}
-                className="w-full max-h-[412px] object-cover"
+                className="w-full max-h-[200px] object-cover"
               />
               <h1 className="font-inter font-bold text-[1.125rem] lg:text-[1.25rem] mt-[1rem] text-neutral-100">
                 {article.title}
