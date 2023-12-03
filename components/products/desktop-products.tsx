@@ -34,7 +34,7 @@ const DesktopProducts = ({
   );
   const dispatch = useAppDispatch();
 
-  const shouldShowSkeleton = isLoading;
+  const renderedProducts = isLoading ? dummyProducts : products;
 
   return (
     <div className="hidden items-start gap-[1rem] mt-[2rem] relative hidden lg:flex">
@@ -98,34 +98,22 @@ const DesktopProducts = ({
         </Accordion>
       </div>
       {/* Products */}
-      {shouldShowSkeleton ||
-        (products && products.length > 0 && (
+      {renderedProducts && renderedProducts.length > 0 && (
+        <Skeleton visible={isLoading}>
           <div className="grid grid-cols-4 gap-[1rem]">
-            {shouldShowSkeleton &&
-              dummyProducts.slice(0, 4).map((p) => {
-                return (
-                  <Skeleton key={p.id}>
-                    <ProductCard
-                      product={p}
-                      wishlistProducts={wishlistProducts}
-                      dispatch={dispatch}
-                    />
-                  </Skeleton>
-                );
-              })}
-            {!shouldShowSkeleton &&
-              products?.map((p) => {
-                return (
-                  <ProductCard
-                    key={p.id}
-                    product={p}
-                    wishlistProducts={wishlistProducts}
-                    dispatch={dispatch}
-                  />
-                );
-              })}
+            {renderedProducts?.map((p) => {
+              return (
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  wishlistProducts={wishlistProducts}
+                  dispatch={dispatch}
+                />
+              );
+            })}
           </div>
-        ))}
+        </Skeleton>
+      )}
       {!isLoading && (!products || products.length === 0) && (
         <div className="p-[1rem]">
           <IconZoomExclamation size={128} color={colors.redIcon} />
