@@ -13,6 +13,9 @@ import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
 import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
 import { generalWhatsappMessage, sendWhatsappMessage } from "@/utils/whatsapp";
 
+import { Skeleton } from "@mantine/core";
+import { dummyProducts } from "@/utils/dummy-products";
+
 type Props = {
   filter: FindProductsFilter;
   changeSubcategoryId: (subcategoryId: string) => void;
@@ -35,6 +38,8 @@ const MobileProducts = ({
   );
   const dispatch = useAppDispatch();
 
+  const renderedProducts = isLoading ? dummyProducts : products;
+
   return (
     <div className="relative lg:hidden mt-[2rem]">
       <button
@@ -43,66 +48,70 @@ const MobileProducts = ({
       >
         <IconAdjustments />
       </button>
-      {products && products.length > 0 && (
-        <div className="grid grid-cols-2 gap-[1rem] mt-[1rem]">
-          {products?.map((p) => {
-            return (
-              <Link
-                key={p.id}
-                className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
-                href={`/product/${p.id}`}
-              >
-                <Image
-                  src={p.productImage[0].path}
-                  width={280}
-                  height={280}
-                  alt={p.name}
-                  className="w-full h-[200px] lg:h-[250px] object-cover"
-                />
-                <div className="p-[0.75rem]">
-                  <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
-                  <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
-                    {`${p.material}, ${p.size}`}
-                  </p>
-                  <div className="flex justify-between items-center mt-[0.5rem]">
-                    <p className="font-inter font-bold text-neutral-100 text-[0.8rem] lg:text-[1rem]">
-                      {formatToRupiah(p.price)}
+      {renderedProducts && renderedProducts.length > 0 && (
+        <Skeleton visible={isLoading}>
+          <div className="grid grid-cols-2 gap-[1rem] mt-[1rem]">
+            {renderedProducts?.map((p) => {
+              return (
+                <Link
+                  key={p.id}
+                  className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
+                  href={`/product/${p.id}`}
+                >
+                  <Image
+                    src={p.productImage[0].path}
+                    width={280}
+                    height={280}
+                    alt={p.name}
+                    className="w-full h-[200px] lg:h-[250px] object-cover"
+                  />
+                  <div className="p-[0.75rem]">
+                    <p className="font-inter font-bold">
+                      {p.name.toUpperCase()}
                     </p>
-                    <button
-                      className="transition-all hover:scale-[1.2]"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
+                    <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
+                      {`${p.material}, ${p.size}`}
+                    </p>
+                    <div className="flex justify-between items-center mt-[0.5rem]">
+                      <p className="font-inter font-bold text-neutral-100 text-[0.8rem] lg:text-[1rem]">
+                        {formatToRupiah(p.price)}
+                      </p>
+                      <button
+                        className="transition-all hover:scale-[1.2]"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
 
-                        if (wishlistProducts.find((wp) => wp.id === p.id)) {
-                          dispatch(removeProduct(p));
-                        } else {
-                          dispatch(addProduct(p));
-                        }
-                      }}
-                    >
-                      {wishlistProducts.find((wp) => wp.id === p.id) ? (
-                        <Image
-                          src="/assets/heart-filled.svg"
-                          width={24}
-                          height={24}
-                          alt="Remove from wishlist"
-                        />
-                      ) : (
-                        <Image
-                          src="/assets/heart.svg"
-                          width={24}
-                          height={24}
-                          alt="Add to wishlist"
-                        />
-                      )}
-                    </button>
+                          if (wishlistProducts.find((wp) => wp.id === p.id)) {
+                            dispatch(removeProduct(p));
+                          } else {
+                            dispatch(addProduct(p));
+                          }
+                        }}
+                      >
+                        {wishlistProducts.find((wp) => wp.id === p.id) ? (
+                          <Image
+                            src="/assets/heart-filled.svg"
+                            width={24}
+                            height={24}
+                            alt="Remove from wishlist"
+                          />
+                        ) : (
+                          <Image
+                            src="/assets/heart.svg"
+                            width={24}
+                            height={24}
+                            alt="Add to wishlist"
+                          />
+                        )}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                </Link>
+              );
+            })}
+          </div>
+        </Skeleton>
       )}
       {!isLoading && (!products || products.length === 0) && (
         <div className="p-[1rem]">
