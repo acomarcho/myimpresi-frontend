@@ -1,15 +1,18 @@
 import useCategories from "@/hooks/use-categories";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Image from "next/image";
-import Skeleton from "react-loading-skeleton";
+import { Skeleton } from "@mantine/core";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useRef } from "react";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import Link from "next/link";
+import { dummyCategories } from "@/utils/dummy-categories";
 
 const CategoryScroll = () => {
-  const { categories, isLoading } = useCategories();
+  const { categories, isLoading, error } = useCategories();
   const scrollContainer = useRef<HTMLDivElement>(null);
+
+  const shouldShowSkeleton = !categories || isLoading || !!error;
 
   return (
     <div className="relative">
@@ -30,7 +33,29 @@ const CategoryScroll = () => {
         className="flex flex-row gap-[1rem] lg:gap-[1.25rem] mt-[2rem] px-[0.5rem]"
         innerRef={scrollContainer}
       >
-        {isLoading && <Skeleton containerClassName="flex-1" count={5} />}
+        {shouldShowSkeleton &&
+          dummyCategories.map((c) => {
+            return (
+              <Skeleton key={c.id}>
+                <Link
+                  href={`/product?categoryId=${c.id}`}
+                  className="cursor-pointer flex flex-col w-[50%] lg:w-[25%] gap-[0.75rem] items-center flex-shrink-0 relative transition-all hover:scale-[1.02] block"
+                >
+                  <Image
+                    src={c.imagePath}
+                    width={0}
+                    height={0}
+                    sizes="100%"
+                    alt={c.name}
+                    className="w-full object-cover"
+                  />
+                  <p className="font-inter font-bold text-neutral-100 text-[1rem]">
+                    {c.name}
+                  </p>
+                </Link>
+              </Skeleton>
+            );
+          })}
         {!isLoading &&
           categories?.categories?.map((c) => {
             return (
