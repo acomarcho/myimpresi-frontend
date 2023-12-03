@@ -98,33 +98,34 @@ const DesktopProducts = ({
         </Accordion>
       </div>
       {/* Products */}
-      {products && products.length > 0 && (
-        <div className="grid grid-cols-4 gap-[1rem]">
-          {shouldShowSkeleton &&
-            dummyProducts.slice(0, 4).map((p) => {
-              return (
-                <Skeleton key={p.id}>
+      {shouldShowSkeleton ||
+        (products && products.length > 0 && (
+          <div className="grid grid-cols-4 gap-[1rem]">
+            {shouldShowSkeleton &&
+              dummyProducts.slice(0, 4).map((p) => {
+                return (
+                  <Skeleton key={p.id}>
+                    <ProductCard
+                      product={p}
+                      wishlistProducts={wishlistProducts}
+                      dispatch={dispatch}
+                    />
+                  </Skeleton>
+                );
+              })}
+            {!shouldShowSkeleton &&
+              products?.map((p) => {
+                return (
                   <ProductCard
+                    key={p.id}
                     product={p}
                     wishlistProducts={wishlistProducts}
                     dispatch={dispatch}
                   />
-                </Skeleton>
-              );
-            })}
-          {!shouldShowSkeleton &&
-            products?.map((p) => {
-              return (
-                <ProductCard
-                  key={p.id}
-                  product={p}
-                  wishlistProducts={wishlistProducts}
-                  dispatch={dispatch}
-                />
-              );
-            })}
-        </div>
-      )}
+                );
+              })}
+          </div>
+        ))}
       {!isLoading && (!products || products.length === 0) && (
         <div className="p-[1rem]">
           <IconZoomExclamation size={128} color={colors.redIcon} />
