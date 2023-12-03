@@ -8,7 +8,7 @@ type Props = {
 };
 
 const BestSellingProducts = ({ productId }: Props) => {
-  const { similarProducts } = useSimilarProducts(productId);
+  const { similarProducts, isLoading, error } = useSimilarProducts(productId);
 
   return (
     <div className="mt-[2rem]">
@@ -19,6 +19,8 @@ const BestSellingProducts = ({ productId }: Props) => {
             _.shuffle(similarProducts.data).slice(0, 5)) ??
           []
         }
+        isLoading={isLoading}
+        error={error}
       />
     </div>
   );
