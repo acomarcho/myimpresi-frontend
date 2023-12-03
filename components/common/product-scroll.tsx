@@ -51,125 +51,23 @@ const ProductScroll = ({ products, isLoading, error }: Props) => {
           dummyProducts.map((p) => {
             return (
               <Skeleton key={p.id}>
-                <Link
-                  className="bg-neutral-10 w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
-                  href={`/product/${p.id}`}
-                >
-                  {p.productImage && (
-                    <Image
-                      src={p.productImage[0].path}
-                      sizes="100%"
-                      width={0}
-                      height={0}
-                      alt={p.name}
-                      className="w-[180px] h-[180px] lg:w-[280px] lg:h-[280px] object-cover"
-                    />
-                  )}
-                  <div className="p-[0.75rem]">
-                    <p className="font-inter font-bold">
-                      {p.name.toUpperCase()}
-                    </p>
-                    <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
-                      {`${p.material}, ${p.size}`}
-                    </p>
-                    <div className="flex justify-between items-center mt-[0.5rem]">
-                      <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
-                        {formatToRupiah(p.price)}
-                      </p>
-                      <button
-                        className="transition-all hover:scale-[1.2]"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-
-                          if (wishlistProducts.find((wp) => wp.id === p.id)) {
-                            dispatch(removeProduct(p));
-                          } else {
-                            dispatch(addProduct(p));
-                          }
-                        }}
-                      >
-                        {wishlistProducts.find((wp) => wp.id === p.id) ? (
-                          <Image
-                            src="/assets/heart-filled.svg"
-                            width={24}
-                            height={24}
-                            alt="Remove from wishlist"
-                          />
-                        ) : (
-                          <Image
-                            src="/assets/heart.svg"
-                            width={24}
-                            height={24}
-                            alt="Add to wishlist"
-                          />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </Link>
+                <ProductCard
+                  product={p}
+                  wishlistProducts={wishlistProducts}
+                  dispatch={dispatch}
+                />
               </Skeleton>
             );
           })}
         {!shouldShowSkeleton &&
           products.map((p) => {
             return (
-              <Link
+              <ProductCard
                 key={p.id}
-                className="bg-neutral-10 w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
-                href={`/product/${p.id}`}
-              >
-                {p.productImage && (
-                  <Image
-                    src={p.productImage[0].path}
-                    sizes="100%"
-                    width={0}
-                    height={0}
-                    alt={p.name}
-                    className="w-[180px] h-[180px] lg:w-[280px] lg:h-[280px] object-cover"
-                  />
-                )}
-                <div className="p-[0.75rem]">
-                  <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
-                  <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
-                    {`${p.material}, ${p.size}`}
-                  </p>
-                  <div className="flex justify-between items-center mt-[0.5rem]">
-                    <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
-                      {formatToRupiah(p.price)}
-                    </p>
-                    <button
-                      className="transition-all hover:scale-[1.2]"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        if (wishlistProducts.find((wp) => wp.id === p.id)) {
-                          dispatch(removeProduct(p));
-                        } else {
-                          dispatch(addProduct(p));
-                        }
-                      }}
-                    >
-                      {wishlistProducts.find((wp) => wp.id === p.id) ? (
-                        <Image
-                          src="/assets/heart-filled.svg"
-                          width={24}
-                          height={24}
-                          alt="Remove from wishlist"
-                        />
-                      ) : (
-                        <Image
-                          src="/assets/heart.svg"
-                          width={24}
-                          height={24}
-                          alt="Add to wishlist"
-                        />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </Link>
+                product={p}
+                wishlistProducts={wishlistProducts}
+                dispatch={dispatch}
+              />
             );
           })}
       </ScrollContainer>
@@ -187,6 +85,76 @@ const ProductScroll = ({ products, isLoading, error }: Props) => {
         <IconChevronRight />
       </button>
     </div>
+  );
+};
+
+const ProductCard = ({
+  product,
+  wishlistProducts,
+  dispatch,
+}: {
+  product: ProductWithImages;
+  wishlistProducts: ProductWithImages[];
+  dispatch: any;
+}) => {
+  const p = product;
+
+  return (
+    <Link
+      className="bg-neutral-10 w-[180px] lg:w-[280px] flex-shrink-0 transition-all cursor-pointer hover:scale-[1.05] relative"
+      href={`/product/${p.id}`}
+    >
+      {p.productImage && (
+        <Image
+          src={p.productImage[0].path}
+          sizes="100%"
+          width={0}
+          height={0}
+          alt={p.name}
+          className="w-[180px] h-[180px] lg:w-[280px] lg:h-[280px] object-cover"
+        />
+      )}
+      <div className="p-[0.75rem]">
+        <p className="font-inter font-bold">{p.name.toUpperCase()}</p>
+        <p className="font-inter text-neutral-60 text-[0.875rem] truncate-two h-[44px]">
+          {`${p.material}, ${p.size}`}
+        </p>
+        <div className="flex justify-between items-center mt-[0.5rem]">
+          <p className="font-inter font-bold text-neutral-100 text-[0.9rem] lg:text-[1rem]">
+            {formatToRupiah(p.price)}
+          </p>
+          <button
+            className="transition-all hover:scale-[1.2]"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              if (wishlistProducts.find((wp) => wp.id === p.id)) {
+                dispatch(removeProduct(p));
+              } else {
+                dispatch(addProduct(p));
+              }
+            }}
+          >
+            {wishlistProducts.find((wp) => wp.id === p.id) ? (
+              <Image
+                src="/assets/heart-filled.svg"
+                width={24}
+                height={24}
+                alt="Remove from wishlist"
+              />
+            ) : (
+              <Image
+                src="/assets/heart.svg"
+                width={24}
+                height={24}
+                alt="Add to wishlist"
+              />
+            )}
+          </button>
+        </div>
+      </div>
+    </Link>
   );
 };
 
