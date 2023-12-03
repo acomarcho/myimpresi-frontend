@@ -2,8 +2,8 @@ import { formatToRupiah } from "@/utils/format-to-rupiah";
 import ImageSelector from "./image-selector";
 import ImageCarousel from "./image-carousel";
 import { ProductWithImages } from "@/types/responses/product";
-import { LoadingOverlay } from "@mantine/core";
 import Image from "next/image";
+import { Skeleton } from "@mantine/core";
 
 import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
 import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
@@ -39,7 +39,7 @@ const dummyProduct: ProductWithImages = {
   productImage: [
     {
       id: "f1691ea5-a46d-4342-9ac4-9602f88133f3",
-      path: "/assets/placeholder-product.png",
+      path: "/assets/placeholder-product.jpg",
       productId: "f8a3dd2b-d6fc-46f7-b815-91c38009d14b",
       isMainImage: true,
     },
@@ -85,11 +85,6 @@ const ProductDetail = ({ product, isLoading }: Props) => {
       {product && (
         <>
           <div>
-            <LoadingOverlay
-              visible={isLoading}
-              zIndex={1000}
-              overlayProps={{ radius: "sm", blur: 2 }}
-            />
             <div className="block lg:hidden">
               <ImageCarousel product={product} />
             </div>
@@ -98,45 +93,59 @@ const ProductDetail = ({ product, isLoading }: Props) => {
             </div>
           </div>
           <div>
-            <LoadingOverlay
-              visible={isLoading}
-              zIndex={1000}
-              overlayProps={{ radius: "sm", blur: 2 }}
-            />
             <h1 className="font-inter font-bold text-[2rem] text-neutral-100">
-              {product.name.toUpperCase()}
+              {isLoading ? (
+                <Skeleton>{product.name.toUpperCase()}</Skeleton>
+              ) : (
+                product.name.toUpperCase()
+              )}
             </h1>
             <p className="font-inter text-[0.9375rem] text-neutral-60">
-              {`${product.material}, ${product.size}`}
+              {isLoading ? (
+                <Skeleton>{`${product.material}, ${product.size}`}</Skeleton>
+              ) : (
+                `${product.material}, ${product.size}`
+              )}
             </p>
             <p className="font-inter text-[1.25rem] text-neutral-100 font-bold mt-[1rem]">
-              {formatToRupiah(product.price)}
+              {isLoading ? (
+                <Skeleton>{formatToRupiah(product.price)}</Skeleton>
+              ) : (
+                formatToRupiah(product.price)
+              )}
             </p>
             <p className="font-inter text-[0.9375rem] text-neutral-60">
-              {product.soldAmount} membeli produk ini
+              {isLoading ? (
+                <Skeleton>{product.soldAmount} membeli produk ini</Skeleton>
+              ) : (
+                `${product.soldAmount} membeli produk ini`
+              )}
             </p>
             <hr className="text-neutral-20 mt-[0.5rem]" />
             <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
               Warna:
             </p>
             <div className="flex gap-[0.5rem] flex-wrap">
-              {product.colors.map((c) => {
-                if (c !== "MIX") {
+              {isLoading ? (
+                <Skeleton height={30} />
+              ) : (
+                product.colors.map((c) => {
+                  if (c !== "MIX") {
+                    return (
+                      <div
+                        className="w-[30px] h-[30px] rounded-full shadow-md"
+                        style={{
+                          backgroundColor: c,
+                        }}
+                        key={c}
+                      />
+                    );
+                  }
                   return (
                     <div
                       className="w-[30px] h-[30px] rounded-full shadow-md"
                       style={{
-                        backgroundColor: c,
-                      }}
-                      key={c}
-                    />
-                  );
-                }
-                return (
-                  <div
-                    className="w-[30px] h-[30px] rounded-full shadow-md"
-                    style={{
-                      background: `conic-gradient(
+                        background: `conic-gradient(
                         from 90deg,
                         violet,
                         indigo,
@@ -147,84 +156,101 @@ const ProductDetail = ({ product, isLoading }: Props) => {
                         red,
                         violet
                       )`,
-                    }}
-                    key={c}
-                  />
-                );
-              })}
+                      }}
+                      key={c}
+                    />
+                  );
+                })
+              )}
             </div>
             <hr className="text-neutral-20 mt-[1rem]" />
             <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
               Bahan:
             </p>
             <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
-              {product.material}
+              {isLoading ? (
+                <Skeleton>{product.material}</Skeleton>
+              ) : (
+                product.material
+              )}
             </p>
             <hr className="text-neutral-20 mt-[1rem]" />
             <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
               Ukuran:
             </p>
             <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
-              {product.size}
+              {isLoading ? <Skeleton>{product.size}</Skeleton> : product.size}
             </p>
             <hr className="text-neutral-20 mt-[1rem]" />
             <p className="font-inter text-[1rem] text-neutral-60 font-bold mt-[0.5rem]">
               Minimal order hanya:
             </p>
             <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
-              {product.minimumOrder} pcs
+              {isLoading ? (
+                <Skeleton>{product.minimumOrder} pcs</Skeleton>
+              ) : (
+                `${product.minimumOrder} pcs`
+              )}
             </p>
             <hr className="text-neutral-20 mt-[1rem]" />
             <p className="font-inter text-[0.9375rem] text-neutral-60 mt-[0.5rem]">
-              {product.description}
+              {isLoading ? (
+                <Skeleton>{product.description}</Skeleton>
+              ) : (
+                product.description
+              )}
             </p>
-            <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20] lg:static lg:w-full">
-              <button
-                className="p-[1rem] rounded-full border-[1px] border-neutral-20 transition-all hover:scale-[1.1]"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
+            <Skeleton visible={isLoading}>
+              <div className="fixed bg-neutral-10 bottom-0 left-0 w-screen grid grid-cols-[auto_1fr] p-[1.5rem] gap-[1rem] z-[20] lg:static lg:w-full">
+                <button
+                  className="p-[1rem] rounded-full border-[1px] border-neutral-20 transition-all hover:scale-[1.1]"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-                  if (product) {
-                    if (wishlistProducts.find((wp) => wp.id === product?.id)) {
-                      dispatch(removeProduct(product));
-                    } else {
-                      dispatch(addProduct(product));
+                    if (product) {
+                      if (
+                        wishlistProducts.find((wp) => wp.id === product?.id)
+                      ) {
+                        dispatch(removeProduct(product));
+                      } else {
+                        dispatch(addProduct(product));
+                      }
                     }
-                  }
-                }}
-              >
-                {wishlistProducts.find((wp) => wp.id === product?.id) ? (
-                  <Image
-                    src="/assets/heart-filled.svg"
-                    width={24}
-                    height={24}
-                    alt="Remove from wishlist"
-                  />
-                ) : (
-                  <Image
-                    src="/assets/heart.svg"
-                    width={24}
-                    height={24}
-                    alt="Add to wishlist"
-                  />
-                )}
-              </button>
-              <button
-                onClick={() => {
-                  sendWhatsappMessage(
-                    productWhatsappMessage(
-                      product?.name || "",
-                      product?.sku || "",
-                      window.location.toString()
-                    )
-                  );
-                }}
-                className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full transition-all hover:opacity-[0.9]"
-              >
-                Pesan Sekarang
-              </button>
-            </div>
+                  }}
+                >
+                  {wishlistProducts.find((wp) => wp.id === product?.id) ? (
+                    <Image
+                      src="/assets/heart-filled.svg"
+                      width={24}
+                      height={24}
+                      alt="Remove from wishlist"
+                    />
+                  ) : (
+                    <Image
+                      src="/assets/heart.svg"
+                      width={24}
+                      height={24}
+                      alt="Add to wishlist"
+                    />
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    sendWhatsappMessage(
+                      productWhatsappMessage(
+                        product?.name || "",
+                        product?.sku || "",
+                        window.location.toString()
+                      )
+                    );
+                  }}
+                  className="p-[0.75rem] bg-primary-default font-inter font-bold text-neutral-10 rounded-full transition-all hover:opacity-[0.9]"
+                >
+                  Pesan Sekarang
+                </button>
+              </div>
+            </Skeleton>
           </div>
         </>
       )}
