@@ -233,10 +233,15 @@ const CategoryAccordion = ({
                     }}
                     style={{
                       color:
-                        filter.subcategoryId === s.id
+                        filter.subcategoryId === s.id ||
+                        filter.categoryId === d.id
                           ? colors.primaryDefault
                           : "",
-                      fontWeight: filter.subcategoryId === s.id ? "bold" : "",
+                      fontWeight:
+                        filter.subcategoryId === s.id ||
+                        filter.categoryId === d.id
+                          ? "bold"
+                          : "",
                     }}
                   >
                     {s.name}
