@@ -1,18 +1,18 @@
-import { Accordion } from "@mantine/core";
-import Link from "next/link";
-import Image from "next/image";
-import { formatToRupiah } from "@/utils/format-to-rupiah";
-import { Category } from "@/types/responses";
-import { Product, ProductWithImages } from "@/types/responses/product";
-import { colors } from "@/utils/colors";
 import { FindProductsFilter } from "@/types/requests";
-import { IconZoomExclamation } from "@tabler/icons-react";
+import { Category } from "@/types/responses";
+import { ProductWithImages } from "@/types/responses/product";
+import { colors } from "@/utils/colors";
+import { formatToRupiah } from "@/utils/format-to-rupiah";
+import { IconChevronDown, IconZoomExclamation } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
 
+import { useAppDispatch, useAppSelector } from "@/hooks/use-redux";
 import { addProduct, removeProduct } from "@/redux/slices/wishlist-slice";
-import { useAppSelector, useAppDispatch } from "@/hooks/use-redux";
+import { dummyProducts } from "@/utils/dummy-products";
 import { generalWhatsappMessage, sendWhatsappMessage } from "@/utils/whatsapp";
 import { Skeleton } from "@mantine/core";
-import { dummyProducts } from "@/utils/dummy-products";
+import { useState } from "react";
 
 type Props = {
   filter: FindProductsFilter;
@@ -41,61 +41,12 @@ const DesktopProducts = ({
       {/* Sidebar */}
       <div className="w-[10rem] sticky top-[10rem] flex-shrink-0">
         <p className="font-inter font-bold text-neutral-100">Semua Kategori</p>
-        <hr className="text-neutral-20 mt-[0.5rem]" />
-        <Accordion
-          styles={{
-            control: {
-              border: "none",
-            },
-            item: {
-              border: "none",
-            },
-          }}
-        >
-          {filterData?.map((d) => {
-            return (
-              <Accordion.Item key={d.id} value={d.name}>
-                <Accordion.Control>
-                  <p
-                    className="font-bold font-inter text-neutral-100"
-                    style={{
-                      color: d.subcategory.find(
-                        (s) => s.id === filter.subcategoryId
-                      )
-                        ? colors.primaryDefault
-                        : "",
-                    }}
-                  >
-                    {d.name}
-                  </p>
-                </Accordion.Control>
-                <Accordion.Panel>
-                  <div className="flex flex-col gap-[1rem]">
-                    {d.subcategory.map((s) => {
-                      return (
-                        <button
-                          key={s.id}
-                          className="font-inter text-neutral-100 transition-all hover:pl-[0.5rem] cursor-pointer text-left"
-                          onClick={() => changeSubcategoryId(s.id)}
-                          style={{
-                            color:
-                              filter.subcategoryId === s.id
-                                ? colors.primaryDefault
-                                : "",
-                            fontWeight:
-                              filter.subcategoryId === s.id ? "bold" : "",
-                          }}
-                        >
-                          {s.name}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </Accordion.Panel>
-              </Accordion.Item>
-            );
-          })}
-        </Accordion>
+        <hr className="text-neutral-20 my-[1rem]" />
+        <CategoryAccordion
+          filter={filter}
+          filterData={filterData}
+          changeSubcategoryId={changeSubcategoryId}
+        />
       </div>
       {/* Products */}
       {renderedProducts && renderedProducts.length > 0 && (
@@ -203,6 +154,92 @@ const ProductCard = ({
         </div>
       </div>
     </Link>
+  );
+};
+
+type CategoryAccordionProps = {
+  filter: FindProductsFilter;
+  filterData: Category[] | undefined;
+  changeSubcategoryId: (subcategoryId: string) => void;
+};
+
+const CategoryAccordion = ({
+  filter,
+  filterData,
+  changeSubcategoryId,
+}: CategoryAccordionProps) => {
+  const [openAccordionId, setOpenAccordionId] = useState("");
+
+  return (
+    <div className="flex flex-col gap-[0.5rem]">
+      {filterData?.map((d) => {
+        return (
+          <div key={d.id}>
+            <div className="flex justify-between items-center gap-[1rem]">
+              <button
+                className="font-bold text-left"
+                style={{
+                  color: d.subcategory.find(
+                    (s) => s.id === filter.subcategoryId
+                  )
+                    ? colors.primaryDefault
+                    : "",
+                }}
+              >
+                {d.name}
+              </button>
+              <button
+                onClick={() => {
+                  if (openAccordionId === d.id) {
+                    setOpenAccordionId("");
+                  } else {
+                    setOpenAccordionId(d.id);
+                  }
+                }}
+              >
+                <IconChevronDown
+                  className="transition-all"
+                  style={{
+                    transform:
+                      openAccordionId === d.id
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)",
+                  }}
+                />
+              </button>
+            </div>
+            <div
+              className="flex flex-col gap-[1rem] overflow-hidden mt-[1rem] transition-all items-start justify-start"
+              style={{
+                maxHeight: openAccordionId === d.id ? "400px" : "0px",
+                paddingBottom: openAccordionId === d.id ? "0.5rem" : "0px",
+              }}
+            >
+              {d.subcategory.map((s) => {
+                return (
+                  <button
+                    key={s.id}
+                    className="text-left hover:pl-[0.25rem] transition-all"
+                    onClick={() => {
+                      changeSubcategoryId(s.id);
+                    }}
+                    style={{
+                      color:
+                        filter.subcategoryId === s.id
+                          ? colors.primaryDefault
+                          : "",
+                      fontWeight: filter.subcategoryId === s.id ? "bold" : "",
+                    }}
+                  >
+                    {s.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
