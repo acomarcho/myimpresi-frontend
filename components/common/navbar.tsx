@@ -299,24 +299,37 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex gap-[2rem] mt-[1.5rem]">
-            <Link href="/" className="font-inter text-neutral-100 font-bold">
+            <Link
+              href="/"
+              className="font-inter text-neutral-100 font-bold"
+              style={router.pathname === "/" ? { color: "#0057E2" } : {}}
+            >
               Home
             </Link>
             <Link
               href="/product"
               className="font-inter text-neutral-100 font-bold"
+              style={
+                router.pathname.includes("/product") ? { color: "#0057E2" } : {}
+              }
             >
               Produk
             </Link>
             <Link
               href="/event"
               className="font-inter text-neutral-100 font-bold"
+              style={
+                router.pathname.includes("/event") ? { color: "#0057E2" } : {}
+              }
             >
               Acara
             </Link>
             <Link
               href="/article"
               className="font-inter text-neutral-100 font-bold"
+              style={
+                router.pathname.includes("/article") ? { color: "#0057E2" } : {}
+              }
             >
               Artikel
             </Link>
@@ -419,24 +432,34 @@ const Navbar = () => {
             <Link
               href="/"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
+              style={router.pathname === "/" ? { color: "#0057E2" } : {}}
             >
               Home
             </Link>
             <Link
               href="/product"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
+              style={
+                router.pathname.includes("/product") ? { color: "#0057E2" } : {}
+              }
             >
               Produk
             </Link>
             <Link
               href="/event"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
+              style={
+                router.pathname.includes("/event") ? { color: "#0057E2" } : {}
+              }
             >
               Acara
             </Link>
             <Link
               href="/article"
               className="py-[1rem] border-b-[1px] border-neutral-20 font-inter font-bold"
+              style={
+                router.pathname.includes("/article") ? { color: "#0057E2" } : {}
+              }
             >
               Artikel
             </Link>
