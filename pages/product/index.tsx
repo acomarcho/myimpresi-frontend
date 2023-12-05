@@ -117,6 +117,25 @@ export default function Products() {
     });
   };
 
+  const changeCategoryId = (categoryId: string) => {
+    const filterCopy = { ...filter };
+    delete filterCopy.categoryId;
+    delete filterCopy.subcategoryId;
+
+    let newFilter = {
+      ...filterCopy,
+      page: 1, // Reset page to 1
+    };
+
+    if (categoryId !== filter.categoryId) {
+      newFilter.categoryId = categoryId;
+    }
+
+    router.push(`/product?${generateParams(newFilter)}`, undefined, {
+      shallow: true,
+    });
+  };
+
   const generateParams = (filter: FindProductsFilter) => {
     let urlFilter: {
       [name: string]: string;
@@ -189,6 +208,7 @@ export default function Products() {
           />
           <DesktopProducts
             filter={filter}
+            changeCategoryId={changeCategoryId}
             changeSubcategoryId={changeSubcategoryId}
             filterData={categories?.categories}
             products={products}

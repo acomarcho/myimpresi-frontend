@@ -16,6 +16,7 @@ import { useState } from "react";
 
 type Props = {
   filter: FindProductsFilter;
+  changeCategoryId: (categoryId: string) => void;
   changeSubcategoryId: (subcategoryId: string) => void;
   filterData: Category[] | undefined;
   products: ProductWithImages[] | undefined;
@@ -24,6 +25,7 @@ type Props = {
 
 const DesktopProducts = ({
   filter,
+  changeCategoryId,
   changeSubcategoryId,
   filterData,
   products,
@@ -45,6 +47,7 @@ const DesktopProducts = ({
         <CategoryAccordion
           filter={filter}
           filterData={filterData}
+          changeCategoryId={changeCategoryId}
           changeSubcategoryId={changeSubcategoryId}
         />
       </div>
@@ -160,12 +163,14 @@ const ProductCard = ({
 type CategoryAccordionProps = {
   filter: FindProductsFilter;
   filterData: Category[] | undefined;
+  changeCategoryId: (categoryId: string) => void;
   changeSubcategoryId: (subcategoryId: string) => void;
 };
 
 const CategoryAccordion = ({
   filter,
   filterData,
+  changeCategoryId,
   changeSubcategoryId,
 }: CategoryAccordionProps) => {
   const [openAccordionId, setOpenAccordionId] = useState("");
@@ -179,11 +184,14 @@ const CategoryAccordion = ({
               <button
                 className="font-bold text-left"
                 style={{
-                  color: d.subcategory.find(
-                    (s) => s.id === filter.subcategoryId
-                  )
-                    ? colors.primaryDefault
-                    : "",
+                  color:
+                    d.subcategory.find((s) => s.id === filter.subcategoryId) ||
+                    filter.categoryId === d.id
+                      ? colors.primaryDefault
+                      : "",
+                }}
+                onClick={() => {
+                  changeCategoryId(d.id);
                 }}
               >
                 {d.name}
