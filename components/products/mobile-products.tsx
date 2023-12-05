@@ -49,15 +49,15 @@ const MobileProducts = ({
         <IconAdjustments />
       </button>
       {renderedProducts && renderedProducts.length > 0 && (
-        <Skeleton visible={isLoading}>
-          <div className="grid grid-cols-2 gap-[1rem] mt-[1rem]">
-            {renderedProducts?.map((p) => {
-              return (
-                <Link
-                  key={p.id}
-                  className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
-                  href={`/product/${p.id}`}
-                >
+        <div className="grid grid-cols-2 gap-[1rem] mt-[1rem]">
+          {renderedProducts?.map((p) => {
+            return (
+              <Link
+                key={p.id}
+                className="bg-neutral-10 transition-all cursor-pointer hover:scale-[1.05] relative block"
+                href={`/product/${p.id}`}
+              >
+                <Skeleton visible={isLoading}>
                   <Image
                     src={p.productImage[0].path}
                     width={280}
@@ -65,6 +65,8 @@ const MobileProducts = ({
                     alt={p.name}
                     className="w-full h-[200px] lg:h-[250px] object-cover"
                   />
+                </Skeleton>
+                <Skeleton visible={isLoading}>
                   <div className="p-[0.75rem]">
                     <p className="font-inter font-bold">
                       {p.name.toUpperCase()}
@@ -107,11 +109,11 @@ const MobileProducts = ({
                       </button>
                     </div>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
-        </Skeleton>
+                </Skeleton>
+              </Link>
+            );
+          })}
+        </div>
       )}
       {!isLoading && (!products || products.length === 0) && (
         <div className="p-[1rem]">
